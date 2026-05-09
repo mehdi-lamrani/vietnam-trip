@@ -113,18 +113,47 @@
 
   /* Collapsible sections */
   .collapsible-header {
-    display: flex; align-items: center; cursor: pointer;
-    user-select: none; gap: 10px;
+    display: flex; align-items: center; justify-content: space-between;
+    cursor: pointer; user-select: none;
+    padding: 12px 0; position: relative;
   }
-  .collapsible-header .toggle-icon {
-    font-size: 1.2rem; transition: transform .3s; color: var(--accent);
+  .collapsible-header .section-title {
+    margin-bottom: 0; padding-bottom: 8px;
   }
-  .collapsible-header.collapsed .toggle-icon {
-    transform: rotate(-90deg);
+  .collapsible-header .chevron {
+    width: 20px; height: 20px; position: relative;
+    flex-shrink: 0; margin-left: 12px;
+  }
+  .collapsible-header .chevron::before,
+  .collapsible-header .chevron::after {
+    content: ''; position: absolute;
+    width: 10px; height: 2px; background: var(--accent);
+    top: 50%; border-radius: 2px;
+    transition: transform .35s cubic-bezier(.4,0,.2,1);
+  }
+  .collapsible-header .chevron::before {
+    left: 2px; transform: rotate(45deg);
+  }
+  .collapsible-header .chevron::after {
+    right: 2px; transform: rotate(-45deg);
+  }
+  .collapsible-header.collapsed .chevron::before {
+    transform: rotate(-45deg);
+  }
+  .collapsible-header.collapsed .chevron::after {
+    transform: rotate(45deg);
+  }
+  .collapsible-header:hover .section-title {
+    color: var(--accent);
+  }
+  .collapsible-header:hover .chevron::before,
+  .collapsible-header:hover .chevron::after {
+    background: var(--dark);
   }
   .collapsible-body {
-    overflow: hidden; transition: max-height .4s ease, opacity .3s ease;
-    max-height: 5000px; opacity: 1;
+    overflow: hidden;
+    transition: max-height .5s cubic-bezier(.4,0,.2,1), opacity .4s ease;
+    max-height: 8000px; opacity: 1;
   }
   .collapsible-body.collapsed {
     max-height: 0; opacity: 0;
@@ -384,8 +413,8 @@
   <!-- RECAP TRAJET -->
   <div class="section">
     <div class="collapsible-header collapsed" onclick="toggleSection(this)">
-      <span class="toggle-icon">▼</span>
-      <h2 class="section-title">Recap du Trajet</h2>
+      <h2 class="section-title" style="margin-bottom:0;">Recap du Trajet</h2>
+      <span class="chevron"></span>
     </div>
     <div class="collapsible-body collapsed">
 
@@ -512,8 +541,8 @@
   <!-- DOCUMENTS / BILLETS -->
   <div class="section">
     <div class="collapsible-header collapsed" onclick="toggleSection(this)">
-      <span class="toggle-icon">▼</span>
-      <h2 class="section-title">Billets & Documents</h2>
+      <h2 class="section-title" style="margin-bottom:0;">Billets & Documents</h2>
+      <span class="chevron"></span>
     </div>
     <div class="collapsible-body collapsed">
       <div class="docs-grid" id="documents-container"></div>
@@ -523,8 +552,8 @@
   <!-- ITINERAIRE -->
   <div class="section">
     <div class="collapsible-header collapsed" onclick="toggleSection(this)">
-      <span class="toggle-icon">▼</span>
-      <h2 class="section-title">Itineraire</h2>
+      <h2 class="section-title" style="margin-bottom:0;">Itineraire</h2>
+      <span class="chevron"></span>
     </div>
     <div class="collapsible-body collapsed">
 
@@ -936,8 +965,8 @@
   <!-- BUDGET -->
   <div class="section">
     <div class="collapsible-header collapsed" onclick="toggleSection(this)">
-      <span class="toggle-icon">▼</span>
-      <h2 class="section-title">Budget Estimatif (pour 2)</h2>
+      <h2 class="section-title" style="margin-bottom:0;">Budget Estimatif (pour 2)</h2>
+      <span class="chevron"></span>
     </div>
     <div class="collapsible-body collapsed">
       <table class="budget-table">
@@ -961,8 +990,8 @@
   <!-- CHECKLIST -->
   <div class="section">
     <div class="collapsible-header collapsed" onclick="toggleSection(this)">
-      <span class="toggle-icon">▼</span>
-      <h2 class="section-title">Checklist</h2>
+      <h2 class="section-title" style="margin-bottom:0;">Checklist</h2>
+      <span class="chevron"></span>
     </div>
     <div class="collapsible-body collapsed">
       <ul class="checklist" id="checklist-container"></ul>

@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Escapade au Vietnam - Ouidad & Mehdi</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Outfit:wght@300;400;500;600&display=swap');
+
+  :root {
+    --gold: #e0a458;
+    --dark: #3d5a3e;
+    --darker: #2a4a2b;
+    --accent: #e07a5f;
+    --green: #6a994e;
+    --light: #fdf8f0;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 24px rgba(0,0,0,0.06);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--light);
+    color: #333;
+    line-height: 1.6;
+  }
+
+  /* ---- PASSWORD GATE ---- */
+  #login-screen {
+    position: fixed; inset: 0; z-index: 9999;
+    background: linear-gradient(135deg, #5a7d5a, #3d5a3e, #2a4a2b);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; color: white;
+  }
+  #login-screen::before {
+    content: '🌿'; position: absolute; top: 15%; left: 10%;
+    font-size: 4rem; opacity: .15; animation: float 6s ease-in-out infinite;
+  }
+  #login-screen::after {
+    content: '🌺'; position: absolute; bottom: 20%; right: 12%;
+    font-size: 3.5rem; opacity: .15; animation: float 5s ease-in-out infinite reverse;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+  }
+  #login-screen h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem; font-weight: 600; margin-bottom: .5rem;
+  }
+  #login-screen p { opacity: .8; margin-bottom: 2rem; font-size: 1.2rem; font-family: 'Outfit', sans-serif; }
+  #login-screen input {
+    padding: 14px 24px; border: 2px solid rgba(255,255,255,.25);
+    background: rgba(255,255,255,.12); color: white; border-radius: 50px;
+    font-size: 1rem; width: 300px; text-align: center; outline: none;
+    transition: border-color .3s;
+  }
+  #login-screen input::placeholder { color: rgba(255,255,255,.5); }
+  #login-screen input:focus { border-color: var(--gold); }
+  #login-screen button {
+    margin-top: 1rem; padding: 12px 40px; background: var(--gold);
+    color: #fff; border: none; border-radius: 50px; font-size: 1rem;
+    font-weight: 600; cursor: pointer; transition: transform .2s;
+  }
+  #login-screen button:hover { transform: scale(1.05); }
+  #login-error { color: #f4a261; margin-top: 1rem; display: none; }
+
+  /* ---- MAIN CONTENT ---- */
+  #main-content { display: none; }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, #6a994e, #3d5a3e, #2a4a2b);
+    color: white; text-align: center; padding: 80px 20px 60px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '🌸 🌿 🏮 🌺 🍃';
+    position: absolute; top: 15px; left: 0; right: 0;
+    font-size: 1.5rem; letter-spacing: 20px; opacity: .2;
+  }
+  .hero::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+    height: 60px; background: linear-gradient(transparent, var(--light));
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem; margin-bottom: .5rem;
+  }
+  .hero .dates {
+    font-size: 1.3rem; color: #f4d9a0; font-weight: 300;
+    letter-spacing: 2px;
+  }
+  .hero .subtitle {
+    margin-top: 1rem; opacity: .8; font-size: 1.05rem;
+  }
+
+  /* Container */
+  .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+
+  /* Section */
+  .section {
+    margin: 50px auto; max-width: 1000px; padding: 0 20px;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; color: var(--dark); margin-bottom: 30px;
+    padding-bottom: 10px; border-bottom: 3px solid var(--accent);
+    display: inline-block;
+  }
+
+  /* Timeline */
+  .timeline { position: relative; padding-left: 40px; }
+  .timeline::before {
+    content: ''; position: absolute; left: 15px; top: 0; bottom: 0;
+    width: 3px; background: linear-gradient(var(--green), var(--gold), var(--accent), var(--green));
+    border-radius: 3px;
+  }
+  .timeline-item {
+    position: relative; margin-bottom: 50px;
+    background: var(--card-bg); border-radius: 16px;
+    box-shadow: var(--shadow); overflow: hidden;
+  }
+  .timeline-item::before {
+    content: ''; position: absolute; left: -33px; top: 30px;
+    width: 14px; height: 14px; background: var(--gold);
+    border-radius: 50%; border: 3px solid var(--light); z-index: 1;
+  }
+  .timeline-header {
+    background: linear-gradient(135deg, #5a7d5a, #3d5a3e);
+    color: white; padding: 20px 25px; display: flex;
+    justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
+  }
+  .timeline-header h3 {
+    font-family: 'Cormorant Garamond', serif; font-size: 1.5rem;
+  }
+  .timeline-header .badge {
+    background: var(--gold); color: var(--dark); padding: 4px 14px;
+    border-radius: 20px; font-size: .85rem; font-weight: 600;
+  }
+  .timeline-body { padding: 25px; }
+
+  /* Photo grid */
+  .photo-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px; margin: 15px 0;
+  }
+  .photo-grid img {
+    width: 100%; height: 180px; object-fit: cover;
+    border-radius: 10px; transition: transform .3s;
+  }
+  .photo-grid img:hover { transform: scale(1.03); }
+
+  /* Activities */
+  .activities { margin: 15px 0; }
+  .activity {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 8px 0; border-bottom: 1px solid #f0f0f0;
+  }
+  .activity:last-child { border-bottom: none; }
+  .activity-icon { font-size: 1.3rem; min-width: 30px; text-align: center; }
+  .activity-text strong { color: var(--dark); }
+
+  /* Hotel card */
+  .hotel-card {
+    background: linear-gradient(135deg, #f8f6f0, #fff);
+    border: 1px solid #e8e0d0; border-radius: 12px;
+    padding: 18px; margin: 15px 0;
+  }
+  .hotel-card h4 { color: var(--dark); margin-bottom: 5px; }
+  .hotel-card .price { color: var(--green); font-weight: 600; }
+  .hotel-card .hotel-link {
+    display: inline-block; margin-top: 8px; padding: 6px 16px;
+    background: #003580; color: white; border-radius: 6px;
+    text-decoration: none; font-size: .85rem; font-weight: 500;
+  }
+  .hotel-card .hotel-link:hover { background: #00224f; }
+
+  /* Transport info */
+  .transport-info {
+    display: flex; gap: 12px; flex-wrap: wrap; margin: 10px 0;
+  }
+  .transport-badge {
+    display: flex; align-items: center; gap: 8px;
+    background: linear-gradient(135deg, #e8f5e9, #f1f8e9); padding: 8px 16px; border-radius: 20px;
+    font-size: .85rem; font-weight: 500; color: #2d5a2d;
+    border: 1px solid #c8e6c9;
+  }
+
+  /* Sub-section capsules */
+  .capsule {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 16px; border-radius: 20px; font-size: .8rem;
+    font-weight: 600; margin: 4px 4px 4px 0;
+  }
+  .capsule-green { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+  .capsule-orange { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+  .capsule-blue { background: #e3f2fd; color: #1565c0; border: 1px solid #90caf9; }
+  .capsule-pink { background: #fce4ec; color: #c62828; border: 1px solid #f48fb1; }
+  .capsule-purple { background: #f3e5f5; color: #6a1b9a; border: 1px solid #ce93d8; }
+  .capsule-teal { background: #e0f2f1; color: #00695c; border: 1px solid #80cbc4; }
+
+  /* Recap section */
+  .recap-card {
+    background: var(--card-bg); border-radius: 16px; box-shadow: var(--shadow);
+    overflow: hidden; margin: 20px 0;
+  }
+  .recap-header {
+    background: linear-gradient(135deg, #5a7d5a, #3d5a3e);
+    color: white; padding: 20px 25px;
+    font-family: 'Cormorant Garamond', serif; font-size: 1.3rem;
+  }
+  .recap-body { padding: 25px; }
+  .recap-route {
+    display: flex; align-items: center; flex-wrap: wrap; gap: 0;
+    margin: 15px 0;
+  }
+  .recap-stop {
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+    min-width: 80px;
+  }
+  .recap-stop .stop-name { font-weight: 600; color: var(--dark); font-size: .9rem; }
+  .recap-stop .stop-dates { font-size: .75rem; color: #888; margin-top: 2px; }
+  .recap-stop .stop-icon { font-size: 1.5rem; margin-bottom: 4px; }
+  .recap-arrow {
+    display: flex; flex-direction: column; align-items: center;
+    padding: 0 6px; color: #aaa; min-width: 60px;
+  }
+  .recap-arrow .arrow-line { font-size: 1.2rem; color: var(--accent); }
+  .recap-arrow .arrow-info { font-size: .65rem; color: #999; white-space: nowrap; }
+  .recap-table {
+    width: 100%; border-collapse: collapse; margin-top: 15px; font-size: .9rem;
+  }
+  .recap-table th {
+    background: #f0f4f0; padding: 10px 14px; text-align: left;
+    font-weight: 600; color: var(--dark); border-bottom: 2px solid #ddd;
+  }
+  .recap-table td {
+    padding: 10px 14px; border-bottom: 1px solid #eee;
+  }
+  .recap-table tr:hover { background: #fafaf5; }
+
+  /* Booking placeholder */
+  .booking-placeholder {
+    border: 2px dashed #ccc; border-radius: 12px;
+    padding: 20px; text-align: center; color: #999;
+    margin: 15px 0; background: #fafafa;
+    transition: border-color .3s;
+  }
+  .booking-placeholder:hover { border-color: var(--gold); }
+  .booking-placeholder a {
+    color: #003580; font-weight: 600; text-decoration: none;
+  }
+
+  /* Links section */
+  .links-section { margin: 20px 0 5px; }
+  .links-list {
+    list-style: none; margin: 10px 0; padding: 0;
+  }
+  .links-list li {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 12px; border-bottom: 1px solid #f0f0f0;
+    font-size: .9rem;
+  }
+  .links-list li:last-child { border-bottom: none; }
+  .links-list a {
+    color: #1565c0; text-decoration: none; font-weight: 500;
+    word-break: break-all;
+  }
+  .links-list a:hover { text-decoration: underline; }
+  .add-link-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-top: 8px; padding: 6px 16px;
+    background: #e3f2fd; color: #1565c0; border: 1px dashed #90caf9;
+    border-radius: 20px; font-size: .8rem; font-weight: 500;
+    cursor: default;
+  }
+
+  /* Documents section */
+  .docs-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px; margin: 20px 0;
+  }
+  .doc-card {
+    border: 2px dashed #ccc; border-radius: 12px; padding: 25px;
+    text-align: center; background: #fafafa; transition: all .3s;
+  }
+  .doc-card:hover { border-color: var(--gold); background: #fff; }
+  .doc-card .doc-icon { font-size: 2.5rem; margin-bottom: 10px; }
+  .doc-card h4 { color: var(--dark); margin-bottom: 5px; }
+  .doc-card p { color: #999; font-size: .9rem; }
+  .doc-card a {
+    display: inline-block; margin-top: 10px; padding: 8px 20px;
+    background: var(--dark); color: white; border-radius: 8px;
+    text-decoration: none; font-size: .85rem;
+  }
+
+  /* Budget table */
+  .budget-table {
+    width: 100%; border-collapse: collapse; margin: 15px 0;
+  }
+  .budget-table th {
+    background: linear-gradient(135deg, #5a7d5a, #3d5a3e); color: white; padding: 12px 16px;
+    text-align: left; font-weight: 500;
+  }
+  .budget-table td {
+    padding: 12px 16px; border-bottom: 1px solid #eee;
+  }
+  .budget-table tr:hover { background: #f8f6f0; }
+  .budget-table .total {
+    font-weight: 700; background: #f0f4f8;
+  }
+
+  /* Checklist */
+  .checklist { list-style: none; margin: 15px 0; }
+  .checklist li {
+    padding: 10px 0; border-bottom: 1px solid #f0f0f0;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .checklist input[type="checkbox"] {
+    width: 20px; height: 20px; accent-color: var(--green);
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center; padding: 40px 20px;
+    color: #999; font-size: .9rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 2.2rem; }
+    .timeline { padding-left: 25px; }
+    .timeline::before { left: 7px; }
+    .timeline-item::before { left: -25px; }
+    .photo-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PASSWORD GATE -->
+<div id="login-screen">
+  <h1>Escapade au Vietnam</h1>
+  <p>Ouidad & Mehdi - Entrez le mot de passe</p>
+  <input type="password" id="password-input" placeholder="Mot de passe" onkeydown="if(event.key==='Enter')checkPassword()">
+  <button onclick="checkPassword()">Entrer</button>
+  <p id="login-error">Mot de passe incorrect</p>
+</div>
+
+<!-- MAIN CONTENT -->
+<div id="main-content">
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1>Escapade au Vietnam</h1>
+    <p style="font-family:'Cormorant Garamond',serif; font-size:3.5rem; font-weight:700; color:#f4d9a0; margin-bottom:.5rem; letter-spacing:3px;">Ouidad & Mehdi</p>
+    <div class="dates">22 JUIN - 12 JUILLET 2026</div>
+    <p class="subtitle">Hanoi &bull; Ninh Binh &bull; Ha Long Bay &bull; Sa Pa &bull; Da Nang &bull; Hoi An</p>
+  </div>
+
+  <!-- RECAP TRAJET -->
+  <div class="section">
+    <h2 class="section-title">Recap du Trajet</h2>
+
+    <div class="recap-card">
+      <div class="recap-header">Vue d'ensemble</div>
+      <div class="recap-body">
+        <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:15px;">
+          <span class="capsule capsule-green">🗓️ 21 jours</span>
+          <span class="capsule capsule-orange">📍 6 etapes au Vietnam</span>
+          <span class="capsule capsule-blue">✈️ ~1 785 km au Vietnam</span>
+          <span class="capsule capsule-pink">💰 3 000 - 3 800 EUR pour 2</span>
+        </div>
+
+        <div class="recap-route">
+          <div class="recap-stop">
+            <span class="stop-icon">🏠</span>
+            <span class="stop-name">Lyon</span>
+            <span class="stop-dates">21 juin</span>
+          </div>
+          <div class="recap-arrow">
+            <span class="arrow-line">&rarr;</span>
+            <span class="arrow-info">🚄 2h</span>
+          </div>
+          <div class="recap-stop">
+            <span class="stop-icon">🗼</span>
+            <span class="stop-name">Paris</span>
+            <span class="stop-dates">21-22 juin</span>
+          </div>
+          <div class="recap-arrow">
+            <span class="arrow-line">&rarr;</span>
+            <span class="arrow-info">✈️ 11h</span>
+          </div>
+          <div class="recap-stop">
+            <span class="stop-icon">🏯</span>
+            <span class="stop-name">Hanoi</span>
+            <span class="stop-dates">23-25 juin</span>
+          </div>
+          <div class="recap-arrow">
+            <span class="arrow-line">&rarr;</span>
+            <span class="arrow-info">🚗 95km</span>
+          </div>
+          <div class="recap-stop">
+            <span class="stop-icon">🚣</span>
+            <span class="stop-name">Ninh Binh</span>
+            <span class="stop-dates">26-27 juin</span>
+          </div>
+          <div class="recap-arrow">
+            <span class="arrow-line">&rarr;</span>
+            <span class="arrow-info">🚗 220km</span>
+          </div>
+          <div class="recap-stop">
+            <span class="stop-icon">🛥️</span>
+            <span class="stop-name">Ha Long</span>
+            <span class="stop-dates">28-29 juin</span>
+          </div>
+          <div class="recap-arrow">
+            <span class="arrow-line">&rarr;</span>
+            <span class="arrow-info">🚌 480km</span>
+          </div>
+          <div class="recap-stop">
+            <span class="stop-icon">🏔️</span>
+            <span class="stop-name">Sa Pa</span>
+            <span class="stop-dates">30 juin - 2 juil</span>
+          </div>
+          <div class="recap-arrow">
+            <span class="arrow-line">&rarr;</span>
+            <span class="arrow-info">✈️ 1h20</span>
+          </div>
+          <div class="recap-stop">
+            <span class="stop-icon">🌉</span>
+            <span class="stop-name">Da Nang</span>
+            <span class="stop-dates">3-5 juil</span>
+          </div>
+          <div class="recap-arrow">
+            <span class="arrow-line">&rarr;</span>
+            <span class="arrow-info">🚗 30km</span>
+          </div>
+          <div class="recap-stop">
+            <span class="stop-icon">🏮</span>
+            <span class="stop-name">Hoi An</span>
+            <span class="stop-dates">6-10 juil</span>
+          </div>
+          <div class="recap-arrow">
+            <span class="arrow-line">&rarr;</span>
+            <span class="arrow-info">✈️ retour</span>
+          </div>
+          <div class="recap-stop">
+            <span class="stop-icon">🗼</span>
+            <span class="stop-name">Paris</span>
+            <span class="stop-dates">12-13 juil</span>
+          </div>
+          <div class="recap-arrow">
+            <span class="arrow-line">&rarr;</span>
+            <span class="arrow-info">🚄 2h</span>
+          </div>
+          <div class="recap-stop">
+            <span class="stop-icon">🏠</span>
+            <span class="stop-name">Lyon</span>
+            <span class="stop-dates">13 juil</span>
+          </div>
+        </div>
+
+        <table class="recap-table">
+          <thead>
+            <tr><th>Troncon</th><th>Transport</th><th>Distance</th><th>Duree</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Lyon &rarr; Paris</td><td><span class="capsule capsule-blue">🚄 TGV</span></td><td>~470 km</td><td>~2h</td></tr>
+            <tr><td>Paris &rarr; Hanoi</td><td><span class="capsule capsule-purple">✈️ Vol</span></td><td>~9 200 km</td><td>~11h</td></tr>
+            <tr><td>Hanoi &rarr; Ninh Binh</td><td><span class="capsule capsule-green">🚗 Route</span></td><td>~95 km</td><td>~2h</td></tr>
+            <tr><td>Ninh Binh &rarr; Ha Long Bay</td><td><span class="capsule capsule-green">🚗 Route</span></td><td>~220 km</td><td>~3h30</td></tr>
+            <tr><td>Ha Long &rarr; Sa Pa</td><td><span class="capsule capsule-orange">🚌 Bus/Train</span></td><td>~480 km</td><td>~7h30</td></tr>
+            <tr><td>Sa Pa &rarr; Da Nang</td><td><span class="capsule capsule-purple">✈️ Vol int.</span></td><td>~960 km</td><td>~1h20</td></tr>
+            <tr><td>Da Nang &rarr; Hoi An</td><td><span class="capsule capsule-green">🚗 Route</span></td><td>~30 km</td><td>~40 min</td></tr>
+            <tr><td>Hoi An &rarr; Paris</td><td><span class="capsule capsule-purple">✈️ Vol</span></td><td>~9 200 km</td><td>~12h</td></tr>
+            <tr><td>Paris &rarr; Lyon</td><td><span class="capsule capsule-blue">🚄 TGV</span></td><td>~470 km</td><td>~2h</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- DOCUMENTS / BILLETS -->
+  <div class="section">
+    <h2 class="section-title">Billets & Documents</h2>
+    <div class="docs-grid" id="documents-container"></div>
+  </div>
+
+  <!-- ITINERAIRE -->
+  <div class="section">
+    <h2 class="section-title">Itineraire</h2>
+
+    <div class="timeline">
+
+      <!-- LYON - PARIS -->
+      <div class="timeline-item">
+        <div class="timeline-header">
+          <h3>Lyon &rarr; Paris</h3>
+          <span class="badge">21 Juin</span>
+        </div>
+        <div class="timeline-body">
+          <div class="transport-info">
+            <div class="transport-badge">🚄 TGV ~2h</div>
+            <div class="transport-badge">📍 Gare de Lyon &rarr; Gare de Lyon Paris</div>
+          </div>
+          <p>Arrivee a Paris la veille du vol. Nuit a Paris pres de l'aeroport ou dans le centre.</p>
+          <div class="hotel-card">
+            <span class="capsule capsule-teal">🏨 Hotel conseille</span>
+            <p>Ibis Paris Gare de Lyon ou Novotel Paris CDG (si vol tot le matin)</p>
+            <span class="price">~70-100 EUR/nuit</span><br>
+            <a href="https://www.booking.com/searchresults.html?ss=Paris+CDG" target="_blank" class="hotel-link">Chercher sur Booking.com</a>
+          </div>
+          <div class="booking-placeholder" id="resa-paris" data-city="Paris"></div>
+        </div>
+      </div>
+
+      <!-- PARIS - HANOI -->
+      <div class="timeline-item">
+        <div class="timeline-header">
+          <h3>Paris &rarr; Hanoi</h3>
+          <span class="badge">22 Juin</span>
+        </div>
+        <div class="timeline-body">
+          <div class="transport-info">
+            <div class="transport-badge">✈️ Vol direct ~11h</div>
+            <div class="transport-badge">💰 ~500-800 EUR A/R</div>
+          </div>
+          <p>Vol Paris CDG &rarr; Hanoi Noi Bai (HAN). Compagnies : Vietnam Airlines, Air France (direct), ou avec escale via Bangkok/Doha.</p>
+        </div>
+      </div>
+
+      <!-- HANOI -->
+      <div class="timeline-item">
+        <div class="timeline-header">
+          <h3>Hanoi</h3>
+          <span class="badge">23 - 25 Juin &bull; 3 jours</span>
+        </div>
+        <div class="timeline-body">
+          <div class="photo-grid">
+            <img src="https://images.unsplash.com/photo-1509030450996-dd1a26613571?w=400&h=300&fit=crop" alt="Hanoi Old Quarter">
+            <img src="https://images.unsplash.com/photo-1555921015-5532091f6026?w=400&h=300&fit=crop" alt="Hanoi Temple">
+            <img src="https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=400&h=300&fit=crop" alt="Hanoi Street Food">
+          </div>
+
+          <div style="margin-top:15px;"><span class="capsule capsule-pink">💑 A faire en couple</span></div>
+          <div class="activities">
+            <div class="activity">
+              <span class="activity-icon">🏯</span>
+              <div><strong>Vieux quartier (36 rues)</strong> — Balade a pied dans les ruelles, street food, cafes caches</div>
+            </div>
+            <div class="activity">
+              <span class="activity-icon">☕</span>
+              <div><strong>Egg Coffee</strong> — Gouter le ca phe trung au Cafe Giang (legendaire)</div>
+            </div>
+            <div class="activity">
+              <span class="activity-icon">🌊</span>
+              <div><strong>Lac Hoan Kiem</strong> — Promenade romantique au coucher du soleil, temple Ngoc Son</div>
+            </div>
+            <div class="activity">
+              <span class="activity-icon">🎭</span>
+              <div><strong>Spectacle de marionnettes sur l'eau</strong> — Theatre Thang Long, unique au monde</div>
+            </div>
+            <div class="activity">
+              <span class="activity-icon">🍜</span>
+              <div><strong>Food tour nocturne</strong> — Pho, bun cha, banh mi, bia hoi dans le vieux quartier</div>
+            </div>
+            <div class="activity">
+              <span class="activity-icon">🏛️</span>
+              <div><strong>Temple de la Litterature</strong> — Premiere universite du Vietnam, jardins paisibles</div>
+            </div>
+          </div>
+
+          <div class="hotel-card">
+            <span class="capsule capsule-teal">🏨 Hotels conseilles</span> <span class="capsule capsule-orange">💰 30-60 EUR/nuit</span>
+            <p><strong>Hanoi La Siesta Hotel & Spa</strong> — Vieux quartier, romantique, rooftop</p>
+            <p><strong>Essence Hanoi Hotel</strong> — Charme colonial, excellent service</p>
+            <p><strong>Hanoi Gratitude Hotel</strong> — Boutique hotel, bon rapport qualite-prix</p>
+            <span class="price">~30-60 EUR/nuit pour un 3-4 etoiles</span><br>
+            <a href="https://www.booking.com/searchresults.html?ss=Hanoi+Old+Quarter&checkin=2026-06-23&checkout=2026-06-26" target="_blank" class="hotel-link">Chercher sur Booking.com</a>
+          </div>
+          <div class="booking-placeholder" id="resa-hanoi" data-city="Hanoi"></div>
+          <div class="links-section" id="links-hanoi" data-city="Hanoi"></div>
+        </div>
+      </div>
+
+      <!-- NINH BINH -->
+      <div class="timeline-item">
+        <div class="timeline-header">
+          <h3>Ninh Binh</h3>
+          <span class="badge">26 - 27 Juin &bull; 2 jours</span>
+        </div>
+        <div class="timeline-body">
+          <div class="transport-info">
+            <div class="transport-badge">🚗 ~95 km depuis Hanoi</div>
+            <div class="transport-badge">⏱️ ~2h en voiture/bus</div>
+          </div>
+
+          <div class="photo-grid">
+            <img src="https://images.unsplash.com/photo-1528127269322-539801943592?w=400&h=300&fit=crop" alt="Tam Coc">
+            <img src="https://images.unsplash.com/photo-1573790387438-4da905039392?w=400&h=300&fit=crop" alt="Ninh Binh rice fields">
+            <img src="https://images.unsplash.com/photo-1600398235654-c tried3e7b2f6?w=400&h=300&fit=crop" alt="Trang An">
+          </div>
+
+          <div style="margin-top:15px;"><span class="capsule capsule-pink">💑 A faire en couple</span></div>
+          <div class="activities">
+            <div class="activity">
+              <span class="activity-icon">🚣</span>
+              <div><strong>Balade en barque a Tam Coc</strong> — Rizieres et grottes, la "Baie d'Ha Long terrestre"</div>
+            </div>
+            <div class="activity">
+              <span class="activity-icon">🏔️</span>
+              <div><strong>Trang An</strong> — Complexe paysager UNESCO, barque a travers grottes et temples</div>
+            </div>
+            <div class="activity">
+              <span class="activity-icon">🚲</span>
+              <div><strong>Velo dans les rizieres</strong> — Parcours a travers les champs, coucher de soleil magique</div>
+            </div>
+            <div class="activity">
+              <span class="activity-icon">🛕</span>
+              <div><strong>Bai Dinh Pagoda</strong> — Plus grand complexe bouddhiste du Vietnam</div>
+            </div>
+            <div class="activity">
+              <span class="activity-icon">🌄</span>
+              <div><strong>Mua Cave (Hang Mua)</strong> — 500 marches, vue panoramique epoustouflante au sommet</div>
+            </div>
+          </div>
+
+          <div class="hotel-card">
+            <span class="capsule capsule-teal">🏨 Hotels conseilles</span> <span class="capsule capsule-orange">💰 25-50 EUR/nuit</span>
+            <p><strong>Tam Coc Garden Resort</strong> — Bungalows au milieu des rizieres, piscine</p>
+            <p><strong>Nguyen Shack Ninh Binh</strong> — Eco-lodge, ambiance romantique</p>
+            <p><strong>Mua Caves Ecolodge</strong> — Vue sur les montagnes, calme absolu</p>
+            <span class="price">~25-50 EUR/nuit</span><br>
+            <a href="https://www.booking.com/searchresults.html?ss=Ninh+Binh&checkin=2026-06-26&checkout=2026-06-28" target="_blank" class="hotel-link">Chercher sur Booking.com</a>
+          </div>
+          <div class="booking-placeholder" id="resa-ninhbinh" data-city="Ninh Binh"></div>
+          <div class="links-section" id="links-ninhbinh" data-city="Ninh Binh"></div>
+        </div>
+      </div>
+
+      <!-- HA LONG BAY -->
+      <div class="timeline-item">
+        <div class="timeline-header">
+          <h3>Ha Long Bay</h3>
+          <span class="badge">28 - 29 Juin &bull; 2 jours</span>
+        </div>
+        <div class="timeline-body">
+          <div class="transport-info">
+            <div class="transport-badge">🚗 ~220 km depuis Ninh Binh</div>
+            <div class="transport-badge">⏱️ ~3h30-4h</div>
+          </div>
+
+          <div class="photo-grid">
+            <img src="https://images.unsplash.com/photo-1528127269322-539801943592?w=400&h=300&fit=crop" alt="Ha Long Bay">
+            <img src="https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=400&h=300&fit=crop" alt="Ha Long Cruise">
+            <img src="https://images.unsplash.com/photo-1573790387438-4da905039392?w=400&h=300&fit=crop" alt="Ha Long Kayak">
+          </div>
+
+          <div style="margin-top:15px;"><span class="capsule capsule-pink">💑 A faire en couple</span></div>
+          <div class="activities">
+            <div class="activity">
+              <span class="activity-icon">🛥️</span>
+              <div><strong>Croisiere 1 nuit sur la baie</strong> — Dormir sur un bateau au milieu des karsts, incontournable</div>
+            </div>
+            <div class="activity">
+              <span class="activity-icon">🛶</span>
+              <div><strong>Kayak entre les ilots</strong> — Explorer les grottes et lagons caches</div>
+            </div>
+            <div class="activity">
+              <span class="activity-icon">🌅</span>
+              <div><strong>Lever de soleil sur la baie</strong> — Tai chi sur le pont du bateau au lever du jour</div>
+            </div>
+            <div class="activity">
+              <span class="activity-icon">🏊</span>
+              <div><strong>Baignade & snorkeling</strong> — Eaux emeraude, plages isolees</div>
+            </div>
+            <div class="activity">
+              <span class="activity-icon">🍽️</span>
+              <div><strong>Cours de cuisine sur le bateau</strong> — Preparer des spring rolls face a la baie</div>
+            </div>
+          </div>
+
+          <div class="hotel-card">
+            <span class="capsule capsule-blue">🛥️ Croisieres conseillees</span> <span class="capsule capsule-orange">💰 100-180 EUR/pers (2j/1n)</span>
+            <p><strong>Ambassador Cruise</strong> — Bon rapport qualite-prix, cabines modernes</p>
+            <p><strong>Lan Ha Bay Cat Ba cruise</strong> — Moins touristique que Ha Long classique</p>
+            <p><strong>Indochina Junk</strong> — Bateaux traditionnels, experience authentique</p>
+            <span class="price">~100-180 EUR/personne (2 jours / 1 nuit)</span><br>
+            <a href="https://www.booking.com/searchresults.html?ss=Ha+Long+Bay+Cruise&checkin=2026-06-28&checkout=2026-06-30" target="_blank" class="hotel-link">Chercher sur Booking.com</a>
+          </div>
+          <div class="booking-placeholder" id="resa-halong" data-city="Ha Long"></div>
+          <div class="links-section" id="links-halong" data-city="Ha Long"></div>
+        </div>
+      </div>
+
+      <!-- SA PA -->
+      <div class="timeline-item">
+        <div class="timeline-header">
+          <h3>Sa Pa</h3>
+          <span class="badge">30 Juin - 2 Juil &bull; 3 jours</span>
+        </div>
+        <div class="timeline-body">
+          <div class="transport-info">
+            <div class="transport-badge">🚗 ~480 km depuis Ha Long</div>
+            <div class="transport-badge">⏱️ ~7h30-8h (ou train de nuit depuis Hanoi)</div>
+          </div>
+          <p style="margin:10px 0; color: var(--accent); font-weight:500;">💡 Conseil : Retourner a Hanoi puis prendre le train de nuit Hanoi &rarr; Lao Cai (8h, couchettes ~30 EUR)</p>
+
+          <div class="photo-grid">
+            <img src="https://images.unsplash.com/photo-1570366583862-f91883984fde?w=400&h=300&fit=crop" alt="Sapa rice terraces">
+            <img src="https://images.unsplash.com/photo-1584003564911-a89e55966637?w=400&h=300&fit=crop" alt="Sapa mountains">
+            <img src="https://images.unsplash.com/photo-1560969184-10fe8719e047?w=400&h=300&fit=crop" alt="Sapa village">
+          </div>
+
+          <div style="margin-top:15px;"><span class="capsule capsule-pink">💑 A faire en couple</span></div>
+          <div class="activities">
+            <div class="activity">
+              <span class="activity-icon">🥾</span>
+              <div><strong>Trek dans les rizieres en terrasses</strong> — Vallee de Muong Hoa, paysages a couper le souffle</div>
+            </div>
+            <div class="activity">
+              <span class="activity-icon">🏔️</span>
+              <div><strong>Fansipan</strong> — "Toit de l'Indochine" (3143m), telecabine ou trek 2 jours</div>
+            </div>
+            <div class="activity">
+              <span class="activity-icon">🏘️</span>
+              <div><strong>Villages ethniques</strong> — Cat Cat, Ta Phin, rencontres avec les Hmong et Dao</div>
+            </div>
+            <div class="activity">
+              <span class="activity-icon">🌿</span>
+              <div><strong>Bain aux herbes medicinales</strong> — Tradition Dao rouge, relaxation totale en couple</div>
+            </div>
+            <div class="activity">
+              <span class="activity-icon">🌄</span>
+              <div><strong>Lever de soleil sur la vallee</strong> — Depuis l'hotel ou le sommet de Ham Rong</div>
+            </div>
+          </div>
+
+          <div class="hotel-card">
+            <span class="capsule capsule-teal">🏨 Hotels conseilles</span> <span class="capsule capsule-orange">💰 35-70 EUR/nuit</span>
+            <p><strong>Topas Ecolodge</strong> — Bungalows avec vue, piscine infinity, romantique</p>
+            <p><strong>Sapa Catcat Hills Resort</strong> — Vue sur la vallee, calme</p>
+            <p><strong>Aira Boutique Sapa</strong> — Centre-ville, confort moderne, vue montagnes</p>
+            <span class="price">~35-70 EUR/nuit</span><br>
+            <a href="https://www.booking.com/searchresults.html?ss=Sapa+Vietnam&checkin=2026-06-30&checkout=2026-07-03" target="_blank" class="hotel-link">Chercher sur Booking.com</a>
+          </div>
+          <div class="booking-placeholder" id="resa-sapa" data-city="Sa Pa"></div>
+          <div class="links-section" id="links-sapa" data-city="Sa Pa"></div>
+        </div>
+      </div>
+
+      <!-- VOL INTERIEUR -->
+      <div class="timeline-item">
+        <div class="timeline-header">
+          <h3>Transfert vers le Centre</h3>
+          <span class="badge">3 Juillet</span>
+        </div>
+        <div class="timeline-body">
+          <div class="transport-info">
+            <div class="transport-badge">✈️ Vol Hanoi &rarr; Da Nang ~1h20</div>
+            <div class="transport-badge">💰 ~40-80 EUR</div>
+          </div>
+          <p>Retour Sa Pa &rarr; Hanoi (bus/train), puis vol interieur Hanoi &rarr; Da Nang. Compagnies : VietJet, Bamboo Airways, Vietnam Airlines.</p>
+          <div class="booking-placeholder" id="resa-vol-interieur" data-city="Vol Interieur"></div>
+        </div>
+      </div>
+
+      <!-- DA NANG -->
+      <div class="timeline-item">
+        <div class="timeline-header">
+          <h3>Da Nang</h3>
+          <span class="badge">3 - 5 Juil &bull; 3 jours</span>
+        </div>
+        <div class="timeline-body">
+          <div class="photo-grid">
+            <img src="https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=400&h=300&fit=crop" alt="Da Nang Dragon Bridge">
+            <img src="https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=400&h=300&fit=crop" alt="Da Nang Beach">
+            <img src="https://images.unsplash.com/photo-1564596823821-79b97151c509?w=400&h=300&fit=crop" alt="Ba Na Hills">
+          </div>
+
+          <div style="margin-top:15px;"><span class="capsule capsule-pink">💑 A faire en couple</span></div>
+          <div class="activities">
+            <div class="activity">
+              <span class="activity-icon">🌉</span>
+              <div><strong>Dragon Bridge</strong> — Spectacle de feu et eau le samedi et dimanche soir</div>
+            </div>
+            <div class="activity">
+              <span class="activity-icon">✋</span>
+              <div><strong>Ba Na Hills & Golden Bridge</strong> — Le celebre pont tenu par des mains geantes</div>
+            </div>
+            <div class="activity">
+              <span class="activity-icon">🏖️</span>
+              <div><strong>Plage de My Khe</strong> — Une des plus belles plages du Vietnam, baignade et detente</div>
+            </div>
+            <div class="activity">
+              <span class="activity-icon">🏔️</span>
+              <div><strong>Marble Mountains</strong> — Grottes, temples et vue panoramique</div>
+            </div>
+            <div class="activity">
+              <span class="activity-icon">🍲</span>
+              <div><strong>Mi Quang & Banh Xeo</strong> — Specialites locales, marche Han</div>
+            </div>
+          </div>
+
+          <div class="hotel-card">
+            <span class="capsule capsule-teal">🏨 Hotels conseilles</span> <span class="capsule capsule-orange">💰 30-60 EUR/nuit</span>
+            <p><strong>Fivitel Da Nang</strong> — Front de mer, piscine, moderne</p>
+            <p><strong>Sala Danang Beach Hotel</strong> — Bord de plage, excellent rapport qualite-prix</p>
+            <p><strong>Grand Tourane Hotel</strong> — Centre-ville, rooftop piscine</p>
+            <span class="price">~30-60 EUR/nuit</span><br>
+            <a href="https://www.booking.com/searchresults.html?ss=Da+Nang+Beach&checkin=2026-07-03&checkout=2026-07-06" target="_blank" class="hotel-link">Chercher sur Booking.com</a>
+          </div>
+          <div class="booking-placeholder" id="resa-danang" data-city="Da Nang"></div>
+          <div class="links-section" id="links-danang" data-city="Da Nang"></div>
+        </div>
+      </div>
+
+      <!-- HOI AN -->
+      <div class="timeline-item">
+        <div class="timeline-header">
+          <h3>Hoi An</h3>
+          <span class="badge">6 - 10 Juil &bull; 5 jours</span>
+        </div>
+        <div class="timeline-body">
+          <div class="transport-info">
+            <div class="transport-badge">🚗 ~30 km depuis Da Nang</div>
+            <div class="transport-badge">⏱️ ~40 min</div>
+          </div>
+
+          <div class="photo-grid">
+            <img src="https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=400&h=300&fit=crop" alt="Hoi An Lanterns">
+            <img src="https://images.unsplash.com/photo-1564596823821-79b97151c509?w=400&h=300&fit=crop" alt="Hoi An Old Town">
+            <img src="https://images.unsplash.com/photo-1528127269322-539801943592?w=400&h=300&fit=crop" alt="Hoi An Beach">
+          </div>
+
+          <div style="margin-top:15px;"><span class="capsule capsule-pink">💑 A faire en couple</span></div>
+          <div class="activities">
+            <div class="activity">
+              <span class="activity-icon">🏮</span>
+              <div><strong>Vieille ville aux lanternes</strong> — Balade nocturne, pont japonais, ambiance magique</div>
+            </div>
+            <div class="activity">
+              <span class="activity-icon">🕯️</span>
+              <div><strong>Lanternes flottantes</strong> — Lacher de lanternes sur la riviere Thu Bon au coucher du soleil</div>
+            </div>
+            <div class="activity">
+              <span class="activity-icon">👗</span>
+              <div><strong>Tailleur sur mesure</strong> — Se faire faire des vetements sur mesure en 24h (costume, robe, ao dai)</div>
+            </div>
+            <div class="activity">
+              <span class="activity-icon">🍳</span>
+              <div><strong>Cours de cuisine</strong> — Marche + cuisine vietnamienne en couple, excellente experience</div>
+            </div>
+            <div class="activity">
+              <span class="activity-icon">🚲</span>
+              <div><strong>Velo jusqu'a An Bang Beach</strong> — Plage tranquille, bars de plage, coucher de soleil</div>
+            </div>
+            <div class="activity">
+              <span class="activity-icon">🛶</span>
+              <div><strong>Basket Boat a Cam Thanh</strong> — Balade en bateau-panier dans la foret de cocotiers</div>
+            </div>
+            <div class="activity">
+              <span class="activity-icon">💆</span>
+              <div><strong>Spa & massage</strong> — Massages de qualite pour ~10-15 EUR/personne</div>
+            </div>
+          </div>
+
+          <div class="hotel-card">
+            <span class="capsule capsule-teal">🏨 Hotels conseilles</span> <span class="capsule capsule-orange">💰 25-55 EUR/nuit</span>
+            <p><strong>Hoi An Chic Hotel</strong> — Piscine, petit-dejeuner inclus, velo gratuit</p>
+            <p><strong>La An Central Boutique</strong> — Charme, proche vieille ville</p>
+            <p><strong>Lantana Riverside Hoi An</strong> — Bord de riviere, piscine, romantique</p>
+            <span class="price">~25-55 EUR/nuit</span><br>
+            <a href="https://www.booking.com/searchresults.html?ss=Hoi+An&checkin=2026-07-06&checkout=2026-07-11" target="_blank" class="hotel-link">Chercher sur Booking.com</a>
+          </div>
+          <div class="booking-placeholder" id="resa-hoian" data-city="Hoi An"></div>
+          <div class="links-section" id="links-hoian" data-city="Hoi An"></div>
+        </div>
+      </div>
+
+      <!-- RETOUR -->
+      <div class="timeline-item">
+        <div class="timeline-header">
+          <h3>Retour Da Nang/Hanoi &rarr; Paris</h3>
+          <span class="badge">11 - 12 Juillet</span>
+        </div>
+        <div class="timeline-body">
+          <div class="transport-info">
+            <div class="transport-badge">✈️ Vol retour ~11-14h</div>
+          </div>
+          <p>Transfert Hoi An &rarr; Da Nang (ou vol interieur &rarr; Hanoi), puis vol international vers Paris.</p>
+          <div class="booking-placeholder" id="resa-vol-retour" data-city="Vol Retour"></div>
+        </div>
+      </div>
+
+      <!-- PARIS - LYON -->
+      <div class="timeline-item">
+        <div class="timeline-header">
+          <h3>Paris &rarr; Lyon</h3>
+          <span class="badge">13 Juillet</span>
+        </div>
+        <div class="timeline-body">
+          <div class="transport-info">
+            <div class="transport-badge">🚄 TGV ~2h</div>
+          </div>
+          <p>Retour a la maison. Repos bien merite !</p>
+          <div class="booking-placeholder" id="resa-train-retour" data-city="Train Retour"></div>
+        </div>
+      </div>
+
+    </div><!-- /timeline -->
+  </div>
+
+  <!-- BUDGET -->
+  <div class="section">
+    <h2 class="section-title">Budget Estimatif (pour 2)</h2>
+    <table class="budget-table">
+      <thead>
+        <tr><th>Poste</th><th>Estimation</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Vols internationaux A/R x2</td><td>1 600 EUR</td><td>2 x 800 EUR Paris-Hanoi</td></tr>
+        <tr><td>Vol interieur x2</td><td>80 - 120 EUR</td><td>Hanoi-Da Nang</td></tr>
+        <tr><td>Trains Lyon-Paris A/R x2</td><td>100 - 150 EUR</td><td>TGV, reserver en avance</td></tr>
+        <tr><td>Hotels (20 nuits)</td><td>500 - 800 EUR</td><td>25-40 EUR/nuit en moyenne</td></tr>
+        <tr><td>Croisiere Ha Long (2j/1n)</td><td>200 - 300 EUR</td><td>Pour 2 personnes</td></tr>
+        <tr><td>Repas (~20 jours)</td><td>250 - 350 EUR</td><td>~6-9 EUR/jour/pers</td></tr>
+        <tr><td>Transports locaux</td><td>100 - 200 EUR</td><td>Grab, bus, train de nuit</td></tr>
+        <tr><td>Activites & visites</td><td>170 - 280 EUR</td><td>Treks, cours cuisine, spas</td></tr>
+        <tr class="total"><td><strong>TOTAL ESTIME</strong></td><td><strong>3 000 - 3 800 EUR</strong></td><td>Pour 2 personnes</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- CHECKLIST -->
+  <div class="section">
+    <h2 class="section-title">Checklist</h2>
+    <ul class="checklist" id="checklist-container"></ul>
+  </div>
+
+  <div class="footer">
+    <p>Escapade au Vietnam &bull; Ouidad & Mehdi &bull; Mis a jour le <span id="last-updated"></span></p>
+  </div>
+
+</div><!-- /main-content -->
+
+<script>
+const API = 'https://script.google.com/macros/s/AKfycbzja7IY4EXDfRZZHsEPgD3AkO3m0iFtNNCgUcZkPZmx_C_lemSZ-kbpX31yK9lHU1Dizw/exec';
+const SITE_PASSWORD = 'toukou';
+
+// --- PASSWORD ---
+function checkPassword() {
+  const input = document.getElementById('password-input').value;
+  if (input === SITE_PASSWORD) {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('main-content').style.display = 'block';
+    sessionStorage.setItem('authenticated', 'true');
+    loadAll();
+  } else {
+    document.getElementById('login-error').style.display = 'block';
+    document.getElementById('password-input').value = '';
+  }
+}
+if (sessionStorage.getItem('authenticated') === 'true') {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('main-content').style.display = 'block';
+  loadAll();
+}
+
+// --- API HELPERS ---
+async function apiRead(sheet) {
+  const r = await fetch(`${API}?action=read&sheet=${sheet}`);
+  return r.json();
+}
+async function apiPost(body) {
+  const r = await fetch(API, {
+    method: 'POST',
+    body: JSON.stringify(body)
+  });
+  return r.json();
+}
+
+// --- LOAD ALL DATA ---
+function loadAll() {
+  document.getElementById('last-updated').textContent = new Date().toLocaleDateString('fr-FR');
+  loadLinks();
+  loadReservations();
+  loadDocuments();
+  loadChecklist();
+}
+
+// --- LINKS ---
+async function loadLinks() {
+  const { rows } = await apiRead('links');
+  document.querySelectorAll('.links-section').forEach(el => {
+    const city = el.dataset.city;
+    const cityLinks = (rows || []).filter(r => r.city === city);
+    el.innerHTML = `
+      <span class="capsule capsule-blue">🔗 Liens utiles — ${city}</span>
+      <ul class="links-list">
+        ${cityLinks.map(l => `
+          <li>📌 <a href="${l.url}" target="_blank">${l.title}</a>
+            <button onclick="deleteItem('links','${l.id}','loadLinks')" style="background:none;border:none;color:#c62828;cursor:pointer;font-size:.9rem;margin-left:auto;">✕</button>
+          </li>`).join('')}
+      </ul>
+      <button onclick="addLink('${city}')" class="add-link-btn" style="cursor:pointer;border:1px dashed #90caf9;">+ Ajouter un lien</button>
+    `;
+  });
+}
+async function addLink(city) {
+  const title = prompt('Titre du lien :');
+  if (!title) return;
+  const url = prompt('URL :');
+  if (!url) return;
+  await apiPost({ action: 'add', sheet: 'links', row: { city, title, url } });
+  loadLinks();
+}
+
+// --- RESERVATIONS ---
+async function loadReservations() {
+  const { rows } = await apiRead('reservations');
+  document.querySelectorAll('.booking-placeholder').forEach(el => {
+    const city = el.dataset.city;
+    if (!city) return;
+    const cityResas = (rows || []).filter(r => r.city === city);
+    el.innerHTML = `
+      <p>📋 <strong>Reservations — ${city}</strong></p>
+      ${cityResas.length ? `<ul class="links-list" style="text-align:left;">
+        ${cityResas.map(r => `
+          <li>🏨 <a href="${r.url}" target="_blank">${r.name}</a>
+            ${r.dates ? `<span style="color:#888;font-size:.8rem;margin-left:8px;">${r.dates}</span>` : ''}
+            ${r.status ? `<span class="capsule capsule-green" style="margin-left:8px;">${r.status}</span>` : ''}
+            <button onclick="deleteItem('reservations','${r.id}','loadReservations')" style="background:none;border:none;color:#c62828;cursor:pointer;font-size:.9rem;margin-left:auto;">✕</button>
+          </li>`).join('')}
+      </ul>` : '<p style="color:#bbb;font-size:.85rem;">Aucune reservation</p>'}
+      <button onclick="addReservation('${city}')" class="add-link-btn" style="cursor:pointer;border:1px dashed #90caf9;">+ Ajouter une reservation</button>
+    `;
+  });
+}
+async function addReservation(city) {
+  const name = prompt('Nom (hotel, croisiere, etc.) :');
+  if (!name) return;
+  const url = prompt('Lien Booking.com (ou autre) :');
+  const dates = prompt('Dates (ex: 23-25 juin) :') || '';
+  const status = prompt('Statut (ex: Reserve, En attente) :') || '';
+  await apiPost({ action: 'add', sheet: 'reservations', row: { city, name, url: url || '#', dates, status } });
+  loadReservations();
+}
+
+// --- DOCUMENTS ---
+const DOC_TEMPLATES = [
+  { type: 'train-aller', icon: '🚄', label: 'Train Lyon → Paris', sub: '21 juin 2026' },
+  { type: 'vol-aller', icon: '✈️', label: 'Vol Paris → Hanoi', sub: '22 juin 2026' },
+  { type: 'bp-aller', icon: '🎫', label: 'Boarding Pass Aller', sub: 'Paris CDG → Hanoi' },
+  { type: 'vol-retour', icon: '✈️', label: 'Vol Hanoi/Da Nang → Paris', sub: '12 juillet 2026' },
+  { type: 'bp-retour', icon: '🎫', label: 'Boarding Pass Retour', sub: 'Hanoi → Paris CDG' },
+  { type: 'train-retour', icon: '🚄', label: 'Train Paris → Lyon', sub: '13 juillet 2026' }
+];
+async function loadDocuments() {
+  const { rows } = await apiRead('documents');
+  const container = document.getElementById('documents-container');
+  container.innerHTML = DOC_TEMPLATES.map(t => {
+    const doc = (rows || []).find(r => r.type === t.type);
+    return `<div class="doc-card" style="${doc && doc.url && doc.url !== '#' ? 'border-color:var(--green);background:#f0faf0;' : ''}">
+      <div class="doc-icon">${t.icon}</div>
+      <h4>${t.label}</h4>
+      <p>${t.sub}</p>
+      ${doc && doc.url && doc.url !== '#'
+        ? `<a href="${doc.url}" target="_blank" style="background:var(--green);">${doc.label || 'Voir le billet'}</a>
+           <button onclick="deleteItem('documents','${doc.id}','loadDocuments')" style="background:none;border:none;color:#c62828;cursor:pointer;font-size:.85rem;display:block;margin:8px auto 0;">Supprimer</button>`
+        : `<a href="#" onclick="event.preventDefault();addDocument('${t.type}','${t.label}')">Ajouter le billet</a>`}
+    </div>`;
+  }).join('');
+}
+async function addDocument(type, label) {
+  const url = prompt(`Lien pour "${label}" :`);
+  if (!url) return;
+  const lbl = prompt('Libelle du lien (ex: e-billet SNCF) :') || 'Voir le billet';
+  await apiPost({ action: 'add', sheet: 'documents', row: { type, label: lbl, url } });
+  loadDocuments();
+}
+
+// --- CHECKLIST ---
+async function loadChecklist() {
+  const { rows } = await apiRead('checklist');
+  const container = document.getElementById('checklist-container');
+  container.innerHTML = (rows || []).map(r => `
+    <li>
+      <input type="checkbox" ${r.checked === 'true' ? 'checked' : ''} onchange="toggleCheck('${r.id}', this.checked)">
+      ${r.label}
+    </li>
+  `).join('');
+}
+async function toggleCheck(id, checked) {
+  await apiPost({ action: 'update', sheet: 'checklist', id, field: 'checked', value: String(checked) });
+}
+
+// --- DELETE ---
+async function deleteItem(sheet, id, reloadFn) {
+  if (!confirm('Supprimer ?')) return;
+  await apiPost({ action: 'delete', sheet, id });
+  window[reloadFn]();
+}
+</script>
+
+</body>
+</html>

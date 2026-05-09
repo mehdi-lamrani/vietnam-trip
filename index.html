@@ -950,12 +950,18 @@
 
 <script>
 const API = 'https://script.google.com/macros/s/AKfycbzja7IY4EXDfRZZHsEPgD3AkO3m0iFtNNCgUcZkPZmx_C_lemSZ-kbpX31yK9lHU1Dizw/exec';
-const SITE_PASSWORD = 'toukou';
+const PWD_HASH = '364f5a42bae117774e462285362a26f0fa0baadcf638d3ee20e576258cc58494';
+
+async function hashStr(str) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
 
 // --- PASSWORD ---
-function checkPassword() {
+async function checkPassword() {
   const input = document.getElementById('password-input').value;
-  if (input === SITE_PASSWORD) {
+  const h = await hashStr(input);
+  if (h === PWD_HASH) {
     document.getElementById('login-screen').style.display = 'none';
     document.getElementById('main-content').style.display = 'block';
     sessionStorage.setItem('authenticated', 'true');

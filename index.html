@@ -111,23 +111,39 @@
     display: inline-block;
   }
 
-  /* Collapsible sections */
+  /* Collapsible sections — capsule style */
   .collapsible-header {
     display: flex; align-items: center; justify-content: space-between;
     cursor: pointer; user-select: none;
-    padding: 12px 0; position: relative;
+    padding: 16px 24px; position: relative;
+    background: linear-gradient(135deg, #5a7d5a, #3d5a3e);
+    border-radius: 14px 14px 14px 14px;
+    margin-bottom: 0;
+    transition: border-radius .35s cubic-bezier(.4,0,.2,1), box-shadow .3s;
+    box-shadow: 0 2px 12px rgba(0,0,0,.08);
+  }
+  .collapsible-header:not(.collapsed) {
+    border-radius: 14px 14px 0 0;
   }
   .collapsible-header .section-title {
-    margin-bottom: 0; padding-bottom: 8px;
+    margin-bottom: 0; padding-bottom: 0;
+    color: white; border-bottom: none;
+    font-size: 1.6rem;
+  }
+  .collapsible-header:hover {
+    box-shadow: 0 4px 20px rgba(0,0,0,.15);
+  }
+  .collapsible-header:hover .section-title {
+    color: #f4d9a0;
   }
   .collapsible-header .chevron {
-    width: 20px; height: 20px; position: relative;
-    flex-shrink: 0; margin-left: 12px;
+    width: 22px; height: 22px; position: relative;
+    flex-shrink: 0; margin-left: 16px;
   }
   .collapsible-header .chevron::before,
   .collapsible-header .chevron::after {
     content: ''; position: absolute;
-    width: 10px; height: 2px; background: var(--accent);
+    width: 10px; height: 2.5px; background: rgba(255,255,255,.7);
     top: 50%; border-radius: 2px;
     transition: transform .35s cubic-bezier(.4,0,.2,1);
   }
@@ -143,20 +159,66 @@
   .collapsible-header.collapsed .chevron::after {
     transform: rotate(45deg);
   }
-  .collapsible-header:hover .section-title {
-    color: var(--accent);
-  }
   .collapsible-header:hover .chevron::before,
   .collapsible-header:hover .chevron::after {
-    background: var(--dark);
+    background: #f4d9a0;
   }
   .collapsible-body {
     overflow: hidden;
-    transition: max-height .5s cubic-bezier(.4,0,.2,1), opacity .4s ease;
+    background: var(--card-bg);
+    border-radius: 0 0 14px 14px;
+    box-shadow: 0 4px 16px rgba(0,0,0,.06);
+    padding: 0 20px;
+    transition: max-height .5s cubic-bezier(.4,0,.2,1), opacity .4s ease, padding .4s;
     max-height: 8000px; opacity: 1;
+    padding-top: 20px; padding-bottom: 20px;
   }
   .collapsible-body.collapsed {
     max-height: 0; opacity: 0;
+    padding-top: 0; padding-bottom: 0;
+  }
+
+  /* Timeline item collapsible */
+  .timeline-item .timeline-header {
+    cursor: pointer; user-select: none;
+    transition: border-radius .35s cubic-bezier(.4,0,.2,1);
+  }
+  .timeline-item .timeline-header .chevron {
+    width: 18px; height: 18px; position: relative;
+    flex-shrink: 0; margin-left: 12px;
+  }
+  .timeline-item .timeline-header .chevron::before,
+  .timeline-item .timeline-header .chevron::after {
+    content: ''; position: absolute;
+    width: 8px; height: 2px; background: rgba(255,255,255,.6);
+    top: 50%; border-radius: 2px;
+    transition: transform .35s cubic-bezier(.4,0,.2,1);
+  }
+  .timeline-item .timeline-header .chevron::before {
+    left: 2px; transform: rotate(45deg);
+  }
+  .timeline-item .timeline-header .chevron::after {
+    right: 2px; transform: rotate(-45deg);
+  }
+  .timeline-item .timeline-header.collapsed .chevron::before {
+    transform: rotate(-45deg);
+  }
+  .timeline-item .timeline-header.collapsed .chevron::after {
+    transform: rotate(45deg);
+  }
+  .timeline-item .timeline-header:hover .chevron::before,
+  .timeline-item .timeline-header:hover .chevron::after {
+    background: #f4d9a0;
+  }
+  .timeline-item .timeline-body.collapsed {
+    max-height: 0; opacity: 0; padding: 0 25px;
+    overflow: hidden;
+    transition: max-height .5s cubic-bezier(.4,0,.2,1), opacity .4s ease, padding .4s;
+  }
+  .timeline-item .timeline-body {
+    transition: max-height .5s cubic-bezier(.4,0,.2,1), opacity .4s ease, padding .4s;
+    max-height: 5000px; opacity: 1;
+    overflow: hidden;
   }
 
   /* Timeline */
@@ -169,7 +231,7 @@
   .timeline-item {
     position: relative; margin-bottom: 50px;
     background: var(--card-bg); border-radius: 16px;
-    box-shadow: var(--shadow); overflow: hidden;
+    box-shadow: var(--shadow);
   }
   .timeline-item::before {
     content: ''; position: absolute; left: -33px; top: 30px;
@@ -180,6 +242,11 @@
     background: linear-gradient(135deg, #5a7d5a, #3d5a3e);
     color: white; padding: 20px 25px; display: flex;
     justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
+    border-radius: 16px 16px 0 0;
+    transition: border-radius .35s cubic-bezier(.4,0,.2,1);
+  }
+  .timeline-header.collapsed {
+    border-radius: 16px;
   }
   .timeline-header h3 {
     font-family: 'Cormorant Garamond', serif; font-size: 1.5rem;
@@ -561,11 +628,11 @@
 
       <!-- LYON - DUBAI - HANOI -->
       <div class="timeline-item">
-        <div class="timeline-header">
+        <div class="timeline-header collapsed" onclick="toggleSection(this)">
           <h3>Lyon &rarr; Dubai &rarr; Hanoi</h3>
-          <span class="badge">21 - 22 Juin</span>
+          <span class="badge">21 - 22 Juin</span><span class="chevron"></span>
         </div>
-        <div class="timeline-body">
+        <div class="timeline-body collapsed">
           <div class="transport-info">
             <div class="transport-badge">✈️ Emirates EK082</div>
             <div class="transport-badge">📍 Lyon (LYS) &rarr; Dubai (DXB)</div>
@@ -586,11 +653,11 @@
 
       <!-- HANOI -->
       <div class="timeline-item">
-        <div class="timeline-header">
+        <div class="timeline-header collapsed" onclick="toggleSection(this)">
           <h3>Hanoi</h3>
-          <span class="badge">23 - 25 Juin &bull; 3 jours</span>
+          <span class="badge">23 - 25 Juin &bull; 3 jours</span><span class="chevron"></span>
         </div>
-        <div class="timeline-body">
+        <div class="timeline-body collapsed">
           <div class="photo-grid">
             <img src="https://images.unsplash.com/photo-1509030450996-dd1a26613571?w=400&h=300&fit=crop" alt="Hanoi Old Quarter">
             <img src="https://images.unsplash.com/photo-1555921015-5532091f6026?w=400&h=300&fit=crop" alt="Hanoi Temple">
@@ -640,11 +707,11 @@
 
       <!-- NINH BINH -->
       <div class="timeline-item">
-        <div class="timeline-header">
+        <div class="timeline-header collapsed" onclick="toggleSection(this)">
           <h3>Ninh Binh</h3>
-          <span class="badge">26 - 27 Juin &bull; 2 jours</span>
+          <span class="badge">26 - 27 Juin &bull; 2 jours</span><span class="chevron"></span>
         </div>
-        <div class="timeline-body">
+        <div class="timeline-body collapsed">
           <div class="transport-info">
             <div class="transport-badge">🚗 ~95 km depuis Hanoi</div>
             <div class="transport-badge">⏱️ ~2h en voiture/bus</div>
@@ -695,11 +762,11 @@
 
       <!-- HA LONG BAY -->
       <div class="timeline-item">
-        <div class="timeline-header">
+        <div class="timeline-header collapsed" onclick="toggleSection(this)">
           <h3>Ha Long Bay</h3>
-          <span class="badge">28 - 29 Juin &bull; 2 jours</span>
+          <span class="badge">28 - 29 Juin &bull; 2 jours</span><span class="chevron"></span>
         </div>
-        <div class="timeline-body">
+        <div class="timeline-body collapsed">
           <div class="transport-info">
             <div class="transport-badge">🚗 ~220 km depuis Ninh Binh</div>
             <div class="transport-badge">⏱️ ~3h30-4h</div>
@@ -750,11 +817,11 @@
 
       <!-- SA PA -->
       <div class="timeline-item">
-        <div class="timeline-header">
+        <div class="timeline-header collapsed" onclick="toggleSection(this)">
           <h3>Sa Pa</h3>
-          <span class="badge">30 Juin - 2 Juil &bull; 3 jours</span>
+          <span class="badge">30 Juin - 2 Juil &bull; 3 jours</span><span class="chevron"></span>
         </div>
-        <div class="timeline-body">
+        <div class="timeline-body collapsed">
           <div class="transport-info">
             <div class="transport-badge">🚗 ~480 km depuis Ha Long</div>
             <div class="transport-badge">⏱️ ~7h30-8h (ou train de nuit depuis Hanoi)</div>
@@ -806,11 +873,11 @@
 
       <!-- VOL INTERIEUR -->
       <div class="timeline-item">
-        <div class="timeline-header">
+        <div class="timeline-header collapsed" onclick="toggleSection(this)">
           <h3>Transfert vers le Centre</h3>
-          <span class="badge">3 Juillet</span>
+          <span class="badge">3 Juillet</span><span class="chevron"></span>
         </div>
-        <div class="timeline-body">
+        <div class="timeline-body collapsed">
           <div class="transport-info">
             <div class="transport-badge">✈️ Vol Hanoi &rarr; Da Nang ~1h20</div>
             <div class="transport-badge">💰 ~40-80 EUR</div>
@@ -822,11 +889,11 @@
 
       <!-- DA NANG -->
       <div class="timeline-item">
-        <div class="timeline-header">
+        <div class="timeline-header collapsed" onclick="toggleSection(this)">
           <h3>Da Nang</h3>
-          <span class="badge">3 - 5 Juil &bull; 3 jours</span>
+          <span class="badge">3 - 5 Juil &bull; 3 jours</span><span class="chevron"></span>
         </div>
-        <div class="timeline-body">
+        <div class="timeline-body collapsed">
           <div class="photo-grid">
             <img src="https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=400&h=300&fit=crop" alt="Da Nang Dragon Bridge">
             <img src="https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=400&h=300&fit=crop" alt="Da Nang Beach">
@@ -872,11 +939,11 @@
 
       <!-- HOI AN -->
       <div class="timeline-item">
-        <div class="timeline-header">
+        <div class="timeline-header collapsed" onclick="toggleSection(this)">
           <h3>Hoi An</h3>
-          <span class="badge">6 - 10 Juil &bull; 5 jours</span>
+          <span class="badge">6 - 10 Juil &bull; 5 jours</span><span class="chevron"></span>
         </div>
-        <div class="timeline-body">
+        <div class="timeline-body collapsed">
           <div class="transport-info">
             <div class="transport-badge">🚗 ~30 km depuis Da Nang</div>
             <div class="transport-badge">⏱️ ~40 min</div>
@@ -935,11 +1002,11 @@
 
       <!-- RETOUR HANOI - DUBAI - LYON -->
       <div class="timeline-item">
-        <div class="timeline-header">
+        <div class="timeline-header collapsed" onclick="toggleSection(this)">
           <h3>Hanoi &rarr; Dubai &rarr; Lyon</h3>
-          <span class="badge">13 Juillet</span>
+          <span class="badge">13 Juillet</span><span class="chevron"></span>
         </div>
-        <div class="timeline-body">
+        <div class="timeline-body collapsed">
           <div class="transport-info">
             <div class="transport-badge">✈️ Emirates EK395</div>
             <div class="transport-badge">📍 Hanoi (HAN) &rarr; Dubai (DXB)</div>

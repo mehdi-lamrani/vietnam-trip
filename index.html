@@ -98,11 +98,11 @@
   }
 
   /* Container */
-  .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+  .container { max-width: 96%; margin: 0 auto; padding: 0 16px; }
 
   /* Section */
   .section {
-    margin: 50px auto; max-width: 1000px; padding: 0 20px;
+    margin: 50px auto; max-width: 96%; padding: 0 16px;
   }
   .section-title {
     font-family: 'Cormorant Garamond', serif;
@@ -505,10 +505,25 @@
   /* Responsive */
   @media (max-width: 600px) {
     .hero h1 { font-size: 2.2rem; }
+    .hero .dates { font-size: 1rem; }
+    .section { padding: 0 8px; }
     .timeline { padding-left: 25px; }
     .timeline::before { left: 7px; }
     .timeline-item::before { left: -25px; }
     .photo-grid { grid-template-columns: 1fr; }
+    .recap-table { font-size: .8rem; }
+    .recap-table th, .recap-table td { padding: 8px 6px; }
+    .budget-table th, .budget-table td { padding: 8px 10px; font-size: .85rem; }
+    .collapsible-header .section-title { font-size: 1.3rem; }
+    .collapsible-body { padding: 12px; }
+    .hotel-card { padding: 14px; }
+    .recap-route { justify-content: center; }
+    .recap-stop { min-width: 60px; }
+    .recap-arrow { min-width: 40px; padding: 0 3px; }
+    .timeline-header h3 { font-size: 1.2rem; }
+    .timeline-header .badge { font-size: .9rem; padding: 4px 12px; }
+    .timeline-header .header-details .detail-tag { font-size: .85rem; }
+    .transport-info { flex-direction: column; gap: 6px; }
   }
 </style>
 </head>

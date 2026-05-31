@@ -463,9 +463,9 @@
   .cal-day.empty { background: transparent; min-height: 0; }
   .cal-day.transit { background: linear-gradient(135deg, #78909c, #546e7a); }
   .cal-day.hanoi { background: linear-gradient(135deg, #81c784, #4caf50); }
-  .cal-day.ninhbinh { background: linear-gradient(135deg, #66bb6a, #2e7d32); }
   .cal-day.halong { background: linear-gradient(135deg, #64b5f6, #1e88e5); }
-  .cal-day.puluong { background: linear-gradient(135deg, #a5d6a7, #388e3c); }
+  .cal-day.puluong { background: linear-gradient(135deg, #4db6ac, #00897b); }
+  .cal-day.ninhbinh { background: linear-gradient(135deg, #ce93d8, #8e24aa); }
   .cal-day.lanha { background: linear-gradient(135deg, #4fc3f7, #0277bd); }
   .cal-day.danang { background: linear-gradient(135deg, #ff8a65, #e64a19); }
   .cal-day.hoian { background: linear-gradient(135deg, #ffd54f, #f9a825); color: #5d4037; }
@@ -593,8 +593,8 @@
       <div class="cal-legend">
         <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#546e7a;"></div>Transit</div>
         <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#4caf50;"></div>Hanoi</div>
-        <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#388e3c;"></div>Pu Luong</div>
-        <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#2e7d32;"></div>Ninh Binh</div>
+        <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#00897b;"></div>Pu Luong</div>
+        <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#8e24aa;"></div>Ninh Binh</div>
         <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#0277bd;"></div>Lan Ha Bay</div>
         <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#f9a825;"></div>Hoi An</div>
       </div>
@@ -731,7 +731,7 @@
             <tr><td>Hanoi &rarr; Mai Chau &rarr; Pu Luong</td><td><span class="capsule capsule-green">🚗 Route</span></td><td>~165 km</td><td>~4h (+ repas)</td></tr>
             <tr><td>Pu Luong &rarr; Ninh Binh</td><td><span class="capsule capsule-green">🚗 Route</span></td><td>~130 km</td><td>~4h30</td></tr>
             <tr><td>Ninh Binh &rarr; Lan Ha Bay</td><td><span class="capsule capsule-green">🚗 Route</span></td><td>~220 km</td><td>~3h30</td></tr>
-            <tr><td>Lan Ha &rarr; Hanoi &rarr; Da Nang</td><td><span class="capsule capsule-purple">✈️ Vol int.</span></td><td>~960 km</td><td>~1h20 (vol)</td></tr>
+            <tr><td>Lan Ha &rarr; Hai Phong &rarr; Da Nang</td><td><span class="capsule capsule-purple">✈️ Vol int.</span></td><td>~680 km</td><td>~3h (ferry + vol)</td></tr>
             <tr><td>Hoi An &rarr; Da Nang &rarr; Hanoi</td><td><span class="capsule capsule-purple">✈️ Vol int.</span></td><td>~770 km</td><td>~1h20 (vol)</td></tr>
             <tr><td>Hanoi &rarr; Dubai</td><td><span class="capsule capsule-purple">✈️ EK395</span></td><td>~5 700 km</td><td>~7h</td></tr>
             <tr><td>Dubai &rarr; Lyon</td><td><span class="capsule capsule-purple">✈️ EK081</span></td><td>~4 900 km</td><td>~6h</td></tr>
@@ -1012,7 +1012,7 @@
         </div>
       </div>
 
-      <!-- VOL INTERIEUR HANOI → DA NANG -->
+      <!-- VOL INTERIEUR HAI PHONG → DA NANG -->
       <div class="timeline-item">
         <div class="timeline-header collapsed" onclick="toggleSection(this)">
           <h3>Transfert vers le Centre</h3>
@@ -1020,11 +1020,11 @@
         </div>
         <div class="timeline-body collapsed">
           <div class="transport-info">
-            <div class="transport-badge">🚗 Lan Ha &rarr; Hanoi ~3h</div>
-            <div class="transport-badge">✈️ Vol Hanoi &rarr; Da Nang ~1h20</div>
-            <div class="transport-badge">🚗 Da Nang &rarr; Hoi An ~40min</div>
+            <div class="transport-badge">🛥️ Cat Ba &rarr; Hai Phong ~45 min (ferry)</div>
+            <div class="transport-badge">✈️ Vol Hai Phong &rarr; Da Nang ~1h20</div>
+            <div class="transport-badge">🚗 Da Nang &rarr; Hoi An ~40 min</div>
           </div>
-          <p>Retour a Hanoi puis vol interieur vers Da Nang. Compagnies : VietJet, Bamboo Airways, Vietnam Airlines. ~40-80 EUR/pers.</p>
+          <p>Ferry depuis Cat Ba puis vol direct Hai Phong (HPH) &rarr; Da Nang. Compagnies : VietJet, Bamboo Airways. ~40-80 EUR/pers.</p>
           <div class="booking-placeholder" id="resa-vol-interieur" data-city="Vol Interieur"></div>
         </div>
       </div>

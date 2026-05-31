@@ -438,6 +438,55 @@
     width: 20px; height: 20px; accent-color: var(--green);
   }
 
+  /* Calendar */
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+    margin: 15px 0;
+  }
+  .cal-header {
+    text-align: center; font-weight: 600; font-size: .75rem;
+    color: var(--dark); padding: 8px 0;
+    border-bottom: 2px solid #e0e0e0;
+  }
+  .cal-day {
+    text-align: center; padding: 10px 4px; border-radius: 10px;
+    font-size: .8rem; font-weight: 500; color: #fff;
+    min-height: 62px; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 2px;
+    transition: transform .2s;
+  }
+  .cal-day:hover { transform: scale(1.08); }
+  .cal-day .cal-num { font-size: 1.05rem; font-weight: 700; }
+  .cal-day .cal-label { font-size: .6rem; opacity: .9; line-height: 1.1; }
+  .cal-day.empty { background: transparent; min-height: 0; }
+  .cal-day.transit { background: linear-gradient(135deg, #78909c, #546e7a); }
+  .cal-day.hanoi { background: linear-gradient(135deg, #81c784, #4caf50); }
+  .cal-day.ninhbinh { background: linear-gradient(135deg, #66bb6a, #2e7d32); }
+  .cal-day.halong { background: linear-gradient(135deg, #64b5f6, #1e88e5); }
+  .cal-day.puluong { background: linear-gradient(135deg, #a5d6a7, #388e3c); }
+  .cal-day.lanha { background: linear-gradient(135deg, #4fc3f7, #0277bd); }
+  .cal-day.danang { background: linear-gradient(135deg, #ff8a65, #e64a19); }
+  .cal-day.hoian { background: linear-gradient(135deg, #ffd54f, #f9a825); color: #5d4037; }
+  .cal-legend {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px;
+    justify-content: center;
+  }
+  .cal-legend-item {
+    display: flex; align-items: center; gap: 6px;
+    font-size: .8rem; color: #555;
+  }
+  .cal-legend-dot {
+    width: 14px; height: 14px; border-radius: 4px; flex-shrink: 0;
+  }
+  @media (max-width: 600px) {
+    .cal-day { padding: 6px 2px; min-height: 52px; }
+    .cal-day .cal-num { font-size: .9rem; }
+    .cal-day .cal-label { font-size: .55rem; }
+    .calendar-grid { gap: 4px; }
+  }
+
   /* Footer */
   .footer {
     text-align: center; padding: 40px 20px;
@@ -474,7 +523,83 @@
     <h1>Escapade au Vietnam</h1>
     <p style="font-family:'Cormorant Garamond',serif; font-size:3.5rem; font-weight:700; color:#f4d9a0; margin-bottom:.5rem; letter-spacing:3px;">Ouidad & Mehdi</p>
     <div class="dates">21 JUIN - 13 JUILLET 2026</div>
-    <p class="subtitle">Hanoi &bull; Ninh Binh &bull; Ha Long Bay &bull; Sa Pa &bull; Da Nang &bull; Hoi An</p>
+    <p class="subtitle">Hanoi &bull; Pu Luong &bull; Ninh Binh &bull; Lan Ha Bay &bull; Hoi An</p>
+  </div>
+
+  <!-- CALENDRIER VISUEL -->
+  <div class="section">
+    <div class="collapsible-header" onclick="toggleSection(this)">
+      <h2 class="section-title" style="margin-bottom:0;">Calendrier</h2>
+      <span class="chevron"></span>
+    </div>
+    <div class="collapsible-body">
+
+      <div class="calendar-grid">
+        <!-- Header jours -->
+        <div class="cal-header">Lun</div>
+        <div class="cal-header">Mar</div>
+        <div class="cal-header">Mer</div>
+        <div class="cal-header">Jeu</div>
+        <div class="cal-header">Ven</div>
+        <div class="cal-header">Sam</div>
+        <div class="cal-header">Dim</div>
+
+        <!-- Semaine 15-21 juin (seul dim 21 est dans le trip) -->
+        <div class="cal-day empty"></div>
+        <div class="cal-day empty"></div>
+        <div class="cal-day empty"></div>
+        <div class="cal-day empty"></div>
+        <div class="cal-day empty"></div>
+        <div class="cal-day empty"></div>
+        <div class="cal-day transit"><span class="cal-num">21</span><span class="cal-label">Lyon→Paris</span></div>
+
+        <!-- Semaine 22-28 juin -->
+        <div class="cal-day transit"><span class="cal-num">22</span><span class="cal-label">✈️ Vol</span></div>
+        <div class="cal-day hanoi"><span class="cal-num">23</span><span class="cal-label">Hanoi</span></div>
+        <div class="cal-day hanoi"><span class="cal-num">24</span><span class="cal-label">Hanoi</span></div>
+        <div class="cal-day puluong"><span class="cal-num">25</span><span class="cal-label">Pu Luong</span></div>
+        <div class="cal-day puluong"><span class="cal-num">26</span><span class="cal-label">Pu Luong</span></div>
+        <div class="cal-day puluong"><span class="cal-num">27</span><span class="cal-label">Pu Luong</span></div>
+        <div class="cal-day puluong"><span class="cal-num">28</span><span class="cal-label">Pu Luong</span></div>
+
+        <!-- Semaine 29 juin - 5 juil -->
+        <div class="cal-day ninhbinh"><span class="cal-num">29</span><span class="cal-label">Ninh Binh</span></div>
+        <div class="cal-day ninhbinh"><span class="cal-num">30</span><span class="cal-label">Ninh Binh</span></div>
+        <div class="cal-day ninhbinh"><span class="cal-num">1</span><span class="cal-label">Ninh Binh</span></div>
+        <div class="cal-day lanha"><span class="cal-num">2</span><span class="cal-label">Lan Ha</span></div>
+        <div class="cal-day lanha"><span class="cal-num">3</span><span class="cal-label">Lan Ha</span></div>
+        <div class="cal-day hoian"><span class="cal-num">4</span><span class="cal-label">Hoi An</span></div>
+        <div class="cal-day hoian"><span class="cal-num">5</span><span class="cal-label">Hoi An</span></div>
+
+        <!-- Semaine 6-12 juil -->
+        <div class="cal-day hoian"><span class="cal-num">6</span><span class="cal-label">Hoi An</span></div>
+        <div class="cal-day hoian"><span class="cal-num">7</span><span class="cal-label">Hoi An</span></div>
+        <div class="cal-day hoian"><span class="cal-num">8</span><span class="cal-label">Hoi An</span></div>
+        <div class="cal-day hoian"><span class="cal-num">9</span><span class="cal-label">Hoi An</span></div>
+        <div class="cal-day hanoi"><span class="cal-num">10</span><span class="cal-label">✈️ Hanoi</span></div>
+        <div class="cal-day hanoi"><span class="cal-num">11</span><span class="cal-label">Hanoi</span></div>
+        <div class="cal-day hanoi"><span class="cal-num">12</span><span class="cal-label">Hanoi</span></div>
+
+        <!-- Semaine 13 juil -->
+        <div class="cal-day transit"><span class="cal-num">13</span><span class="cal-label">✈️ Retour</span></div>
+        <div class="cal-day empty"></div>
+        <div class="cal-day empty"></div>
+        <div class="cal-day empty"></div>
+        <div class="cal-day empty"></div>
+        <div class="cal-day empty"></div>
+        <div class="cal-day empty"></div>
+      </div>
+
+      <div class="cal-legend">
+        <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#546e7a;"></div>Transit</div>
+        <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#4caf50;"></div>Hanoi</div>
+        <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#388e3c;"></div>Pu Luong</div>
+        <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#2e7d32;"></div>Ninh Binh</div>
+        <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#0277bd;"></div>Lan Ha Bay</div>
+        <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#f9a825;"></div>Hoi An</div>
+      </div>
+
+    </div>
   </div>
 
   <!-- RECAP TRAJET -->
@@ -485,14 +610,17 @@
     </div>
     <div class="collapsible-body collapsed">
 
+    <div style="margin-bottom:25px; border-radius:14px; overflow:hidden; box-shadow: var(--shadow);">
+      <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1IAG_MeFccGVjwIqcd-Uk7H0gvA15zqU&ll=19.213643597590544%2C105.972215&z=7" width="100%" height="450" style="border:0; display:block;" allowfullscreen loading="lazy"></iframe>
+    </div>
+
     <div class="recap-card">
       <div class="recap-header">Vue d'ensemble</div>
       <div class="recap-body">
         <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:15px;">
-          <span class="capsule capsule-green">🗓️ 21 jours</span>
-          <span class="capsule capsule-orange">📍 6 etapes au Vietnam</span>
-          <span class="capsule capsule-blue">✈️ ~1 785 km au Vietnam</span>
-          <span class="capsule capsule-pink">💰 3 000 - 3 800 EUR pour 2</span>
+          <span class="capsule capsule-green">🗓️ 23 jours</span>
+          <span class="capsule capsule-orange">📍 5 etapes au Vietnam</span>
+          <span class="capsule capsule-pink">💰 2 900 - 3 700 EUR pour 2</span>
         </div>
 
         <div class="recap-route">
@@ -517,16 +645,34 @@
           <div class="recap-stop">
             <span class="stop-icon">🏯</span>
             <span class="stop-name">Hanoi</span>
-            <span class="stop-dates">22-25 juin</span>
+            <span class="stop-dates">23-24 juin</span>
           </div>
           <div class="recap-arrow">
             <span class="arrow-line">&rarr;</span>
-            <span class="arrow-info">🚗 95km</span>
+            <span class="arrow-info">🚗 135km</span>
+          </div>
+          <div class="recap-stop">
+            <span class="stop-icon">🌿</span>
+            <span class="stop-name">Mai Chau</span>
+            <span class="stop-dates">repas</span>
+          </div>
+          <div class="recap-arrow">
+            <span class="arrow-line">&rarr;</span>
+            <span class="arrow-info">🚗 30km</span>
+          </div>
+          <div class="recap-stop">
+            <span class="stop-icon">🌾</span>
+            <span class="stop-name">Pu Luong</span>
+            <span class="stop-dates">25-28 juin</span>
+          </div>
+          <div class="recap-arrow">
+            <span class="arrow-line">&rarr;</span>
+            <span class="arrow-info">🚗 130km</span>
           </div>
           <div class="recap-stop">
             <span class="stop-icon">🚣</span>
             <span class="stop-name">Ninh Binh</span>
-            <span class="stop-dates">26-27 juin</span>
+            <span class="stop-dates">29 juin - 1 juil</span>
           </div>
           <div class="recap-arrow">
             <span class="arrow-line">&rarr;</span>
@@ -534,35 +680,26 @@
           </div>
           <div class="recap-stop">
             <span class="stop-icon">🛥️</span>
-            <span class="stop-name">Ha Long</span>
-            <span class="stop-dates">28-29 juin</span>
-          </div>
-          <div class="recap-arrow">
-            <span class="arrow-line">&rarr;</span>
-            <span class="arrow-info">🚌 480km</span>
-          </div>
-          <div class="recap-stop">
-            <span class="stop-icon">🏔️</span>
-            <span class="stop-name">Sa Pa</span>
-            <span class="stop-dates">30 juin - 2 juil</span>
+            <span class="stop-name">Lan Ha</span>
+            <span class="stop-dates">2-3 juil</span>
           </div>
           <div class="recap-arrow">
             <span class="arrow-line">&rarr;</span>
             <span class="arrow-info">✈️ 1h20</span>
           </div>
           <div class="recap-stop">
-            <span class="stop-icon">🌉</span>
-            <span class="stop-name">Da Nang</span>
-            <span class="stop-dates">3-5 juil</span>
+            <span class="stop-icon">🏮</span>
+            <span class="stop-name">Hoi An</span>
+            <span class="stop-dates">4-9 juil</span>
           </div>
           <div class="recap-arrow">
             <span class="arrow-line">&rarr;</span>
-            <span class="arrow-info">🚗 30km</span>
+            <span class="arrow-info">✈️ Da Nang</span>
           </div>
           <div class="recap-stop">
-            <span class="stop-icon">🏮</span>
-            <span class="stop-name">Hoi An</span>
-            <span class="stop-dates">6-10 juil</span>
+            <span class="stop-icon">🏯</span>
+            <span class="stop-name">Hanoi</span>
+            <span class="stop-dates">10-12 juil</span>
           </div>
           <div class="recap-arrow">
             <span class="arrow-line">&rarr;</span>
@@ -591,11 +728,11 @@
           <tbody>
             <tr><td>Lyon &rarr; Dubai</td><td><span class="capsule capsule-purple">✈️ EK082</span></td><td>~4 900 km</td><td>~6h</td></tr>
             <tr><td>Dubai &rarr; Hanoi</td><td><span class="capsule capsule-purple">✈️ EK394</span></td><td>~5 700 km</td><td>~7h</td></tr>
-            <tr><td>Hanoi &rarr; Ninh Binh</td><td><span class="capsule capsule-green">🚗 Route</span></td><td>~95 km</td><td>~2h</td></tr>
-            <tr><td>Ninh Binh &rarr; Ha Long Bay</td><td><span class="capsule capsule-green">🚗 Route</span></td><td>~220 km</td><td>~3h30</td></tr>
-            <tr><td>Ha Long &rarr; Sa Pa</td><td><span class="capsule capsule-orange">🚌 Bus/Train</span></td><td>~480 km</td><td>~7h30</td></tr>
-            <tr><td>Sa Pa &rarr; Da Nang</td><td><span class="capsule capsule-purple">✈️ Vol int.</span></td><td>~960 km</td><td>~1h20</td></tr>
-            <tr><td>Da Nang &rarr; Hoi An</td><td><span class="capsule capsule-green">🚗 Route</span></td><td>~30 km</td><td>~40 min</td></tr>
+            <tr><td>Hanoi &rarr; Mai Chau &rarr; Pu Luong</td><td><span class="capsule capsule-green">🚗 Route</span></td><td>~165 km</td><td>~4h (+ repas)</td></tr>
+            <tr><td>Pu Luong &rarr; Ninh Binh</td><td><span class="capsule capsule-green">🚗 Route</span></td><td>~130 km</td><td>~4h30</td></tr>
+            <tr><td>Ninh Binh &rarr; Lan Ha Bay</td><td><span class="capsule capsule-green">🚗 Route</span></td><td>~220 km</td><td>~3h30</td></tr>
+            <tr><td>Lan Ha &rarr; Hanoi &rarr; Da Nang</td><td><span class="capsule capsule-purple">✈️ Vol int.</span></td><td>~960 km</td><td>~1h20 (vol)</td></tr>
+            <tr><td>Hoi An &rarr; Da Nang &rarr; Hanoi</td><td><span class="capsule capsule-purple">✈️ Vol int.</span></td><td>~770 km</td><td>~1h20 (vol)</td></tr>
             <tr><td>Hanoi &rarr; Dubai</td><td><span class="capsule capsule-purple">✈️ EK395</span></td><td>~5 700 km</td><td>~7h</td></tr>
             <tr><td>Dubai &rarr; Lyon</td><td><span class="capsule capsule-purple">✈️ EK081</span></td><td>~4 900 km</td><td>~6h</td></tr>
           </tbody>
@@ -655,7 +792,7 @@
       <div class="timeline-item">
         <div class="timeline-header collapsed" onclick="toggleSection(this)">
           <h3>Hanoi</h3>
-          <span class="badge">23 - 25 Juin &bull; 3 jours</span><span class="chevron"></span>
+          <span class="badge">23 - 24 Juin &bull; 2 jours</span><span class="chevron"></span>
         </div>
         <div class="timeline-body collapsed">
           <div class="photo-grid">
@@ -698,10 +835,70 @@
             <p><strong>Essence Hanoi Hotel</strong> — Charme colonial, excellent service</p>
             <p><strong>Hanoi Gratitude Hotel</strong> — Boutique hotel, bon rapport qualite-prix</p>
             <span class="price">~30-60 EUR/nuit pour un 3-4 etoiles</span><br>
-            <a href="https://www.booking.com/searchresults.html?ss=Hanoi+Old+Quarter&checkin=2026-06-23&checkout=2026-06-26" target="_blank" class="hotel-link">Chercher sur Booking.com</a>
+            <a href="https://www.booking.com/searchresults.html?ss=Hanoi+Old+Quarter&checkin=2026-06-23&checkout=2026-06-25" target="_blank" class="hotel-link">Chercher sur Booking.com</a>
           </div>
           <div class="booking-placeholder" id="resa-hanoi" data-city="Hanoi"></div>
           <div class="links-section" id="links-hanoi" data-city="Hanoi"></div>
+        </div>
+      </div>
+
+      <!-- PU LUONG -->
+      <div class="timeline-item">
+        <div class="timeline-header collapsed" onclick="toggleSection(this)">
+          <h3>Pu Luong</h3>
+          <span class="badge">25 - 28 Juin &bull; 4 nuits</span><span class="chevron"></span>
+        </div>
+        <div class="timeline-body collapsed">
+          <div class="transport-info">
+            <div class="transport-badge">🚗 ~165 km depuis Hanoi</div>
+            <div class="transport-badge">⏱️ ~4h (via Mai Chau, repas sur place)</div>
+          </div>
+          <p style="margin:10px 0; color: var(--accent); font-weight:500;">💡 Stop dejeuner a Mai Chau en route — village Thai, rizieres, ambiance paisible</p>
+
+          <div class="photo-grid">
+            <img src="https://images.unsplash.com/photo-1570366583862-f91883984fde?w=400&h=300&fit=crop" alt="Pu Luong rice terraces">
+            <img src="https://images.unsplash.com/photo-1584003564911-a89e55966637?w=400&h=300&fit=crop" alt="Pu Luong nature">
+            <img src="https://images.unsplash.com/photo-1528127269322-539801943592?w=400&h=300&fit=crop" alt="Pu Luong valley">
+          </div>
+
+          <div style="margin-top:15px;"><span class="capsule capsule-pink">💑 A faire en couple</span></div>
+          <div class="activities">
+            <div class="activity">
+              <span class="activity-icon">🌾</span>
+              <div><strong>Rizieres en terrasses</strong> — Balades au rythme lent a travers les plus belles rizieres du Nord</div>
+            </div>
+            <div class="activity">
+              <span class="activity-icon">🏊</span>
+              <div><strong>Cascades naturelles</strong> — Baignade dans les piscines naturelles au milieu de la foret</div>
+            </div>
+            <div class="activity">
+              <span class="activity-icon">🏘️</span>
+              <div><strong>Villages Thai</strong> — Rencontres, ateliers artisanaux, tissage traditionnel</div>
+            </div>
+            <div class="activity">
+              <span class="activity-icon">🚲</span>
+              <div><strong>Velo dans la reserve</strong> — Parcours tranquilles entre les villages et les champs</div>
+            </div>
+            <div class="activity">
+              <span class="activity-icon">🌅</span>
+              <div><strong>Lever de soleil sur la vallee</strong> — Depuis la terrasse du homestay, cafe a la main</div>
+            </div>
+            <div class="activity">
+              <span class="activity-icon">🍃</span>
+              <div><strong>Deconnexion totale</strong> — Pas de foule, pas de bruit, juste la nature et le calme</div>
+            </div>
+          </div>
+
+          <div class="hotel-card">
+            <span class="capsule capsule-teal">🏡 Homestays & ecolodges</span> <span class="capsule capsule-orange">💰 25-60 EUR/nuit</span>
+            <p><strong>Pu Luong Retreat</strong> — Bungalows sur pilotis, piscine infinity, vue rizieres</p>
+            <p><strong>Pu Luong Natura</strong> — Eco-lodge, calme absolu, immersion nature</p>
+            <p><strong>Pu Luong Homestay</strong> — Chez l'habitant, authentique, repas maison</p>
+            <span class="price">~25-60 EUR/nuit</span><br>
+            <a href="https://www.booking.com/searchresults.html?ss=Pu+Luong+Nature+Reserve&checkin=2026-06-25&checkout=2026-06-29" target="_blank" class="hotel-link">Chercher sur Booking.com</a>
+          </div>
+          <div class="booking-placeholder" id="resa-puluong" data-city="Pu Luong"></div>
+          <div class="links-section" id="links-puluong" data-city="Pu Luong"></div>
         </div>
       </div>
 
@@ -709,12 +906,12 @@
       <div class="timeline-item">
         <div class="timeline-header collapsed" onclick="toggleSection(this)">
           <h3>Ninh Binh</h3>
-          <span class="badge">26 - 27 Juin &bull; 2 jours</span><span class="chevron"></span>
+          <span class="badge">29 Juin - 1 Juil &bull; 3 jours</span><span class="chevron"></span>
         </div>
         <div class="timeline-body collapsed">
           <div class="transport-info">
-            <div class="transport-badge">🚗 ~95 km depuis Hanoi</div>
-            <div class="transport-badge">⏱️ ~2h en voiture/bus</div>
+            <div class="transport-badge">🚗 ~130 km depuis Pu Luong</div>
+            <div class="transport-badge">⏱️ ~4h30</div>
           </div>
 
           <div class="photo-grid">
@@ -753,40 +950,40 @@
             <p><strong>Nguyen Shack Ninh Binh</strong> — Eco-lodge, ambiance romantique</p>
             <p><strong>Mua Caves Ecolodge</strong> — Vue sur les montagnes, calme absolu</p>
             <span class="price">~25-50 EUR/nuit</span><br>
-            <a href="https://www.booking.com/searchresults.html?ss=Ninh+Binh&checkin=2026-06-26&checkout=2026-06-28" target="_blank" class="hotel-link">Chercher sur Booking.com</a>
+            <a href="https://www.booking.com/searchresults.html?ss=Ninh+Binh&checkin=2026-06-29&checkout=2026-07-02" target="_blank" class="hotel-link">Chercher sur Booking.com</a>
           </div>
           <div class="booking-placeholder" id="resa-ninhbinh" data-city="Ninh Binh"></div>
           <div class="links-section" id="links-ninhbinh" data-city="Ninh Binh"></div>
         </div>
       </div>
 
-      <!-- HA LONG BAY -->
+      <!-- LAN HA BAY -->
       <div class="timeline-item">
         <div class="timeline-header collapsed" onclick="toggleSection(this)">
-          <h3>Ha Long Bay</h3>
-          <span class="badge">28 - 29 Juin &bull; 2 jours</span><span class="chevron"></span>
+          <h3>Lan Ha Bay</h3>
+          <span class="badge">2 - 3 Juil &bull; 2 jours</span><span class="chevron"></span>
         </div>
         <div class="timeline-body collapsed">
           <div class="transport-info">
             <div class="transport-badge">🚗 ~220 km depuis Ninh Binh</div>
-            <div class="transport-badge">⏱️ ~3h30-4h</div>
+            <div class="transport-badge">⏱️ ~3h30 jusqu'a Cat Ba Island</div>
           </div>
 
           <div class="photo-grid">
-            <img src="https://images.unsplash.com/photo-1528127269322-539801943592?w=400&h=300&fit=crop" alt="Ha Long Bay">
-            <img src="https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=400&h=300&fit=crop" alt="Ha Long Cruise">
-            <img src="https://images.unsplash.com/photo-1573790387438-4da905039392?w=400&h=300&fit=crop" alt="Ha Long Kayak">
+            <img src="https://images.unsplash.com/photo-1528127269322-539801943592?w=400&h=300&fit=crop" alt="Lan Ha Bay">
+            <img src="https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=400&h=300&fit=crop" alt="Lan Ha Cruise">
+            <img src="https://images.unsplash.com/photo-1573790387438-4da905039392?w=400&h=300&fit=crop" alt="Lan Ha Kayak">
           </div>
 
           <div style="margin-top:15px;"><span class="capsule capsule-pink">💑 A faire en couple</span></div>
           <div class="activities">
             <div class="activity">
               <span class="activity-icon">🛥️</span>
-              <div><strong>Croisiere 1 nuit sur la baie</strong> — Dormir sur un bateau au milieu des karsts, incontournable</div>
+              <div><strong>Croisiere 1 nuit sur la baie</strong> — Dormir sur un bateau au milieu des karsts, sans la foule de Ha Long</div>
             </div>
             <div class="activity">
               <span class="activity-icon">🛶</span>
-              <div><strong>Kayak entre les ilots</strong> — Explorer les grottes et lagons caches</div>
+              <div><strong>Kayak entre les ilots</strong> — Explorer les grottes et lagons caches, eaux turquoise</div>
             </div>
             <div class="activity">
               <span class="activity-icon">🌅</span>
@@ -794,146 +991,41 @@
             </div>
             <div class="activity">
               <span class="activity-icon">🏊</span>
-              <div><strong>Baignade & snorkeling</strong> — Eaux emeraude, plages isolees</div>
+              <div><strong>Baignade & snorkeling</strong> — Plages isolees, eaux emeraude, tranquillite absolue</div>
             </div>
             <div class="activity">
-              <span class="activity-icon">🍽️</span>
-              <div><strong>Cours de cuisine sur le bateau</strong> — Preparer des spring rolls face a la baie</div>
+              <span class="activity-icon">🏝️</span>
+              <div><strong>Cat Ba Island</strong> — Parc national, randonnees, village de pecheurs authentique</div>
             </div>
           </div>
 
           <div class="hotel-card">
             <span class="capsule capsule-blue">🛥️ Croisieres conseillees</span> <span class="capsule capsule-orange">💰 100-180 EUR/pers (2j/1n)</span>
-            <p><strong>Ambassador Cruise</strong> — Bon rapport qualite-prix, cabines modernes</p>
-            <p><strong>Lan Ha Bay Cat Ba cruise</strong> — Moins touristique que Ha Long classique</p>
-            <p><strong>Indochina Junk</strong> — Bateaux traditionnels, experience authentique</p>
+            <p><strong>Cat Ba Langur Cruise</strong> — Petit bateau, itineraire Lan Ha exclusif</p>
+            <p><strong>Orchid Cruise Lan Ha</strong> — Elegance, cabines avec balcon, calme</p>
+            <p><strong>Serenity Cruises</strong> — Boutique cruise, loin des foules</p>
             <span class="price">~100-180 EUR/personne (2 jours / 1 nuit)</span><br>
-            <a href="https://www.booking.com/searchresults.html?ss=Ha+Long+Bay+Cruise&checkin=2026-06-28&checkout=2026-06-30" target="_blank" class="hotel-link">Chercher sur Booking.com</a>
+            <a href="https://www.booking.com/searchresults.html?ss=Lan+Ha+Bay+Cat+Ba&checkin=2026-07-02&checkout=2026-07-04" target="_blank" class="hotel-link">Chercher sur Booking.com</a>
           </div>
-          <div class="booking-placeholder" id="resa-halong" data-city="Ha Long"></div>
-          <div class="links-section" id="links-halong" data-city="Ha Long"></div>
+          <div class="booking-placeholder" id="resa-lanha" data-city="Lan Ha"></div>
+          <div class="links-section" id="links-lanha" data-city="Lan Ha"></div>
         </div>
       </div>
 
-      <!-- SA PA -->
-      <div class="timeline-item">
-        <div class="timeline-header collapsed" onclick="toggleSection(this)">
-          <h3>Sa Pa</h3>
-          <span class="badge">30 Juin - 2 Juil &bull; 3 jours</span><span class="chevron"></span>
-        </div>
-        <div class="timeline-body collapsed">
-          <div class="transport-info">
-            <div class="transport-badge">🚗 ~480 km depuis Ha Long</div>
-            <div class="transport-badge">⏱️ ~7h30-8h (ou train de nuit depuis Hanoi)</div>
-          </div>
-          <p style="margin:10px 0; color: var(--accent); font-weight:500;">💡 Conseil : Retourner a Hanoi puis prendre le train de nuit Hanoi &rarr; Lao Cai (8h, couchettes ~30 EUR)</p>
-
-          <div class="photo-grid">
-            <img src="https://images.unsplash.com/photo-1570366583862-f91883984fde?w=400&h=300&fit=crop" alt="Sapa rice terraces">
-            <img src="https://images.unsplash.com/photo-1584003564911-a89e55966637?w=400&h=300&fit=crop" alt="Sapa mountains">
-            <img src="https://images.unsplash.com/photo-1560969184-10fe8719e047?w=400&h=300&fit=crop" alt="Sapa village">
-          </div>
-
-          <div style="margin-top:15px;"><span class="capsule capsule-pink">💑 A faire en couple</span></div>
-          <div class="activities">
-            <div class="activity">
-              <span class="activity-icon">🥾</span>
-              <div><strong>Trek dans les rizieres en terrasses</strong> — Vallee de Muong Hoa, paysages a couper le souffle</div>
-            </div>
-            <div class="activity">
-              <span class="activity-icon">🏔️</span>
-              <div><strong>Fansipan</strong> — "Toit de l'Indochine" (3143m), telecabine ou trek 2 jours</div>
-            </div>
-            <div class="activity">
-              <span class="activity-icon">🏘️</span>
-              <div><strong>Villages ethniques</strong> — Cat Cat, Ta Phin, rencontres avec les Hmong et Dao</div>
-            </div>
-            <div class="activity">
-              <span class="activity-icon">🌿</span>
-              <div><strong>Bain aux herbes medicinales</strong> — Tradition Dao rouge, relaxation totale en couple</div>
-            </div>
-            <div class="activity">
-              <span class="activity-icon">🌄</span>
-              <div><strong>Lever de soleil sur la vallee</strong> — Depuis l'hotel ou le sommet de Ham Rong</div>
-            </div>
-          </div>
-
-          <div class="hotel-card">
-            <span class="capsule capsule-teal">🏨 Hotels conseilles</span> <span class="capsule capsule-orange">💰 35-70 EUR/nuit</span>
-            <p><strong>Topas Ecolodge</strong> — Bungalows avec vue, piscine infinity, romantique</p>
-            <p><strong>Sapa Catcat Hills Resort</strong> — Vue sur la vallee, calme</p>
-            <p><strong>Aira Boutique Sapa</strong> — Centre-ville, confort moderne, vue montagnes</p>
-            <span class="price">~35-70 EUR/nuit</span><br>
-            <a href="https://www.booking.com/searchresults.html?ss=Sapa+Vietnam&checkin=2026-06-30&checkout=2026-07-03" target="_blank" class="hotel-link">Chercher sur Booking.com</a>
-          </div>
-          <div class="booking-placeholder" id="resa-sapa" data-city="Sa Pa"></div>
-          <div class="links-section" id="links-sapa" data-city="Sa Pa"></div>
-        </div>
-      </div>
-
-      <!-- VOL INTERIEUR -->
+      <!-- VOL INTERIEUR HANOI → DA NANG -->
       <div class="timeline-item">
         <div class="timeline-header collapsed" onclick="toggleSection(this)">
           <h3>Transfert vers le Centre</h3>
-          <span class="badge">3 Juillet</span><span class="chevron"></span>
+          <span class="badge">4 Juillet</span><span class="chevron"></span>
         </div>
         <div class="timeline-body collapsed">
           <div class="transport-info">
+            <div class="transport-badge">🚗 Lan Ha &rarr; Hanoi ~3h</div>
             <div class="transport-badge">✈️ Vol Hanoi &rarr; Da Nang ~1h20</div>
-            <div class="transport-badge">💰 ~40-80 EUR</div>
+            <div class="transport-badge">🚗 Da Nang &rarr; Hoi An ~40min</div>
           </div>
-          <p>Retour Sa Pa &rarr; Hanoi (bus/train), puis vol interieur Hanoi &rarr; Da Nang. Compagnies : VietJet, Bamboo Airways, Vietnam Airlines.</p>
+          <p>Retour a Hanoi puis vol interieur vers Da Nang. Compagnies : VietJet, Bamboo Airways, Vietnam Airlines. ~40-80 EUR/pers.</p>
           <div class="booking-placeholder" id="resa-vol-interieur" data-city="Vol Interieur"></div>
-        </div>
-      </div>
-
-      <!-- DA NANG -->
-      <div class="timeline-item">
-        <div class="timeline-header collapsed" onclick="toggleSection(this)">
-          <h3>Da Nang</h3>
-          <span class="badge">3 - 5 Juil &bull; 3 jours</span><span class="chevron"></span>
-        </div>
-        <div class="timeline-body collapsed">
-          <div class="photo-grid">
-            <img src="https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=400&h=300&fit=crop" alt="Da Nang Dragon Bridge">
-            <img src="https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=400&h=300&fit=crop" alt="Da Nang Beach">
-            <img src="https://images.unsplash.com/photo-1564596823821-79b97151c509?w=400&h=300&fit=crop" alt="Ba Na Hills">
-          </div>
-
-          <div style="margin-top:15px;"><span class="capsule capsule-pink">💑 A faire en couple</span></div>
-          <div class="activities">
-            <div class="activity">
-              <span class="activity-icon">🌉</span>
-              <div><strong>Dragon Bridge</strong> — Spectacle de feu et eau le samedi et dimanche soir</div>
-            </div>
-            <div class="activity">
-              <span class="activity-icon">✋</span>
-              <div><strong>Ba Na Hills & Golden Bridge</strong> — Le celebre pont tenu par des mains geantes</div>
-            </div>
-            <div class="activity">
-              <span class="activity-icon">🏖️</span>
-              <div><strong>Plage de My Khe</strong> — Une des plus belles plages du Vietnam, baignade et detente</div>
-            </div>
-            <div class="activity">
-              <span class="activity-icon">🏔️</span>
-              <div><strong>Marble Mountains</strong> — Grottes, temples et vue panoramique</div>
-            </div>
-            <div class="activity">
-              <span class="activity-icon">🍲</span>
-              <div><strong>Mi Quang & Banh Xeo</strong> — Specialites locales, marche Han</div>
-            </div>
-          </div>
-
-          <div class="hotel-card">
-            <span class="capsule capsule-teal">🏨 Hotels conseilles</span> <span class="capsule capsule-orange">💰 30-60 EUR/nuit</span>
-            <p><strong>Fivitel Da Nang</strong> — Front de mer, piscine, moderne</p>
-            <p><strong>Sala Danang Beach Hotel</strong> — Bord de plage, excellent rapport qualite-prix</p>
-            <p><strong>Grand Tourane Hotel</strong> — Centre-ville, rooftop piscine</p>
-            <span class="price">~30-60 EUR/nuit</span><br>
-            <a href="https://www.booking.com/searchresults.html?ss=Da+Nang+Beach&checkin=2026-07-03&checkout=2026-07-06" target="_blank" class="hotel-link">Chercher sur Booking.com</a>
-          </div>
-          <div class="booking-placeholder" id="resa-danang" data-city="Da Nang"></div>
-          <div class="links-section" id="links-danang" data-city="Da Nang"></div>
         </div>
       </div>
 
@@ -941,7 +1033,7 @@
       <div class="timeline-item">
         <div class="timeline-header collapsed" onclick="toggleSection(this)">
           <h3>Hoi An</h3>
-          <span class="badge">6 - 10 Juil &bull; 5 jours</span><span class="chevron"></span>
+          <span class="badge">4 - 9 Juil &bull; 6 nuits</span><span class="chevron"></span>
         </div>
         <div class="timeline-body collapsed">
           <div class="transport-info">
@@ -993,14 +1085,36 @@
             <p><strong>La An Central Boutique</strong> — Charme, proche vieille ville</p>
             <p><strong>Lantana Riverside Hoi An</strong> — Bord de riviere, piscine, romantique</p>
             <span class="price">~25-55 EUR/nuit</span><br>
-            <a href="https://www.booking.com/searchresults.html?ss=Hoi+An&checkin=2026-07-06&checkout=2026-07-11" target="_blank" class="hotel-link">Chercher sur Booking.com</a>
+            <a href="https://www.booking.com/searchresults.html?ss=Hoi+An&checkin=2026-07-04&checkout=2026-07-10" target="_blank" class="hotel-link">Chercher sur Booking.com</a>
           </div>
           <div class="booking-placeholder" id="resa-hoian" data-city="Hoi An"></div>
           <div class="links-section" id="links-hoian" data-city="Hoi An"></div>
         </div>
       </div>
 
-      <!-- RETOUR HANOI - DUBAI - LYON -->
+      <!-- RETOUR HOI AN → HANOI -->
+      <div class="timeline-item">
+        <div class="timeline-header collapsed" onclick="toggleSection(this)">
+          <h3>Retour a Hanoi</h3>
+          <span class="badge">10 - 12 Juil &bull; 3 nuits</span><span class="chevron"></span>
+        </div>
+        <div class="timeline-body collapsed">
+          <div class="transport-info">
+            <div class="transport-badge">🚗 Hoi An &rarr; Da Nang ~30 min</div>
+            <div class="transport-badge">✈️ Vol Da Nang &rarr; Hanoi ~1h20</div>
+          </div>
+          <p style="margin-top:10px;">Derniers jours tranquilles a Hanoi : shopping de souvenirs, derniers repas, balade dans le vieux quartier.</p>
+          <div class="hotel-card">
+            <span class="capsule capsule-teal">🏨 Hotel</span> <span class="capsule capsule-orange">💰 30-60 EUR/nuit</span>
+            <p>Meme hotel qu'a l'arrivee ou nouveau quartier a explorer</p>
+            <span class="price">~30-60 EUR/nuit</span><br>
+            <a href="https://www.booking.com/searchresults.html?ss=Hanoi&checkin=2026-07-10&checkout=2026-07-13" target="_blank" class="hotel-link">Chercher sur Booking.com</a>
+          </div>
+          <div class="booking-placeholder" id="resa-hanoi-retour" data-city="Hanoi Retour"></div>
+        </div>
+      </div>
+
+      <!-- VOL RETOUR HANOI - DUBAI - LYON -->
       <div class="timeline-item">
         <div class="timeline-header collapsed" onclick="toggleSection(this)">
           <h3>Hanoi &rarr; Dubai &rarr; Lyon</h3>
@@ -1042,13 +1156,14 @@
         </thead>
         <tbody>
           <tr><td>Vols Emirates A/R x2</td><td>1 600 EUR</td><td>2 x 800 EUR Lyon-Dubai-Hanoi (DDG67W)</td></tr>
-          <tr><td>Vol interieur x2</td><td>80 - 120 EUR</td><td>Hanoi-Da Nang</td></tr>
-          <tr><td>Hotels (20 nuits)</td><td>500 - 800 EUR</td><td>25-40 EUR/nuit en moyenne</td></tr>
-          <tr><td>Croisiere Ha Long (2j/1n)</td><td>200 - 300 EUR</td><td>Pour 2 personnes</td></tr>
+          <tr><td>Vols interieurs x2 (x2 pers)</td><td>160 - 240 EUR</td><td>Hanoi-Da Nang + Da Nang-Hanoi</td></tr>
+          <tr><td>Hotels (20 nuits)</td><td>500 - 900 EUR</td><td>25-45 EUR/nuit en moyenne</td></tr>
+          <tr><td>Croisiere Lan Ha (2j/1n)</td><td>200 - 300 EUR</td><td>Pour 2 personnes</td></tr>
           <tr><td>Repas (~20 jours)</td><td>250 - 350 EUR</td><td>~6-9 EUR/jour/pers</td></tr>
-          <tr><td>Transports locaux</td><td>100 - 200 EUR</td><td>Grab, bus, train de nuit</td></tr>
-          <tr><td>Activites & visites</td><td>170 - 280 EUR</td><td>Treks, cours cuisine, spas</td></tr>
-          <tr class="total"><td><strong>TOTAL ESTIME</strong></td><td><strong>2 900 - 3 650 EUR</strong></td><td>Pour 2 personnes</td></tr>
+          <tr><td>Transports locaux</td><td>100 - 200 EUR</td><td>Grab, bus, transferts</td></tr>
+          <tr><td>Activites & visites</td><td>150 - 250 EUR</td><td>Barques, velo, cours cuisine, spas</td></tr>
+          <tr class="total"><td><strong>TOTAL ESTIME</strong></td><td><strong>2 960 - 3 840 EUR</strong></td><td>Pour 2 personnes</td></tr>
+          <tr style="background:#f8f6f0;"><td><em>Hors vols internationaux</em></td><td><em><strong>1 360 - 2 240 EUR</strong></em></td><td><em>Budget sur place + vols interieurs</em></td></tr>
         </tbody>
       </table>
     </div>

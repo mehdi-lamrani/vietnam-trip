@@ -896,16 +896,7 @@
     </div><!-- /collapsible-body recap -->
   </div>
 
-  <!-- DOCUMENTS / BILLETS -->
-  <div class="section">
-    <div class="collapsible-header collapsed" onclick="toggleSection(this)">
-      <h2 class="section-title" style="margin-bottom:0;">Billets & Documents</h2>
-      <span class="chevron"></span>
-    </div>
-    <div class="collapsible-body collapsed">
-      <div class="docs-grid" id="documents-container"></div>
-    </div>
-  </div>
+
 
   <!-- ITINERAIRE -->
   <div class="section">
@@ -1477,7 +1468,6 @@ function loadAll() {
   document.getElementById('last-updated').textContent = new Date().toLocaleDateString('fr-FR');
   loadLinks();
   loadReservations();
-  loadDocuments();
   loadChecklist();
 }
 
@@ -1537,41 +1527,6 @@ async function addReservation(city) {
   const status = prompt('Statut (ex: Reserve, En attente) :') || '';
   await apiPost({ action: 'add', sheet: 'reservations', row: { city, name, url: url || '#', dates, status } });
   loadReservations();
-}
-
-// --- DOCUMENTS ---
-const DOC_TEMPLATES = [
-  { type: 'vol-aller-1', icon: '✈️', label: 'EK082 Lyon → Dubai', sub: '21 juin 2026' },
-  { type: 'vol-aller-2', icon: '✈️', label: 'EK394 Dubai → Hanoi', sub: '22 juin 2026' },
-  { type: 'bp-aller-1', icon: '🎫', label: 'Boarding Pass EK082', sub: 'Lyon (LYS) → Dubai (DXB)' },
-  { type: 'bp-aller-2', icon: '🎫', label: 'Boarding Pass EK394', sub: 'Dubai (DXB) → Hanoi (HAN)' },
-  { type: 'vol-retour-1', icon: '✈️', label: 'EK395 Hanoi → Dubai', sub: '13 juillet 2026' },
-  { type: 'vol-retour-2', icon: '✈️', label: 'EK081 Dubai → Lyon', sub: '13 juillet 2026' },
-  { type: 'bp-retour-1', icon: '🎫', label: 'Boarding Pass EK395', sub: 'Hanoi (HAN) → Dubai (DXB)' },
-  { type: 'bp-retour-2', icon: '🎫', label: 'Boarding Pass EK081', sub: 'Dubai (DXB) → Lyon (LYS)' }
-];
-async function loadDocuments() {
-  const { rows } = await apiRead('documents');
-  const container = document.getElementById('documents-container');
-  container.innerHTML = DOC_TEMPLATES.map(t => {
-    const doc = (rows || []).find(r => r.type === t.type);
-    return `<div class="doc-card" style="${doc && doc.url && doc.url !== '#' ? 'border-color:var(--green);background:#f0faf0;' : ''}">
-      <div class="doc-icon">${t.icon}</div>
-      <h4>${t.label}</h4>
-      <p>${t.sub}</p>
-      ${doc && doc.url && doc.url !== '#'
-        ? `<a href="${doc.url}" target="_blank" style="background:var(--green);">${doc.label || 'Voir le billet'}</a>
-           <button onclick="deleteItem('documents','${doc.id}','loadDocuments')" style="background:none;border:none;color:#c62828;cursor:pointer;font-size:.85rem;display:block;margin:8px auto 0;">Supprimer</button>`
-        : `<a href="#" onclick="event.preventDefault();addDocument('${t.type}','${t.label}')">Ajouter le billet</a>`}
-    </div>`;
-  }).join('');
-}
-async function addDocument(type, label) {
-  const url = prompt(`Lien pour "${label}" :`);
-  if (!url) return;
-  const lbl = prompt('Libelle du lien (ex: e-billet SNCF) :') || 'Voir le billet';
-  await apiPost({ action: 'add', sheet: 'documents', row: { type, label: lbl, url } });
-  loadDocuments();
 }
 
 // --- CHECKLIST ---

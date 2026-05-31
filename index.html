@@ -255,6 +255,14 @@
     background: var(--gold); color: var(--dark); padding: 4px 14px;
     border-radius: 20px; font-size: .85rem; font-weight: 600;
   }
+  .timeline-header .header-details {
+    width: 100%; display: flex; flex-wrap: wrap; gap: 6px;
+    margin-top: 8px; font-size: .8rem; font-weight: 400;
+  }
+  .timeline-header .header-details .detail-tag {
+    background: rgba(255,255,255,.15); color: rgba(255,255,255,.9);
+    padding: 3px 12px; border-radius: 14px; font-size: .75rem;
+  }
   .timeline-body { padding: 25px; }
 
   /* Photo grid */
@@ -768,6 +776,10 @@
         <div class="timeline-header collapsed" onclick="toggleSection(this)">
           <h3>Lyon &rarr; Dubai &rarr; Hanoi</h3>
           <span class="badge">21 - 22 Juin</span><span class="chevron"></span>
+          <div class="header-details">
+            <span class="detail-tag">✈️ EK082 Lyon &rarr; Dubai</span>
+            <span class="detail-tag">✈️ EK394 Dubai &rarr; Hanoi</span>
+          </div>
         </div>
         <div class="timeline-body collapsed">
           <div class="transport-info">
@@ -792,7 +804,11 @@
       <div class="timeline-item">
         <div class="timeline-header collapsed" onclick="toggleSection(this)">
           <h3>Hanoi</h3>
-          <span class="badge">23 - 24 Juin &bull; 2 jours</span><span class="chevron"></span>
+          <span class="badge">23 - 24 Juin</span><span class="chevron"></span>
+          <div class="header-details">
+            <span class="detail-tag">🗓️ 2 nuits</span>
+            <span class="detail-tag">✈️ Arrivee vol Emirates depuis Dubai</span>
+          </div>
         </div>
         <div class="timeline-body collapsed">
           <div class="photo-grid">
@@ -846,7 +862,12 @@
       <div class="timeline-item">
         <div class="timeline-header collapsed" onclick="toggleSection(this)">
           <h3>Pu Luong</h3>
-          <span class="badge">25 - 28 Juin &bull; 4 nuits</span><span class="chevron"></span>
+          <span class="badge">25 - 28 Juin</span><span class="chevron"></span>
+          <div class="header-details">
+            <span class="detail-tag">🗓️ 4 nuits</span>
+            <span class="detail-tag">🚗 Voiture privee ~4h depuis Hanoi</span>
+            <span class="detail-tag">🍜 Stop dejeuner a Mai Chau</span>
+          </div>
         </div>
         <div class="timeline-body collapsed">
           <div class="transport-info">
@@ -906,7 +927,11 @@
       <div class="timeline-item">
         <div class="timeline-header collapsed" onclick="toggleSection(this)">
           <h3>Ninh Binh</h3>
-          <span class="badge">29 Juin - 1 Juil &bull; 3 jours</span><span class="chevron"></span>
+          <span class="badge">29 Juin - 1 Juil</span><span class="chevron"></span>
+          <div class="header-details">
+            <span class="detail-tag">🗓️ 3 nuits</span>
+            <span class="detail-tag">🚗 Voiture privee ~4h30 depuis Pu Luong</span>
+          </div>
         </div>
         <div class="timeline-body collapsed">
           <div class="transport-info">
@@ -961,7 +986,12 @@
       <div class="timeline-item">
         <div class="timeline-header collapsed" onclick="toggleSection(this)">
           <h3>Lan Ha Bay</h3>
-          <span class="badge">2 - 3 Juil &bull; 2 jours</span><span class="chevron"></span>
+          <span class="badge">2 - 3 Juil</span><span class="chevron"></span>
+          <div class="header-details">
+            <span class="detail-tag">🗓️ 2 nuits</span>
+            <span class="detail-tag">🚗 Route ~3h30 jusqu'a Cat Ba Island</span>
+            <span class="detail-tag">🛥️ Croisiere sur la baie</span>
+          </div>
         </div>
         <div class="timeline-body collapsed">
           <div class="transport-info">
@@ -1017,6 +1047,11 @@
         <div class="timeline-header collapsed" onclick="toggleSection(this)">
           <h3>Transfert vers le Centre</h3>
           <span class="badge">4 Juillet</span><span class="chevron"></span>
+          <div class="header-details">
+            <span class="detail-tag">🛥️ Ferry Cat Ba &rarr; Hai Phong ~45 min</span>
+            <span class="detail-tag">✈️ Vol Hai Phong &rarr; Da Nang ~1h20</span>
+            <span class="detail-tag">🚗 Grab Da Nang &rarr; Hoi An ~40 min</span>
+          </div>
         </div>
         <div class="timeline-body collapsed">
           <div class="transport-info">
@@ -1033,7 +1068,11 @@
       <div class="timeline-item">
         <div class="timeline-header collapsed" onclick="toggleSection(this)">
           <h3>Hoi An</h3>
-          <span class="badge">4 - 9 Juil &bull; 6 nuits</span><span class="chevron"></span>
+          <span class="badge">4 - 9 Juil</span><span class="chevron"></span>
+          <div class="header-details">
+            <span class="detail-tag">🗓️ 6 nuits</span>
+            <span class="detail-tag">🚗 Grab ~40 min depuis Da Nang</span>
+          </div>
         </div>
         <div class="timeline-body collapsed">
           <div class="transport-info">
@@ -1096,7 +1135,12 @@
       <div class="timeline-item">
         <div class="timeline-header collapsed" onclick="toggleSection(this)">
           <h3>Retour a Hanoi</h3>
-          <span class="badge">10 - 12 Juil &bull; 3 nuits</span><span class="chevron"></span>
+          <span class="badge">10 - 12 Juil</span><span class="chevron"></span>
+          <div class="header-details">
+            <span class="detail-tag">🗓️ 3 nuits</span>
+            <span class="detail-tag">🚗 Grab Hoi An &rarr; Da Nang ~30 min</span>
+            <span class="detail-tag">✈️ Vol Da Nang &rarr; Hanoi ~1h20</span>
+          </div>
         </div>
         <div class="timeline-body collapsed">
           <div class="transport-info">
@@ -1119,6 +1163,10 @@
         <div class="timeline-header collapsed" onclick="toggleSection(this)">
           <h3>Hanoi &rarr; Dubai &rarr; Lyon</h3>
           <span class="badge">13 Juillet</span><span class="chevron"></span>
+          <div class="header-details">
+            <span class="detail-tag">✈️ EK395 Hanoi &rarr; Dubai</span>
+            <span class="detail-tag">✈️ EK081 Dubai &rarr; Lyon</span>
+          </div>
         </div>
         <div class="timeline-body collapsed">
           <div class="transport-info">
@@ -1162,8 +1210,7 @@
           <tr><td>Repas (~20 jours)</td><td>250 - 350 EUR</td><td>~6-9 EUR/jour/pers</td></tr>
           <tr><td>Transports locaux</td><td>100 - 200 EUR</td><td>Grab, bus, transferts</td></tr>
           <tr><td>Activites & visites</td><td>150 - 250 EUR</td><td>Barques, velo, cours cuisine, spas</td></tr>
-          <tr class="total"><td><strong>TOTAL ESTIME</strong></td><td><strong>2 960 - 3 840 EUR</strong></td><td>Pour 2 personnes</td></tr>
-          <tr style="background:#f8f6f0;"><td><em>Hors vols internationaux</em></td><td><em><strong>1 360 - 2 240 EUR</strong></em></td><td><em>Budget sur place + vols interieurs</em></td></tr>
+          <tr class="total" style="background:#f8f6f0;"><td><strong><em>Hors vols internationaux</em></strong></td><td><strong><em>1 360 - 2 240 EUR</em></strong></td><td><em>Budget sur place + vols interieurs</em></td></tr>
         </tbody>
       </table>
     </div>

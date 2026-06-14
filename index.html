@@ -479,6 +479,7 @@
   .cal-day.lanha { background: linear-gradient(135deg, #4fc3f7, #0277bd); }
   .cal-day.danang { background: linear-gradient(135deg, #ff8a65, #e64a19); }
   .cal-day.hoian { background: linear-gradient(135deg, #ffd54f, #f9a825); color: #5d4037; }
+  .cal-day.danang { background: linear-gradient(135deg, #ffb74d, #ef6c00); color: #fff; }
   .cal-legend {
     display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px;
     justify-content: center;
@@ -605,13 +606,13 @@
         <div class="cal-day hoian"><span class="cal-num">6</span><span class="cal-label">Hoi An</span></div>
         <div class="cal-day hoian"><span class="cal-num">7</span><span class="cal-label">Hoi An</span></div>
         <div class="cal-day hoian"><span class="cal-num">8</span><span class="cal-label">Hoi An</span></div>
-        <div class="cal-day hoian"><span class="cal-num">9</span><span class="cal-label">Hoi An</span></div>
-        <div class="cal-day hanoi"><span class="cal-num">10</span><span class="cal-label">✈️ Hanoi</span></div>
-        <div class="cal-day hanoi"><span class="cal-num">11</span><span class="cal-label">Hanoi</span></div>
-        <div class="cal-day hanoi"><span class="cal-num">12</span><span class="cal-label">Hanoi</span></div>
+        <div class="cal-day danang"><span class="cal-num">9</span><span class="cal-label">Da Nang</span></div>
+        <div class="cal-day danang"><span class="cal-num">10</span><span class="cal-label">Da Nang</span></div>
+        <div class="cal-day hanoi"><span class="cal-num">11</span><span class="cal-label">✈️ Hanoi</span></div>
+        <div class="cal-day transit"><span class="cal-num">12</span><span class="cal-label">✈️ Retour</span></div>
 
         <!-- Semaine 13 juil -->
-        <div class="cal-day transit"><span class="cal-num">13</span><span class="cal-label">✈️ Retour</span></div>
+        <div class="cal-day transit"><span class="cal-num">13</span><span class="cal-label">Lyon</span></div>
         <div class="cal-day empty"></div>
         <div class="cal-day empty"></div>
         <div class="cal-day empty"></div>
@@ -627,6 +628,7 @@
         <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#8e24aa;"></div>Ninh Binh</div>
         <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#0277bd;"></div>Lan Ha Bay</div>
         <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#f9a825;"></div>Hoi An</div>
+        <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#ef6c00;"></div>Da Nang</div>
       </div>
 
     </div>
@@ -720,16 +722,25 @@
           <div class="recap-stop">
             <span class="stop-icon">🏮</span>
             <span class="stop-name">Hoi An</span>
-            <span class="stop-dates">4-9 juil</span>
+            <span class="stop-dates">4-8 juil</span>
           </div>
           <div class="recap-arrow">
             <span class="arrow-line">&rarr;</span>
-            <span class="arrow-info">✈️ Da Nang</span>
+            <span class="arrow-info">🚗 30km</span>
+          </div>
+          <div class="recap-stop">
+            <span class="stop-icon">🏖️</span>
+            <span class="stop-name">Da Nang</span>
+            <span class="stop-dates">9-10 juil</span>
+          </div>
+          <div class="recap-arrow">
+            <span class="arrow-line">&rarr;</span>
+            <span class="arrow-info">✈️ 1h20</span>
           </div>
           <div class="recap-stop">
             <span class="stop-icon">🏯</span>
             <span class="stop-name">Hanoi</span>
-            <span class="stop-dates">10-12 juil</span>
+            <span class="stop-dates">11-12 juil</span>
           </div>
           <div class="recap-arrow">
             <span class="arrow-line">&rarr;</span>
@@ -762,7 +773,8 @@
             <tr><td>Pu Luong &rarr; Ninh Binh</td><td><span class="capsule capsule-green">🚗 Voiture privee</span></td><td>~130 km</td><td>~4h30</td></tr>
             <tr><td>Ninh Binh &rarr; Lan Ha Bay</td><td><span class="capsule capsule-orange">🚌 Bus + 🛥️ Ferry</span></td><td>~220 km</td><td>~4h</td></tr>
             <tr><td>Lan Ha &rarr; Hai Phong &rarr; Da Nang</td><td><span class="capsule capsule-purple">✈️ Vol int.</span></td><td>~680 km</td><td>~3h (ferry + vol)</td></tr>
-            <tr><td>Hoi An &rarr; Da Nang &rarr; Hanoi</td><td><span class="capsule capsule-purple">✈️ Vol int.</span></td><td>~770 km</td><td>~1h20 (vol)</td></tr>
+            <tr><td>Hoi An &rarr; Da Nang</td><td><span class="capsule capsule-green">🚗 Grab</span></td><td>~30 km</td><td>~40 min</td></tr>
+            <tr><td>Da Nang &rarr; Hanoi</td><td><span class="capsule capsule-purple">✈️ Vol int.</span></td><td>~770 km</td><td>~1h20</td></tr>
             <tr><td>Hanoi &rarr; Dubai</td><td><span class="capsule capsule-purple">✈️ EK395</span></td><td>~5 700 km</td><td>~7h</td></tr>
             <tr><td>Dubai &rarr; Lyon</td><td><span class="capsule capsule-purple">✈️ EK081</span></td><td>~4 900 km</td><td>~6h</td></tr>
           </tbody>
@@ -1254,9 +1266,9 @@
       <div class="timeline-item">
         <div class="timeline-header collapsed" onclick="toggleSection(this)">
           <h3>Hoi An</h3>
-          <span class="badge">4 - 9 Juil</span><span class="chevron"></span>
+          <span class="badge">4 - 8 Juil</span><span class="chevron"></span>
           <div class="header-details">
-            <span class="detail-tag">🗓️ 6 nuits</span>
+            <span class="detail-tag">🗓️ 5 nuits</span>
             <span class="detail-tag">🚗 Grab ~40 min depuis Da Nang</span>
           </div>
         </div>
@@ -1350,40 +1362,56 @@
         </div>
       </div>
 
-      <!-- RETOUR HOI AN → HANOI -->
+      <!-- DA NANG -->
+      <div class="timeline-item">
+        <div class="timeline-header collapsed" onclick="toggleSection(this)">
+          <h3>Da Nang</h3>
+          <span class="badge">9 - 10 Juil</span><span class="chevron"></span>
+          <div class="header-details">
+            <span class="detail-tag">🗓️ 2 nuits</span>
+            <span class="detail-tag">🚗 Grab ~40 min depuis Hoi An</span>
+          </div>
+        </div>
+        <div class="timeline-body collapsed">
+          <div style="padding:12px; background:#fff8e1; border-radius:10px; border:1px solid #ffe082; margin:0 0 15px;">
+            <p style="font-weight:600; color:#e65100;">🚗 Comment s'y rendre :</p>
+            <p><strong>Grab</strong> Hoi An → Da Nang (~30 km, ~40 min, ~150 000 VND / ~6 EUR).</p>
+          </div>
+          <div class="booking-placeholder" id="resa-danang" data-city="Da Nang"></div>
+        </div>
+      </div>
+
+      <!-- RETOUR HANOI -->
       <div class="timeline-item">
         <div class="timeline-header collapsed" onclick="toggleSection(this)">
           <h3>Retour a Hanoi</h3>
-          <span class="badge">10 - 12 Juil</span><span class="chevron"></span>
+          <span class="badge">11 - 12 Juil</span><span class="chevron"></span>
           <div class="header-details">
-            <span class="detail-tag">🗓️ 3 nuits</span>
-            <span class="detail-tag">🚗 Grab Hoi An &rarr; Da Nang ~30 min</span>
+            <span class="detail-tag">🗓️ 1 nuit</span>
             <span class="detail-tag">✈️ Vol Da Nang &rarr; Hanoi ~1h20</span>
           </div>
         </div>
         <div class="timeline-body collapsed">
           <div style="padding:12px; background:#fff8e1; border-radius:10px; border:1px solid #ffe082; margin:0 0 15px;">
             <p style="font-weight:600; color:#e65100;">✈️ Comment s'y rendre :</p>
-            <p><strong>Grab</strong> Hoi An → aeroport Da Nang (~30 min, ~150 000 VND). Vol Da Nang → Hanoi (~1h20).</p>
-            <p>Reserver le vol sur <a href="https://www.vietjetair.com" target="_blank" style="color:#1565c0;">VietJet</a> ou <a href="https://www.bambooairways.com" target="_blank" style="color:#1565c0;">Bamboo Airways</a> (~30-60 EUR/pers).</p>
+            <p>Vol Da Nang → Hanoi (~1h20). Reserver sur <a href="https://www.vietjetair.com" target="_blank" style="color:#1565c0;">VietJet</a> ou <a href="https://www.bambooairways.com" target="_blank" style="color:#1565c0;">Bamboo Airways</a> (~30-60 EUR/pers).</p>
           </div>
-          <p>Derniers jours tranquilles a Hanoi : shopping de souvenirs, derniers repas, balade dans le vieux quartier.</p>
+          <p>Derniere journee a Hanoi : shopping de souvenirs, dernier repas, balade dans le vieux quartier.</p>
           <div class="hotel-card">
             <span class="capsule capsule-teal">🏨 Hotel</span> <span class="capsule capsule-orange">💰 30-60 EUR/nuit</span>
             <p>Meme hotel qu'a l'arrivee ou nouveau quartier a explorer</p>
             <span class="price">~30-60 EUR/nuit</span><br>
-            <a href="https://www.booking.com/searchresults.html?ss=Hanoi&checkin=2026-07-10&checkout=2026-07-13" target="_blank" class="hotel-link">Chercher sur Booking.com</a>
+            <a href="https://www.booking.com/searchresults.html?ss=Hanoi&checkin=2026-07-11&checkout=2026-07-12" target="_blank" class="hotel-link">Chercher sur Booking.com</a>
           </div>
           <div style="padding:12px 14px; background:#f0f4f8; border-radius:8px; margin:15px 0;">
-            <p style="font-weight:600; margin-bottom:8px;"><i class="fa-solid fa-calculator" style="color:var(--dark);margin-right:6px;"></i> Budget Hanoi retour (3 nuits)</p>
+            <p style="font-weight:600; margin-bottom:8px;"><i class="fa-solid fa-calculator" style="color:var(--dark);margin-right:6px;"></i> Budget Hanoi retour (1 nuit)</p>
             <table class="recap-table sub-budget" style="margin:0; font-size:.85rem;">
               <tbody>
-                <tr><td>Hotel</td><td>~100-150 EUR</td></tr>
+                <tr><td>Hotel</td><td>~30-60 EUR</td></tr>
                 <tr><td>Vol Da Nang &rarr; Hanoi</td><td>~80 EUR</td></tr>
-                <tr><td>Repas</td><td>~35 EUR</td></tr>
-                <tr><td>Shopping / souvenirs</td><td>~50 EUR</td></tr>
-                <tr><td>Grab aeroport</td><td>~8 EUR</td></tr>
-                <tr style="font-weight:700; background:#e8f5e9;"><td>Total</td><td>~275-325 EUR</td></tr>
+                <tr><td>Repas</td><td>~15 EUR</td></tr>
+                <tr><td>Grab aeroport</td><td>~15 EUR</td></tr>
+                <tr style="font-weight:700; background:#e8f5e9;"><td>Total</td><td>~140-170 EUR</td></tr>
               </tbody>
             </table>
           </div>
@@ -1395,7 +1423,7 @@
       <div class="timeline-item">
         <div class="timeline-header collapsed" onclick="toggleSection(this)">
           <h3>Hanoi &rarr; Dubai &rarr; Lyon</h3>
-          <span class="badge">13 Juillet</span><span class="chevron"></span>
+          <span class="badge">Nuit du 12 Juillet</span><span class="chevron"></span>
           <div class="header-details">
             <span class="detail-tag">✈️ EK395 Hanoi 01:30 &rarr; Dubai 05:05</span>
             <span class="detail-tag">✈️ EK081 Dubai 08:55 &rarr; Lyon 13:50</span>
@@ -1496,7 +1524,7 @@
             </tbody>
           </table>
           <p style="margin-top:10px;">Cabine 7kg inclus. Soute en supplement (~15-20 EUR). Reserver 2-4 semaines avant.</p>
-          <p>Vols a reserver : <strong>Hai Phong &rarr; Da Nang</strong> (4 juil) + <strong>Da Nang &rarr; Hanoi</strong> (10 juil)</p>
+          <p>Vols a reserver : <strong>Hai Phong &rarr; Da Nang</strong> (4 juil) + <strong>Da Nang &rarr; Hanoi</strong> (11 juil)</p>
         </div>
       </div>
 

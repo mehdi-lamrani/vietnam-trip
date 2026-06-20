@@ -179,36 +179,36 @@
     padding-top: 0; padding-bottom: 0;
   }
 
-  /* Timeline item collapsible */
-  .timeline-item .timeline-header {
+  /* Sub-section collapsible (inside itinerary panels) */
+  .itinerary-panel .timeline-header {
     cursor: pointer; user-select: none;
     transition: border-radius .35s cubic-bezier(.4,0,.2,1);
   }
-  .timeline-item .timeline-header .chevron {
+  .itinerary-panel .timeline-header .chevron {
     width: 18px; height: 18px; position: relative;
     flex-shrink: 0; margin-left: 12px;
   }
-  .timeline-item .timeline-header .chevron::before,
-  .timeline-item .timeline-header .chevron::after {
+  .itinerary-panel .timeline-header .chevron::before,
+  .itinerary-panel .timeline-header .chevron::after {
     content: ''; position: absolute;
     width: 8px; height: 2px; background: rgba(255,255,255,.6);
     top: 50%; border-radius: 2px;
     transition: transform .35s cubic-bezier(.4,0,.2,1);
   }
-  .timeline-item .timeline-header .chevron::before {
+  .itinerary-panel .timeline-header .chevron::before {
     left: 2px; transform: rotate(45deg);
   }
-  .timeline-item .timeline-header .chevron::after {
+  .itinerary-panel .timeline-header .chevron::after {
     right: 2px; transform: rotate(-45deg);
   }
-  .timeline-item .timeline-header.collapsed .chevron::before {
+  .itinerary-panel .timeline-header.collapsed .chevron::before {
     transform: rotate(-45deg);
   }
-  .timeline-item .timeline-header.collapsed .chevron::after {
+  .itinerary-panel .timeline-header.collapsed .chevron::after {
     transform: rotate(45deg);
   }
-  .timeline-item .timeline-header:hover .chevron::before,
-  .timeline-item .timeline-header:hover .chevron::after {
+  .itinerary-panel .timeline-header:hover .chevron::before,
+  .itinerary-panel .timeline-header:hover .chevron::after {
     background: #f4d9a0;
   }
 
@@ -238,61 +238,6 @@
 
 
 
-  .timeline-item .timeline-body.collapsed {
-    max-height: 0; opacity: 0; padding: 0 25px;
-    overflow: hidden;
-    transition: max-height .5s cubic-bezier(.4,0,.2,1), opacity .4s ease, padding .4s;
-  }
-  .timeline-item .timeline-body {
-    transition: max-height .5s cubic-bezier(.4,0,.2,1), opacity .4s ease, padding .4s;
-    max-height: 5000px; opacity: 1;
-    overflow: hidden;
-  }
-
-  /* Timeline */
-  .timeline { position: relative; padding-left: 40px; }
-  .timeline::before {
-    content: ''; position: absolute; left: 15px; top: 0; bottom: 0;
-    width: 3px; background: linear-gradient(var(--green), var(--gold), var(--accent), var(--green));
-    border-radius: 3px;
-  }
-  .timeline-item {
-    position: relative; margin-bottom: 50px;
-    background: var(--card-bg); border-radius: 16px;
-    box-shadow: var(--shadow);
-  }
-  .timeline-item::before {
-    content: ''; position: absolute; left: -33px; top: 30px;
-    width: 14px; height: 14px; background: var(--gold);
-    border-radius: 50%; border: 3px solid var(--light); z-index: 1;
-  }
-  .timeline-header {
-    background: linear-gradient(135deg, #5a7d5a, #3d5a3e);
-    color: white; padding: 20px 25px; display: flex;
-    justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
-    border-radius: 16px 16px 0 0;
-    transition: border-radius .35s cubic-bezier(.4,0,.2,1);
-  }
-  .timeline-header.collapsed {
-    border-radius: 16px;
-  }
-  .timeline-header h3 {
-    font-family: 'Cormorant Garamond', serif; font-size: 1.5rem;
-  }
-  .timeline-header .badge {
-    background: var(--gold); color: var(--dark); padding: 6px 18px;
-    border-radius: 20px; font-size: 1.1rem; font-weight: 600;
-  }
-  .timeline-header .header-details {
-    width: 100%; display: flex; flex-direction: column; gap: 6px;
-    margin-top: 10px; font-weight: 400;
-  }
-  .timeline-header .header-details .detail-tag {
-    background: rgba(255,255,255,.15); color: rgba(255,255,255,.9);
-    padding: 6px 16px; border-radius: 14px; font-size: 1rem;
-    display: inline-block;
-  }
-  .timeline-body { padding: 25px; }
 
   /* Photo grid */
   .photo-grid {
@@ -536,14 +481,94 @@
     color: #999; font-size: .9rem;
   }
 
+  /* --- ITINERARY TABS --- */
+  .itinerary-tabs-wrapper {
+    display: flex; align-items: center; margin: 20px 0 0; position: relative;
+  }
+  .itinerary-tabs {
+    display: flex; align-items: flex-start; overflow-x: auto; scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch; padding: 20px 8px 12px; position: relative; flex: 1;
+    scrollbar-width: none;
+  }
+  .itinerary-tabs::-webkit-scrollbar { display: none; }
+  .tab-track-line {
+    position: absolute; top: 30px; left: 20px; right: 20px; height: 3px;
+    background: linear-gradient(to right, var(--green), var(--gold), var(--accent), var(--green));
+    border-radius: 3px; z-index: 0;
+  }
+  .itinerary-tab {
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    padding: 4px 12px 8px; background: none; border: none; cursor: pointer;
+    position: relative; z-index: 1; min-width: 80px; flex-shrink: 0; transition: transform .2s;
+  }
+  .itinerary-tab:hover { transform: translateY(-2px); }
+  .tab-dot {
+    width: 16px; height: 16px; border-radius: 50%; background: var(--card-bg);
+    border: 3px solid var(--green); transition: all .3s;
+  }
+  .itinerary-tab.active .tab-dot {
+    width: 20px; height: 20px; background: var(--gold); border-color: var(--dark);
+    box-shadow: 0 0 0 4px rgba(224,164,88,.3);
+  }
+  .itinerary-tab.transit .tab-dot { width: 12px; height: 12px; background: #b0bec5; border-color: #78909c; }
+  .itinerary-tab.transit.active .tab-dot { width: 18px; height: 18px; background: var(--gold); border-color: var(--dark); box-shadow: 0 0 0 4px rgba(224,164,88,.3); }
+  .tab-label {
+    font-family: 'Outfit', sans-serif; font-size: .8rem; font-weight: 600;
+    color: var(--dark); white-space: nowrap;
+  }
+  .itinerary-tab.active .tab-label { color: var(--gold); }
+  .itinerary-tab.transit .tab-label { font-size: .7rem; font-weight: 400; color: #78909c; }
+  .tab-dates { font-size: .65rem; color: #999; white-space: nowrap; }
+  .tab-scroll-btn {
+    background: linear-gradient(135deg, #5a7d5a, #3d5a3e); color: white; border: none;
+    width: 32px; height: 32px; border-radius: 50%; cursor: pointer; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; z-index: 2; opacity: .8; transition: opacity .2s;
+  }
+  .tab-scroll-btn:hover { opacity: 1; }
+  .tab-scroll-btn.hidden { opacity: 0; pointer-events: none; }
+
+  /* --- ITINERARY PANELS --- */
+  .itinerary-panels { min-height: 200px; }
+  .panel-header {
+    background: linear-gradient(135deg, #5a7d5a, #3d5a3e); color: white;
+    padding: 20px 25px; border-radius: 16px 16px 0 0; display: flex;
+    justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
+  }
+  .panel-header h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; }
+  .panel-header .badge {
+    background: var(--gold); color: var(--dark); padding: 6px 18px;
+    border-radius: 20px; font-size: 1.1rem; font-weight: 600;
+  }
+  .panel-header .header-details {
+    width: 100%; display: flex; flex-direction: column; gap: 6px; margin-top: 10px;
+  }
+  .panel-header .detail-tag {
+    background: rgba(255,255,255,.15); color: rgba(255,255,255,.9);
+    padding: 6px 16px; border-radius: 14px; font-size: 1rem; display: inline-block;
+  }
+  .panel-body {
+    padding: 25px; background: var(--card-bg); border-radius: 0 0 16px 16px; box-shadow: var(--shadow);
+  }
+  .itinerary-panel { display: none; }
+  .itinerary-panel.active { display: block; }
+  .panel-nav {
+    display: flex; justify-content: space-between; padding: 16px 0; margin-top: 15px;
+    border-top: 1px solid #f0f0f0;
+  }
+  .panel-nav-btn {
+    display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px;
+    background: linear-gradient(135deg, #5a7d5a, #3d5a3e); color: white; border: none;
+    border-radius: 25px; cursor: pointer; font-size: .9rem; font-weight: 500;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .panel-nav-btn:hover { transform: scale(1.03); box-shadow: 0 4px 12px rgba(0,0,0,.15); }
+  .panel-nav-btn:disabled { opacity: .3; cursor: default; transform: none; box-shadow: none; }
+
   /* Responsive */
   @media (max-width: 600px) {
     .hero h1 { font-size: 2.2rem; }
     .hero .dates { font-size: 1rem; }
     .section { padding: 0 8px; }
-    .timeline { padding-left: 25px; }
-    .timeline::before { left: 7px; }
-    .timeline-item::before { left: -25px; }
     .photo-grid { grid-template-columns: 1fr; }
     .recap-table { font-size: .8rem; }
     .recap-table th, .recap-table td { padding: 8px 6px; }
@@ -554,10 +579,15 @@
     .recap-route { justify-content: center; }
     .recap-stop { min-width: 60px; }
     .recap-arrow { min-width: 40px; padding: 0 3px; }
-    .timeline-header h3 { font-size: 1.2rem; }
-    .timeline-header .badge { font-size: .9rem; padding: 4px 12px; }
-    .timeline-header .header-details .detail-tag { font-size: .85rem; }
     .transport-info { flex-direction: column; gap: 6px; }
+    .itinerary-tab { min-width: 64px; padding: 4px 6px 8px; }
+    .tab-label { font-size: .7rem; }
+    .itinerary-tab.transit .tab-label { font-size: .6rem; }
+    .tab-dates { font-size: .55rem; }
+    .panel-header h3 { font-size: 1.2rem; }
+    .panel-header .badge { font-size: .9rem; padding: 4px 12px; }
+    .panel-body { padding: 15px; }
+    .panel-nav-btn { padding: 8px 14px; font-size: .8rem; }
   }
 </style>
 </head>
@@ -814,26 +844,40 @@
 
 
   <!-- ITINERAIRE -->
-  <div class="section">
-    <div class="collapsible-header collapsed" onclick="toggleSection(this)">
-      <h2 class="section-title" style="margin-bottom:0;">Itineraire</h2>
-      <span class="chevron"></span>
+  <div class="section" id="itinerary-section">
+    <h2 class="section-title" style="margin-bottom:0; padding: 16px 24px; color: var(--dark);">Itineraire</h2>
+
+    <div class="itinerary-tabs-wrapper">
+      <button class="tab-scroll-btn tab-scroll-left" onclick="scrollTabs(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+      <div class="itinerary-tabs" id="itinerary-tabs">
+        <div class="tab-track-line"></div>
+        <button class="itinerary-tab transit active" data-tab="0" onclick="switchTab(0)"><span class="tab-dot"></span><span class="tab-label">Lyon &rarr; Hanoi</span><span class="tab-dates">21-22 Juin</span></button>
+        <button class="itinerary-tab destination" data-tab="1" onclick="switchTab(1)"><span class="tab-dot"></span><span class="tab-label">Hanoi</span><span class="tab-dates">22-24 Juin</span></button>
+        <button class="itinerary-tab destination" data-tab="2" onclick="switchTab(2)"><span class="tab-dot"></span><span class="tab-label">Pu Luong</span><span class="tab-dates">25-28 Juin</span></button>
+        <button class="itinerary-tab destination" data-tab="3" onclick="switchTab(3)"><span class="tab-dot"></span><span class="tab-label">Ninh Binh</span><span class="tab-dates">29 Juin-1 Juil</span></button>
+        <button class="itinerary-tab destination" data-tab="4" onclick="switchTab(4)"><span class="tab-dot"></span><span class="tab-label">Lan Ha Bay</span><span class="tab-dates">2-4 Juil</span></button>
+        <button class="itinerary-tab transit" data-tab="5" onclick="switchTab(5)"><span class="tab-dot"></span><span class="tab-label">&rarr; Da Nang</span><span class="tab-dates">4 Juil</span></button>
+        <button class="itinerary-tab destination" data-tab="6" onclick="switchTab(6)"><span class="tab-dot"></span><span class="tab-label">Hoi An</span><span class="tab-dates">4-8 Juil</span></button>
+        <button class="itinerary-tab destination" data-tab="7" onclick="switchTab(7)"><span class="tab-dot"></span><span class="tab-label">Da Nang</span><span class="tab-dates">9-11 Juil</span></button>
+        <button class="itinerary-tab destination" data-tab="8" onclick="switchTab(8)"><span class="tab-dot"></span><span class="tab-label">Retour Hanoi</span><span class="tab-dates">11-12 Juil</span></button>
+        <button class="itinerary-tab transit" data-tab="9" onclick="switchTab(9)"><span class="tab-dot"></span><span class="tab-label">Hanoi &rarr; Lyon</span><span class="tab-dates">13 Juil</span></button>
+      </div>
+      <button class="tab-scroll-btn tab-scroll-right" onclick="scrollTabs(1)"><i class="fa-solid fa-chevron-right"></i></button>
     </div>
-    <div class="collapsible-body collapsed">
 
-    <div class="timeline">
+    <div class="itinerary-panels">
 
-      <!-- LYON - DUBAI - HANOI -->
-      <div class="timeline-item">
-        <div class="timeline-header collapsed" onclick="toggleSection(this)">
+      <!-- Panel 0: Lyon → Hanoi -->
+      <div class="itinerary-panel active" data-panel="0">
+        <div class="panel-header">
           <h3>Lyon &rarr; Dubai &rarr; Hanoi</h3>
-          <span class="badge">21 - 22 Juin</span><span class="chevron"></span>
+          <span class="badge">21 - 22 Juin</span>
           <div class="header-details">
             <span class="detail-tag">✈️ EK082 Lyon 15:40 &rarr; Dubai 23:59</span>
             <span class="detail-tag">✈️ EK394 Dubai 03:30 &rarr; Hanoi 13:15</span>
           </div>
         </div>
-        <div class="timeline-body collapsed">
+        <div class="panel-body">
           <table class="recap-table" style="margin:0;">
             <thead>
               <tr><th>Vol</th><th>Trajet</th><th>Depart</th><th>Arrivee</th><th>Check-in</th></tr>
@@ -864,20 +908,24 @@
             <p style="margin-top:10px;color:#888;font-size:.85rem;"><strong>Telephonie :</strong> Revolut eSIM activee avant le depart — suffisant pour Hanoi et les grandes villes. Pas besoin d'acheter une SIM a l'aeroport.</p>
             <iframe src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyDAUKeYQmu2g3jqmUL7xFms5ACfBKidyMs&origin=Noi+Bai+International+Airport,+Hanoi&destination=16+Pho+Chan+Cam,+Hoan+Kiem,+Hanoi&mode=driving" width="100%" height="250" style="border:0;border-radius:8px;margin-top:10px;" allowfullscreen loading="lazy"></iframe>
           </div>
+          <div class="panel-nav">
+            <button class="panel-nav-btn" disabled><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="panel-nav-btn" onclick="switchTab(1)">Hanoi <i class="fa-solid fa-chevron-right"></i></button>
+          </div>
         </div>
       </div>
 
-      <!-- HANOI -->
-      <div class="timeline-item">
-        <div class="timeline-header collapsed" onclick="toggleSection(this)">
+      <!-- Panel 1: Hanoi -->
+      <div class="itinerary-panel" data-panel="1">
+        <div class="panel-header">
           <h3>Hanoi</h3>
-          <span class="badge">22 - 24 Juin</span><span class="chevron"></span>
+          <span class="badge">22 - 24 Juin</span>
           <div class="header-details">
             <span class="detail-tag">🗓️ 3 nuits</span>
             <span class="detail-tag">✈️ Arrivee vol Emirates depuis Dubai</span>
           </div>
         </div>
-        <div class="timeline-body collapsed">
+        <div class="panel-body">
           <div class="photo-grid">
             <img src="https://images.unsplash.com/photo-1555921015-5532091f6026?w=400&h=300&fit=crop" alt="Hanoi Temple">
             <img src="https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=400&h=300&fit=crop" alt="Hanoi Street Food">
@@ -950,21 +998,25 @@
           </div>
           <div class="booking-placeholder" id="resa-hanoi" data-city="Hanoi"></div>
           <div class="links-section" id="links-hanoi" data-city="Hanoi"></div>
+          <div class="panel-nav">
+            <button class="panel-nav-btn" onclick="switchTab(0)"><i class="fa-solid fa-chevron-left"></i> Lyon &rarr; Hanoi</button>
+            <button class="panel-nav-btn" onclick="switchTab(2)">Pu Luong <i class="fa-solid fa-chevron-right"></i></button>
+          </div>
         </div>
       </div>
 
-      <!-- PU LUONG -->
-      <div class="timeline-item">
-        <div class="timeline-header collapsed" onclick="toggleSection(this)">
+      <!-- Panel 2: Pu Luong -->
+      <div class="itinerary-panel" data-panel="2">
+        <div class="panel-header">
           <h3>Pu Luong</h3>
-          <span class="badge">25 - 28 Juin</span><span class="chevron"></span>
+          <span class="badge">25 - 28 Juin</span>
           <div class="header-details">
             <span class="detail-tag">🗓️ 4 nuits</span>
             <span class="detail-tag">🚗 Voiture privee ~4h depuis Hanoi</span>
             <span class="detail-tag">🍜 Stop dejeuner a Mai Chau</span>
           </div>
         </div>
-        <div class="timeline-body collapsed">
+        <div class="panel-body">
           <div class="transport-info">
             <div class="transport-badge">🚗 ~165 km depuis Hanoi</div>
             <div class="transport-badge">⏱️ ~4h (via Mai Chau, repas sur place)</div>
@@ -1056,20 +1108,24 @@
           </div>
           <div class="booking-placeholder" id="resa-puluong" data-city="Pu Luong"></div>
           <div class="links-section" id="links-puluong" data-city="Pu Luong"></div>
+          <div class="panel-nav">
+            <button class="panel-nav-btn" onclick="switchTab(1)"><i class="fa-solid fa-chevron-left"></i> Hanoi</button>
+            <button class="panel-nav-btn" onclick="switchTab(3)">Ninh Binh <i class="fa-solid fa-chevron-right"></i></button>
+          </div>
         </div>
       </div>
 
-      <!-- NINH BINH -->
-      <div class="timeline-item">
-        <div class="timeline-header collapsed" onclick="toggleSection(this)">
+      <!-- Panel 3: Ninh Binh -->
+      <div class="itinerary-panel" data-panel="3">
+        <div class="panel-header">
           <h3>Ninh Binh</h3>
-          <span class="badge">29 Juin - 1 Juil</span><span class="chevron"></span>
+          <span class="badge">29 Juin - 1 Juil</span>
           <div class="header-details">
             <span class="detail-tag">🗓️ 3 nuits</span>
             <span class="detail-tag">🚗 Voiture privee ~4h30 depuis Pu Luong</span>
           </div>
         </div>
-        <div class="timeline-body collapsed">
+        <div class="panel-body">
           <div style="padding:12px; background:#fff8e1; border-radius:10px; border:1px solid #ffe082; margin:10px 0;">
             <p style="font-weight:600; color:#e65100;"><i class="fa-solid fa-route"></i> Comment s'y rendre :</p>
             <ul style="list-style:none; padding:0; margin:0; font-size:.92rem; line-height:1.8;">
@@ -1157,20 +1213,24 @@
           </div>
           <div class="booking-placeholder" id="resa-ninhbinh" data-city="Ninh Binh"></div>
           <div class="links-section" id="links-ninhbinh" data-city="Ninh Binh"></div>
+          <div class="panel-nav">
+            <button class="panel-nav-btn" onclick="switchTab(2)"><i class="fa-solid fa-chevron-left"></i> Pu Luong</button>
+            <button class="panel-nav-btn" onclick="switchTab(4)">Lan Ha Bay <i class="fa-solid fa-chevron-right"></i></button>
+          </div>
         </div>
       </div>
 
-      <!-- LAN HA BAY -->
-      <div class="timeline-item">
-        <div class="timeline-header collapsed" onclick="toggleSection(this)">
+      <!-- Panel 4: Lan Ha Bay -->
+      <div class="itinerary-panel" data-panel="4">
+        <div class="panel-header">
           <h3>Lan Ha Bay</h3>
-          <span class="badge">2 - 4 Juil</span><span class="chevron"></span>
+          <span class="badge">2 - 4 Juil</span>
           <div class="header-details">
             <span class="detail-tag">🗓️ 3 jours / 2 nuits</span>
             <span class="detail-tag">🛥️ Heritage Cruises Binh Chuan</span>
           </div>
         </div>
-        <div class="timeline-body collapsed">
+        <div class="panel-body">
           <div style="padding:12px; background:#fff8e1; border-radius:10px; border:1px solid #ffe082; margin:10px 0;">
             <p style="font-weight:600; color:#e65100;"><i class="fa-solid fa-route"></i> Comment s'y rendre :</p>
             <ul style="list-style:none; padding:0; margin:0; font-size:.92rem; line-height:1.8;">
@@ -1256,21 +1316,25 @@
           </div>
           <div class="booking-placeholder" id="resa-lanha" data-city="Lan Ha"></div>
           <div class="links-section" id="links-lanha" data-city="Lan Ha"></div>
+          <div class="panel-nav">
+            <button class="panel-nav-btn" onclick="switchTab(3)"><i class="fa-solid fa-chevron-left"></i> Ninh Binh</button>
+            <button class="panel-nav-btn" onclick="switchTab(5)">&rarr; Da Nang <i class="fa-solid fa-chevron-right"></i></button>
+          </div>
         </div>
       </div>
 
-      <!-- VOL INTERIEUR HANOI → DA NANG -->
-      <div class="timeline-item">
-        <div class="timeline-header collapsed" onclick="toggleSection(this)">
+      <!-- Panel 5: Transfert Da Nang -->
+      <div class="itinerary-panel" data-panel="5">
+        <div class="panel-header">
           <h3>Transfert Halong &rarr; Hanoi / Vol Hanoi &rarr; Da Nang</h3>
-          <span class="badge">4 Juillet</span><span class="chevron"></span>
+          <span class="badge">4 Juillet</span>
           <div class="header-details">
             <span class="detail-tag">🚗 Limo Heritage : Tuan Chau &rarr; Hanoi Noi Bai ~3h</span>
             <span class="detail-tag">✈️ VN187 Hanoi 17h25 &rarr; Da Nang 18h50</span>
             <span class="detail-tag">🚗 Grab Da Nang &rarr; Hoi An ~40 min</span>
           </div>
         </div>
-        <div class="timeline-body collapsed">
+        <div class="panel-body">
           <div class="transport-info">
             <div class="transport-badge">🚗 Tuan Chau &rarr; Noi Bai ~3h (limo Heritage)</div>
             <div class="transport-badge">✈️ VN187 17:25 &rarr; 18:50</div>
@@ -1294,20 +1358,24 @@
               <a href="https://drive.google.com/file/d/1_PK4gAMb9KsNWILa66tlx2X67cJVr8nh/view" target="_blank" class="hotel-link" style="margin-left:8px;"><i class="fa-solid fa-file-pdf"></i> Billet Ouidad</a>
             </div>
           </div>
+          <div class="panel-nav">
+            <button class="panel-nav-btn" onclick="switchTab(4)"><i class="fa-solid fa-chevron-left"></i> Lan Ha Bay</button>
+            <button class="panel-nav-btn" onclick="switchTab(6)">Hoi An <i class="fa-solid fa-chevron-right"></i></button>
+          </div>
         </div>
       </div>
 
-      <!-- HOI AN -->
-      <div class="timeline-item">
-        <div class="timeline-header collapsed" onclick="toggleSection(this)">
+      <!-- Panel 6: Hoi An -->
+      <div class="itinerary-panel" data-panel="6">
+        <div class="panel-header">
           <h3>Hoi An</h3>
-          <span class="badge">4 - 8 Juil</span><span class="chevron"></span>
+          <span class="badge">4 - 8 Juil</span>
           <div class="header-details">
             <span class="detail-tag">🗓️ 5 nuits</span>
             <span class="detail-tag">🚗 Grab ~40 min depuis Da Nang</span>
           </div>
         </div>
-        <div class="timeline-body collapsed">
+        <div class="panel-body">
           <div style="padding:12px; background:#fff8e1; border-radius:10px; border:1px solid #ffe082; margin:0 0 15px;">
             <p style="font-weight:600; color:#e65100;"><i class="fa-solid fa-route"></i> Comment s'y rendre :</p>
             <ul style="list-style:none; padding:0; margin:0; font-size:.92rem; line-height:1.8;">
@@ -1378,20 +1446,24 @@
           </div>
           <div class="booking-placeholder" id="resa-hoian" data-city="Hoi An"></div>
           <div class="links-section" id="links-hoian" data-city="Hoi An"></div>
+          <div class="panel-nav">
+            <button class="panel-nav-btn" onclick="switchTab(5)"><i class="fa-solid fa-chevron-left"></i> &rarr; Da Nang</button>
+            <button class="panel-nav-btn" onclick="switchTab(7)">Da Nang <i class="fa-solid fa-chevron-right"></i></button>
+          </div>
         </div>
       </div>
 
-      <!-- DA NANG -->
-      <div class="timeline-item">
-        <div class="timeline-header collapsed" onclick="toggleSection(this)">
+      <!-- Panel 7: Da Nang -->
+      <div class="itinerary-panel" data-panel="7">
+        <div class="panel-header">
           <h3>Da Nang</h3>
-          <span class="badge">9 - 11 Juil</span><span class="chevron"></span>
+          <span class="badge">9 - 11 Juil</span>
           <div class="header-details">
             <span class="detail-tag">🗓️ 2 nuits</span>
             <span class="detail-tag">🚗 Grab ~40 min depuis Hoi An</span>
           </div>
         </div>
-        <div class="timeline-body collapsed">
+        <div class="panel-body">
           <div style="padding:12px; background:#fff8e1; border-radius:10px; border:1px solid #ffe082; margin:0 0 15px;">
             <p style="font-weight:600; color:#e65100;"><i class="fa-solid fa-route"></i> Comment s'y rendre :</p>
             <ul style="list-style:none; padding:0; margin:0; font-size:.92rem; line-height:1.8;">
@@ -1437,20 +1509,24 @@
               </tbody>
             </table>
           </div>
+          <div class="panel-nav">
+            <button class="panel-nav-btn" onclick="switchTab(6)"><i class="fa-solid fa-chevron-left"></i> Hoi An</button>
+            <button class="panel-nav-btn" onclick="switchTab(8)">Retour Hanoi <i class="fa-solid fa-chevron-right"></i></button>
+          </div>
         </div>
       </div>
 
-      <!-- RETOUR HANOI -->
-      <div class="timeline-item">
-        <div class="timeline-header collapsed" onclick="toggleSection(this)">
+      <!-- Panel 8: Retour Hanoi -->
+      <div class="itinerary-panel" data-panel="8">
+        <div class="panel-header">
           <h3>Retour a Hanoi</h3>
-          <span class="badge">11 - 12 Juil</span><span class="chevron"></span>
+          <span class="badge">11 - 12 Juil</span>
           <div class="header-details">
             <span class="detail-tag">🗓️ 1 nuit</span>
             <span class="detail-tag">✈️ VN168 Da Nang 13h00 &rarr; Hanoi 14h25</span>
           </div>
         </div>
-        <div class="timeline-body collapsed">
+        <div class="panel-body">
           <div style="padding:12px; background:#fff8e1; border-radius:10px; border:1px solid #ffe082; margin:0 0 15px;">
             <p style="font-weight:600; color:#e65100;"><i class="fa-solid fa-route"></i> Comment s'y rendre :</p>
             <ul style="list-style:none; padding:0; margin:0; font-size:.92rem; line-height:1.8;">
@@ -1480,20 +1556,24 @@
             </table>
           </div>
           <div class="booking-placeholder" id="resa-hanoi-retour" data-city="Hanoi Retour"></div>
+          <div class="panel-nav">
+            <button class="panel-nav-btn" onclick="switchTab(7)"><i class="fa-solid fa-chevron-left"></i> Da Nang</button>
+            <button class="panel-nav-btn" onclick="switchTab(9)">Hanoi &rarr; Lyon <i class="fa-solid fa-chevron-right"></i></button>
+          </div>
         </div>
       </div>
 
-      <!-- VOL RETOUR HANOI - DUBAI - LYON -->
-      <div class="timeline-item">
-        <div class="timeline-header collapsed" onclick="toggleSection(this)">
+      <!-- Panel 9: Vol retour -->
+      <div class="itinerary-panel" data-panel="9">
+        <div class="panel-header">
           <h3>Hanoi &rarr; Dubai &rarr; Lyon</h3>
-          <span class="badge">Nuit du 12 Juillet</span><span class="chevron"></span>
+          <span class="badge">Nuit du 12 Juillet</span>
           <div class="header-details">
             <span class="detail-tag">✈️ EK395 Hanoi 01:30 &rarr; Dubai 05:05</span>
             <span class="detail-tag">✈️ EK081 Dubai 08:55 &rarr; Lyon 13:50</span>
           </div>
         </div>
-        <div class="timeline-body collapsed">
+        <div class="panel-body">
           <p style="margin-bottom:10px; color: var(--accent); font-weight:500;">⚠️ Check-in EK395 le <strong>12 juillet a 22:30</strong> — vol de nuit, depart le 13 a 01:30</p>
           <div style="padding:12px; background:#fff8e1; border-radius:10px; border:1px solid #ffe082; margin:0 0 15px;">
             <p style="font-weight:600; color:#e65100;">🚗 Comment aller a l'aeroport :</p>
@@ -1521,11 +1601,14 @@
           </p>
           <p style="margin-top:8px;">Ref. : <strong>DDG67W</strong> — Ticket : <strong>176 2210243378</strong></p>
           <a href="https://drive.google.com/file/d/1dyqVddfGvtXEmnfQpnTjGbaZ6O5tsO-z/view" target="_blank" class="hotel-link" style="margin-top:10px;">📄 Billets Emirates PDF</a>
+          <div class="panel-nav">
+            <button class="panel-nav-btn" onclick="switchTab(8)"><i class="fa-solid fa-chevron-left"></i> Retour Hanoi</button>
+            <button class="panel-nav-btn" disabled><i class="fa-solid fa-chevron-right"></i></button>
+          </div>
         </div>
       </div>
 
-    </div><!-- /timeline -->
-    </div><!-- /collapsible-body itineraire -->
+    </div><!-- /itinerary-panels -->
   </div>
 
   <!-- GUIDE PRATIQUE -->
@@ -1790,6 +1873,34 @@ function toggleSection(header) {
   const body = header.nextElementSibling;
   body.classList.toggle('collapsed');
 }
+// --- ITINERARY TABS ---
+function switchTab(index) {
+  document.querySelectorAll('.itinerary-tab').forEach((tab, i) => {
+    tab.classList.toggle('active', i === index);
+  });
+  document.querySelectorAll('.itinerary-panel').forEach((panel, i) => {
+    panel.classList.toggle('active', i === index);
+  });
+  const tabBtn = document.querySelectorAll('.itinerary-tab')[index];
+  if (tabBtn) tabBtn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+  updateScrollButtons();
+}
+function scrollTabs(direction) {
+  const container = document.getElementById('itinerary-tabs');
+  container.scrollBy({ left: direction * 200, behavior: 'smooth' });
+}
+function updateScrollButtons() {
+  const container = document.getElementById('itinerary-tabs');
+  if (!container) return;
+  const leftBtn = document.querySelector('.tab-scroll-left');
+  const rightBtn = document.querySelector('.tab-scroll-right');
+  if (leftBtn) leftBtn.classList.toggle('hidden', container.scrollLeft <= 0);
+  if (rightBtn) rightBtn.classList.toggle('hidden', container.scrollLeft >= container.scrollWidth - container.clientWidth - 5);
+}
+document.getElementById('itinerary-tabs')?.addEventListener('scroll', updateScrollButtons);
+window.addEventListener('resize', updateScrollButtons);
+window.addEventListener('load', updateScrollButtons);
+
 const PWD_HASH = '364f5a42bae117774e462285362a26f0fa0baadcf638d3ee20e576258cc58494';
 
 async function hashStr(str) {

@@ -244,6 +244,20 @@
   .sub-collapsible-body.collapsed { max-height: 0; opacity: 0; overflow: hidden; }
 
   /* Bons a savoir chevron color */
+  /* Hotel photo carousel */
+  .hotel-carousel { position: relative; margin: 12px 0; border-radius: 10px; overflow: hidden; background: #eee; }
+  .hotel-carousel .carousel-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; gap: 0; }
+  .hotel-carousel .carousel-track::-webkit-scrollbar { display: none; }
+  .hotel-carousel .carousel-track img { flex: 0 0 100%; width: 100%; height: 220px; object-fit: cover; scroll-snap-align: start; }
+  .hotel-carousel .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,.45); color: #fff; border: none; width: 36px; height: 36px; border-radius: 50%; font-size: 1.1rem; cursor: pointer; z-index: 2; display: flex; align-items: center; justify-content: center; }
+  .hotel-carousel .carousel-btn:hover { background: rgba(0,0,0,.7); }
+  .hotel-carousel .carousel-btn.prev { left: 8px; }
+  .hotel-carousel .carousel-btn.next { right: 8px; }
+  .hotel-carousel .carousel-dots { text-align: center; padding: 8px 0; position: absolute; bottom: 0; width: 100%; background: linear-gradient(transparent, rgba(0,0,0,.3)); }
+  .hotel-carousel .carousel-dots span { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.5); margin: 0 3px; cursor: pointer; transition: background .2s; }
+  .hotel-carousel .carousel-dots span.active { background: #fff; }
+  .hotel-carousel .carousel-loading { display: flex; align-items: center; justify-content: center; height: 220px; color: #999; font-size: .9rem; }
+
   .sub-collapsible-header[data-type="warning"] .chevron::before,
   .sub-collapsible-header[data-type="warning"] .chevron::after { background: #c62828; }
   /* A faire en couple chevron color */
@@ -803,19 +817,19 @@
 
         <table class="recap-table">
           <thead>
-            <tr><th>Date</th><th style="width:80px;"></th><th>Troncon</th><th>Transport</th><th>Distance</th><th>Duree</th></tr>
+            <tr><th>Date</th><th>Troncon</th><th>Transport</th><th>Distance</th><th>Duree</th></tr>
           </thead>
           <tbody>
-            <tr><td>21 juin</td><td><img class="place-photo" data-place="Dubai International Airport" style="border-radius:6px;width:70px;height:50px;object-fit:cover;background:#eee;"></td><td>Lyon &rarr; Dubai</td><td><span class="capsule capsule-purple">✈️ EK082</span></td><td>~4 900 km</td><td>~6h</td></tr>
-            <tr><td>22 juin</td><td><img class="place-photo" data-place="Hanoi Center Silk Boutique Hotel" style="border-radius:6px;width:70px;height:50px;object-fit:cover;background:#eee;"></td><td>Dubai &rarr; Hanoi</td><td><span class="capsule capsule-purple">✈️ EK394</span></td><td>~5 700 km</td><td>~7h</td></tr>
-            <tr><td>25 juin</td><td><img class="place-photo" data-place="Pu Luong Eco Garden" style="border-radius:6px;width:70px;height:50px;object-fit:cover;background:#eee;"></td><td>Hanoi &rarr; Mai Chau &rarr; Pu Luong</td><td><span class="capsule capsule-green">🚗 Voiture privee</span></td><td>~165 km</td><td>~4h (+ repas)</td></tr>
-            <tr><td>29 juin</td><td><img class="place-photo" data-place="Coco Island Resort Ninh Binh" style="border-radius:6px;width:70px;height:50px;object-fit:cover;background:#eee;"></td><td>Pu Luong &rarr; Ninh Binh</td><td><span class="capsule capsule-green">🚗 Voiture privee</span></td><td>~130 km</td><td>~4h30</td></tr>
-            <tr><td>2 juil</td><td><img class="place-photo" data-place="Heritage Cruises Lan Ha Bay" style="border-radius:6px;width:70px;height:50px;object-fit:cover;background:#eee;"></td><td>Ninh Binh &rarr; Lan Ha Bay</td><td><span class="capsule capsule-orange">🚌 Bus + 🛥️ Ferry</span></td><td>~220 km</td><td>~4h</td></tr>
-            <tr><td>4 juil</td><td><img class="place-photo" data-place="RiverTown Hoi An Resort and Spa" style="border-radius:6px;width:70px;height:50px;object-fit:cover;background:#eee;"></td><td>Tuan Chau &rarr; Cat Bi (HPH) &rarr; Da Nang</td><td><span class="capsule capsule-purple">✈️ Vol int.</span></td><td>~680 km</td><td>~1h30 (route) + ~1h20 (vol)</td></tr>
-            <tr><td>9 juil</td><td><img class="place-photo" data-place="Melia Danang Beach Resort" style="border-radius:6px;width:70px;height:50px;object-fit:cover;background:#eee;"></td><td>Hoi An &rarr; Da Nang</td><td><span class="capsule capsule-green">🚗 Grab</span></td><td>~30 km</td><td>~40 min</td></tr>
-            <tr><td>11 juil</td><td><img class="place-photo" data-place="Hanoi Old Quarter" style="border-radius:6px;width:70px;height:50px;object-fit:cover;background:#eee;"></td><td>Da Nang &rarr; Hanoi</td><td><span class="capsule capsule-purple">✈️ Vol int.</span></td><td>~770 km</td><td>~1h20</td></tr>
-            <tr><td>13 juil</td><td><img class="place-photo" data-place="Dubai International Airport" style="border-radius:6px;width:70px;height:50px;object-fit:cover;background:#eee;"></td><td>Hanoi &rarr; Dubai</td><td><span class="capsule capsule-purple">✈️ EK395</span></td><td>~5 700 km</td><td>~7h</td></tr>
-            <tr><td>13 juil</td><td><img class="place-photo" data-place="Lyon Saint Exupery Airport" style="border-radius:6px;width:70px;height:50px;object-fit:cover;background:#eee;"></td><td>Dubai &rarr; Lyon</td><td><span class="capsule capsule-purple">✈️ EK081</span></td><td>~4 900 km</td><td>~6h</td></tr>
+            <tr><td>21 juin</td><td>Lyon &rarr; Dubai</td><td><span class="capsule capsule-purple">✈️ EK082</span></td><td>~4 900 km</td><td>~6h</td></tr>
+            <tr><td>22 juin</td><td>Dubai &rarr; Hanoi</td><td><span class="capsule capsule-purple">✈️ EK394</span></td><td>~5 700 km</td><td>~7h</td></tr>
+            <tr><td>25 juin</td><td>Hanoi &rarr; Mai Chau &rarr; Pu Luong</td><td><span class="capsule capsule-green">🚗 Voiture privee</span></td><td>~165 km</td><td>~4h (+ repas)</td></tr>
+            <tr><td>29 juin</td><td>Pu Luong &rarr; Ninh Binh</td><td><span class="capsule capsule-green">🚗 Voiture privee</span></td><td>~130 km</td><td>~4h30</td></tr>
+            <tr><td>2 juil</td><td>Ninh Binh &rarr; Lan Ha Bay</td><td><span class="capsule capsule-orange">🚌 Bus + 🛥️ Ferry</span></td><td>~220 km</td><td>~4h</td></tr>
+            <tr><td>4 juil</td><td>Tuan Chau &rarr; Cat Bi (HPH) &rarr; Da Nang</td><td><span class="capsule capsule-purple">✈️ Vol int.</span></td><td>~680 km</td><td>~1h30 (route) + ~1h20 (vol)</td></tr>
+            <tr><td>9 juil</td><td>Hoi An &rarr; Da Nang</td><td><span class="capsule capsule-green">🚗 Grab</span></td><td>~30 km</td><td>~40 min</td></tr>
+            <tr><td>11 juil</td><td>Da Nang &rarr; Hanoi</td><td><span class="capsule capsule-purple">✈️ Vol int.</span></td><td>~770 km</td><td>~1h20</td></tr>
+            <tr><td>13 juil</td><td>Hanoi &rarr; Dubai</td><td><span class="capsule capsule-purple">✈️ EK395</span></td><td>~5 700 km</td><td>~7h</td></tr>
+            <tr><td>13 juil</td><td>Dubai &rarr; Lyon</td><td><span class="capsule capsule-purple">✈️ EK081</span></td><td>~4 900 km</td><td>~6h</td></tr>
           </tbody>
         </table>
       </div>
@@ -947,6 +961,7 @@
               <a href="https://drive.google.com/file/d/1RRlkvyNu9lr1nUo9FuSUXbd0EAiQsx6N/view" target="_blank" class="hotel-link"><i class="fa-solid fa-file-pdf"></i> Confirmation PDF</a>
             </div>
           </div>
+          <div class="hotel-carousel" data-place="Hanoi Center Silk Boutique Hotel"><div class="carousel-loading"><i class="fa-solid fa-spinner fa-spin"></i>&nbsp; Chargement photos...</div></div>
           <div style="padding:12px 14px; background:#f0f4f8; border-radius:8px; margin:15px 0;">
             <p style="font-weight:600; margin-bottom:8px;"><i class="fa-solid fa-calculator" style="color:var(--dark);margin-right:6px;"></i> Budget Hanoi (2 nuits)</p>
             <table class="recap-table sub-budget" style="margin:0; font-size:.85rem;">
@@ -1052,6 +1067,7 @@
               <a href="https://drive.google.com/file/d/1pvxiU_-xGikloAtnbnfZ570dv19l1cGY/view" target="_blank" class="hotel-link"><i class="fa-solid fa-file-pdf"></i> Confirmation PDF</a>
             </div>
           </div>
+          <div class="hotel-carousel" data-place="Pu Luong Eco Garden"><div class="carousel-loading"><i class="fa-solid fa-spinner fa-spin"></i>&nbsp; Chargement photos...</div></div>
           <div style="padding:12px 14px; background:#f0f4f8; border-radius:8px; margin:15px 0;">
             <p style="font-weight:600; margin-bottom:8px;"><i class="fa-solid fa-calculator" style="color:var(--dark);margin-right:6px;"></i> Budget Pu Luong (4 nuits)</p>
             <table class="recap-table sub-budget" style="margin:0; font-size:.85rem;">
@@ -1152,6 +1168,7 @@
               <a href="https://drive.google.com/file/d/1aQTdVyjeM_SZQU9yQIiu5vVmbABeIm6u/view" target="_blank" class="hotel-link"><i class="fa-solid fa-file-pdf"></i> Confirmation PDF</a>
             </div>
           </div>
+          <div class="hotel-carousel" data-place="Coco Island Resort Ninh Binh"><div class="carousel-loading"><i class="fa-solid fa-spinner fa-spin"></i>&nbsp; Chargement photos...</div></div>
           <div style="padding:12px 14px; background:#f0f4f8; border-radius:8px; margin:15px 0;">
             <p style="font-weight:600; margin-bottom:8px;"><i class="fa-solid fa-calculator" style="color:var(--dark);margin-right:6px;"></i> Budget Ninh Binh (3 nuits)</p>
             <table class="recap-table sub-budget" style="margin:0; font-size:.85rem;">
@@ -1251,6 +1268,7 @@
               <a href="https://drive.google.com/file/d/1rfDrBS6kpLCIQKS-6H3knDx-6A_K8ONh/view" target="_blank" class="hotel-link"><i class="fa-solid fa-file-pdf"></i> Itineraire PDF</a>
             </div>
           </div>
+          <div class="hotel-carousel" data-place="Heritage Cruises Binh Chuan Cat Ba"><div class="carousel-loading"><i class="fa-solid fa-spinner fa-spin"></i>&nbsp; Chargement photos...</div></div>
           <div style="padding:12px 14px; background:#f0f4f8; border-radius:8px; margin:15px 0;">
             <p style="font-weight:600; margin-bottom:8px;"><i class="fa-solid fa-calculator" style="color:var(--dark);margin-right:6px;"></i> Budget Lan Ha Bay (2 nuits)</p>
             <table class="recap-table sub-budget" style="margin:0; font-size:.85rem;">
@@ -1441,6 +1459,7 @@
               <a href="https://drive.google.com/file/d/12t43SHN0ojd-yeq0w9Bb_pqpt_pvdaGZ/view" target="_blank" class="hotel-link"><i class="fa-solid fa-file-pdf"></i> Confirmation PDF</a>
             </div>
           </div>
+          <div class="hotel-carousel" data-place="Melia Danang Beach Resort"><div class="carousel-loading"><i class="fa-solid fa-spinner fa-spin"></i>&nbsp; Chargement photos...</div></div>
         </div>
       </div>
 
@@ -1927,19 +1946,45 @@ async function deleteItem(sheet, id, reloadFn) {
   await apiPost({ action: 'delete', sheet, id });
   window[reloadFn]();
 }
-// --- PLACE PHOTOS ---
+// --- HOTEL PHOTO CAROUSELS ---
 function loadPlacePhotos() {
-  const imgs = document.querySelectorAll('.place-photo');
-  if (!imgs.length) return;
+  const carousels = document.querySelectorAll('.hotel-carousel');
+  if (!carousels.length) return;
   const service = new google.maps.places.PlacesService(document.createElement('div'));
-  imgs.forEach(img => {
-    const query = img.dataset.place;
+  carousels.forEach(el => {
+    const query = el.dataset.place;
     service.findPlaceFromQuery({ query, fields: ['photos'] }, (results, status) => {
       if (status === google.maps.places.PlacesServiceStatus.OK && results[0]?.photos?.length) {
-        img.src = results[0].photos[0].getUrl({ maxWidth: 200, maxHeight: 140 });
+        const photos = results[0].photos.slice(0, 8);
+        let html = '<div class="carousel-track">';
+        photos.forEach(p => { html += `<img src="${p.getUrl({ maxWidth: 800, maxHeight: 500 })}" alt="${query}" loading="lazy">`; });
+        html += '</div>';
+        html += '<button class="carousel-btn prev" onclick="carouselNav(this,-1)"><i class="fa-solid fa-chevron-left"></i></button>';
+        html += '<button class="carousel-btn next" onclick="carouselNav(this,1)"><i class="fa-solid fa-chevron-right"></i></button>';
+        html += '<div class="carousel-dots">';
+        photos.forEach((_, i) => { html += `<span class="${i === 0 ? 'active' : ''}" onclick="carouselGo(this,${i})"></span>`; });
+        html += '</div>';
+        el.innerHTML = html;
+        el.querySelector('.carousel-track').addEventListener('scroll', function() { updateDots(this); });
+      } else {
+        el.style.display = 'none';
       }
     });
   });
+}
+function carouselNav(btn, dir) {
+  const track = btn.parentElement.querySelector('.carousel-track');
+  const w = track.offsetWidth;
+  track.scrollBy({ left: dir * w, behavior: 'smooth' });
+}
+function carouselGo(dot, idx) {
+  const track = dot.closest('.hotel-carousel').querySelector('.carousel-track');
+  track.scrollTo({ left: idx * track.offsetWidth, behavior: 'smooth' });
+}
+function updateDots(track) {
+  const idx = Math.round(track.scrollLeft / track.offsetWidth);
+  const dots = track.parentElement.querySelectorAll('.carousel-dots span');
+  dots.forEach((d, i) => d.classList.toggle('active', i === idx));
 }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAUKeYQmu2g3jqmUL7xFms5ACfBKidyMs&libraries=places&callback=loadPlacePhotos" async defer></script> <!-- gitleaks:allow -->

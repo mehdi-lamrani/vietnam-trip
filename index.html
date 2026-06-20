@@ -211,6 +211,45 @@
   .timeline-item .timeline-header:hover .chevron::after {
     background: #f4d9a0;
   }
+
+  /* Sub-section collapsible (Bons a savoir, A faire en couple) */
+  .sub-collapsible-header {
+    display: flex; align-items: center; justify-content: space-between;
+    cursor: pointer; user-select: none;
+  }
+  .sub-collapsible-header .chevron {
+    width: 16px; height: 16px; position: relative;
+    flex-shrink: 0; margin-left: 10px;
+  }
+  .sub-collapsible-header .chevron::before,
+  .sub-collapsible-header .chevron::after {
+    content: ''; position: absolute;
+    width: 7px; height: 2px;
+    top: 50%; border-radius: 2px;
+    transition: transform .3s cubic-bezier(.4,0,.2,1);
+  }
+  .sub-collapsible-header .chevron::before {
+    left: 1px; transform: rotate(45deg);
+  }
+  .sub-collapsible-header .chevron::after {
+    right: 1px; transform: rotate(-45deg);
+  }
+  .sub-collapsible-header.collapsed .chevron::before {
+    transform: rotate(-45deg);
+  }
+  .sub-collapsible-header.collapsed .chevron::after {
+    transform: rotate(45deg);
+  }
+  .sub-collapsible-body { transition: max-height .4s cubic-bezier(.4,0,.2,1), opacity .3s; max-height: 2000px; opacity: 1; overflow: hidden; }
+  .sub-collapsible-body.collapsed { max-height: 0; opacity: 0; overflow: hidden; }
+
+  /* Bons a savoir chevron color */
+  .sub-collapsible-header[data-type="warning"] .chevron::before,
+  .sub-collapsible-header[data-type="warning"] .chevron::after { background: #c62828; }
+  /* A faire en couple chevron color */
+  .sub-collapsible-header[data-type="couple"] .chevron::before,
+  .sub-collapsible-header[data-type="couple"] .chevron::after { background: #ad1457; }
+
   .timeline-item .timeline-body.collapsed {
     max-height: 0; opacity: 0; padding: 0 25px;
     overflow: hidden;
@@ -858,10 +897,10 @@
           </div>
 
           <div style="margin-top:15px; border-radius:10px; border:1px solid #f8bbd0; overflow:hidden;">
-            <div style="padding:12px; background:#fce4ec; cursor:pointer;" onclick="toggleSection(this)">
+            <div class="sub-collapsible-header collapsed" data-type="warning" style="padding:12px; background:#fce4ec; cursor:pointer;" onclick="toggleSection(this)">
               <p style="font-weight:600; color:#c62828; margin:0;">⚠️ Bons a savoir — Hanoi <span class="chevron"></span></p>
             </div>
-            <div class="collapsed" style="padding:0 12px; background:#fff5f5;">
+            <div class="sub-collapsible-body collapsed" style="padding:0 12px; background:#fff5f5;">
               <div class="activities" style="margin:8px 0;">
                 <div class="activity"><span class="activity-icon">💰</span><div><strong>Retirer 5M VND au VPBank</strong> avant de partir pour Pu Luong — pas d'ATM fiable la-bas pendant 4 jours</div></div>
                 <div class="activity"><span class="activity-icon">📱</span><div><strong>Vol a l'arrache en scooter</strong> — ne pas marcher avec le telephone a la main cote route. Bandouliere ou poche interieure. Idem pour le sac a main d'Ouidad (cote mur, pas cote rue)</div></div>
@@ -874,10 +913,10 @@
           </div>
 
           <div style="margin-top:15px; border-radius:10px; border:1px solid #f8bbd0; overflow:hidden;">
-            <div style="padding:12px; background:#fce4ec; cursor:pointer;" onclick="toggleSection(this)">
+            <div class="sub-collapsible-header collapsed" data-type="couple" style="padding:12px; background:#fce4ec; cursor:pointer;" onclick="toggleSection(this)">
               <p style="font-weight:600; color:#ad1457; margin:0;">💑 A faire en couple — Hanoi <span class="chevron"></span></p>
             </div>
-            <div class="collapsed" style="padding:0 12px; background:#fff5f8;">
+            <div class="sub-collapsible-body collapsed" style="padding:0 12px; background:#fff5f8;">
               <div class="activities" style="margin:8px 0;">
                 <div class="activity"><span class="activity-icon">🏯</span><div><strong>Vieux quartier (36 rues)</strong> — Balade a pied dans les ruelles, street food, cafes caches</div></div>
                 <div class="activity"><span class="activity-icon">☕</span><div><strong>Egg Coffee</strong> — Gouter le ca phe trung au Cafe Giang (legendaire)</div></div>
@@ -962,10 +1001,10 @@
           </div>
 
           <div style="margin-top:15px; border-radius:10px; border:1px solid #f8bbd0; overflow:hidden;">
-            <div style="padding:12px; background:#fce4ec; cursor:pointer;" onclick="toggleSection(this)">
+            <div class="sub-collapsible-header collapsed" data-type="warning" style="padding:12px; background:#fce4ec; cursor:pointer;" onclick="toggleSection(this)">
               <p style="font-weight:600; color:#c62828; margin:0;">⚠️ Bons a savoir — Pu Luong <span class="chevron"></span></p>
             </div>
-            <div class="collapsed" style="padding:0 12px; background:#fff5f5;">
+            <div class="sub-collapsible-body collapsed" style="padding:0 12px; background:#fff5f5;">
               <div class="activities" style="margin:8px 0;">
                 <div class="activity"><span class="activity-icon">🪱</span><div><strong>Sangsues (leeches)</strong> — en juillet dans les rizieres mouillees, elles s'accrochent aux chevilles/mollets. Pas dangereux mais desagreable. <strong>Chaussettes hautes + pantalon rentre dedans</strong> pour les randos. Le lodge aura du sel ou du baume du tigre pour les retirer</div></div>
                 <div class="activity"><span class="activity-icon">🥾</span><div><strong>Sentiers glissants</strong> — la boue post-pluie rend les chemins tres glissants. Les chaussures de rando sont indispensables ici</div></div>
@@ -978,10 +1017,10 @@
           </div>
 
           <div style="margin-top:15px; border-radius:10px; border:1px solid #f8bbd0; overflow:hidden;">
-            <div style="padding:12px; background:#fce4ec; cursor:pointer;" onclick="toggleSection(this)">
+            <div class="sub-collapsible-header collapsed" data-type="couple" style="padding:12px; background:#fce4ec; cursor:pointer;" onclick="toggleSection(this)">
               <p style="font-weight:600; color:#ad1457; margin:0;">💑 A faire en couple — Pu Luong <span class="chevron"></span></p>
             </div>
-            <div class="collapsed" style="padding:0 12px; background:#fff5f8;">
+            <div class="sub-collapsible-body collapsed" style="padding:0 12px; background:#fff5f8;">
               <div class="activities" style="margin:8px 0;">
                 <div class="activity"><span class="activity-icon">🌾</span><div><strong>Rizieres en terrasses</strong> — Balades au rythme lent a travers les plus belles rizieres du Nord</div></div>
                 <div class="activity"><span class="activity-icon">🏊</span><div><strong>Cascades naturelles</strong> — Baignade dans les piscines naturelles au milieu de la foret</div></div>
@@ -1062,10 +1101,10 @@
           </div>
 
           <div style="margin-top:15px; border-radius:10px; border:1px solid #f8bbd0; overflow:hidden;">
-            <div style="padding:12px; background:#fce4ec; cursor:pointer;" onclick="toggleSection(this)">
+            <div class="sub-collapsible-header collapsed" data-type="warning" style="padding:12px; background:#fce4ec; cursor:pointer;" onclick="toggleSection(this)">
               <p style="font-weight:600; color:#c62828; margin:0;">⚠️ Bons a savoir — Ninh Binh <span class="chevron"></span></p>
             </div>
-            <div class="collapsed" style="padding:0 12px; background:#fff5f5;">
+            <div class="sub-collapsible-body collapsed" style="padding:0 12px; background:#fff5f5;">
               <div class="activities" style="margin:8px 0;">
                 <div class="activity"><span class="activity-icon">🚣</span><div><strong>Tam Coc — arnaque des rameurs</strong> — ils rament 90 min avec les pieds puis demandent un gros pourboire au milieu de la riviere. Certains refusent de ramer si tu donnes pas assez. Preparer <strong>50-100k VND en petites coupures</strong>, donner a la fin. Dire non fermement aux vendeurs sur l'eau</div></div>
                 <div class="activity"><span class="activity-icon">✅</span><div><strong>Trang An &gt; Tam Coc</strong> — meme paysage, mais le gouvernement local interdit le harcelement (systeme de notation des rameurs). Moins de stress, recommande</div></div>
@@ -1079,10 +1118,10 @@
           </div>
 
           <div style="margin-top:15px; border-radius:10px; border:1px solid #f8bbd0; overflow:hidden;">
-            <div style="padding:12px; background:#fce4ec; cursor:pointer;" onclick="toggleSection(this)">
+            <div class="sub-collapsible-header collapsed" data-type="couple" style="padding:12px; background:#fce4ec; cursor:pointer;" onclick="toggleSection(this)">
               <p style="font-weight:600; color:#ad1457; margin:0;">💑 A faire en couple — Ninh Binh <span class="chevron"></span></p>
             </div>
-            <div class="collapsed" style="padding:0 12px; background:#fff5f8;">
+            <div class="sub-collapsible-body collapsed" style="padding:0 12px; background:#fff5f8;">
               <div class="activities" style="margin:8px 0;">
                 <div class="activity"><span class="activity-icon">🚣</span><div><strong>Balade en barque a Tam Coc</strong> — Rizieres et grottes, la "Baie d'Ha Long terrestre". Billet sur place ~150k VND (~6 EUR/pers). Prevoir pourboire rameur ~50k VND.</div></div>
                 <div class="activity"><span class="activity-icon">🏔️</span><div><strong>Trang An</strong> — Complexe paysager UNESCO, barque a travers grottes et temples. Billet sur place ~250k VND (~10 EUR/pers), ~2h de balade.</div></div>
@@ -1162,10 +1201,10 @@
           </div>
 
           <div style="margin-top:15px; border-radius:10px; border:1px solid #f8bbd0; overflow:hidden;">
-            <div style="padding:12px; background:#fce4ec; cursor:pointer;" onclick="toggleSection(this)">
+            <div class="sub-collapsible-header collapsed" data-type="warning" style="padding:12px; background:#fce4ec; cursor:pointer;" onclick="toggleSection(this)">
               <p style="font-weight:600; color:#c62828; margin:0;">⚠️ Bons a savoir — Lan Ha Bay <span class="chevron"></span></p>
             </div>
-            <div class="collapsed" style="padding:0 12px; background:#fff5f5;">
+            <div class="sub-collapsible-body collapsed" style="padding:0 12px; background:#fff5f5;">
               <div class="activities" style="margin:8px 0;">
                 <div class="activity"><span class="activity-icon">🤢</span><div><strong>Mal de mer</strong> — en juillet la mer peut etre agitee (mousson). Acheter des <strong>comprimes anti-nausee</strong> a Hanoi ou Ninh Binh avant d'embarquer</div></div>
                 <div class="activity"><span class="activity-icon">💸</span><div><strong>Frais caches</strong> — attention aux croisieres "pas cheres" qui excluent transfert, entree des sites, boissons et kayak. Verifier ce qui est inclus AVANT de reserver</div></div>
@@ -1179,10 +1218,10 @@
           </div>
 
           <div style="margin-top:15px; border-radius:10px; border:1px solid #f8bbd0; overflow:hidden;">
-            <div style="padding:12px; background:#fce4ec; cursor:pointer;" onclick="toggleSection(this)">
+            <div class="sub-collapsible-header collapsed" data-type="couple" style="padding:12px; background:#fce4ec; cursor:pointer;" onclick="toggleSection(this)">
               <p style="font-weight:600; color:#ad1457; margin:0;">💑 A faire en couple — Lan Ha Bay <span class="chevron"></span></p>
             </div>
-            <div class="collapsed" style="padding:0 12px; background:#fff5f8;">
+            <div class="sub-collapsible-body collapsed" style="padding:0 12px; background:#fff5f8;">
               <div class="activities" style="margin:8px 0;">
                 <div class="activity"><span class="activity-icon">🛥️</span><div><strong>Croisiere 1 nuit sur la baie</strong> — Dormir sur un bateau au milieu des karsts, sans la foule. Inclut generalement : repas, kayak, baignade, tai chi matinal.</div></div>
                 <div class="activity"><span class="activity-icon">🛶</span><div><strong>Kayak entre les ilots</strong> — Explorer les grottes et lagons caches, eaux turquoise (inclus dans la croisiere)</div></div>
@@ -1298,10 +1337,10 @@
           </div>
 
           <div style="margin-top:15px; border-radius:10px; border:1px solid #f8bbd0; overflow:hidden;">
-            <div style="padding:12px; background:#fce4ec; cursor:pointer;" onclick="toggleSection(this)">
+            <div class="sub-collapsible-header collapsed" data-type="warning" style="padding:12px; background:#fce4ec; cursor:pointer;" onclick="toggleSection(this)">
               <p style="font-weight:600; color:#c62828; margin:0;">⚠️ Bons a savoir — Hoi An <span class="chevron"></span></p>
             </div>
-            <div class="collapsed" style="padding:0 12px; background:#fff5f5;">
+            <div class="sub-collapsible-body collapsed" style="padding:0 12px; background:#fff5f5;">
               <div class="activities" style="margin:8px 0;">
                 <div class="activity"><span class="activity-icon">👗</span><div><strong>Tailleur — y aller le jour 1</strong> — si Ouidad veut du sur-mesure : jour 1 = mesures + choix tissu, jour 2 = essayage, jour 3 = retouches + recuperation. Sauvegarder des <strong>photos de ce qu'elle veut</strong> sur son telephone avant d'y aller</div></div>
                 <div class="activity"><span class="activity-icon">🧵</span><div><strong>Tailleurs — arnaque qualite</strong> — certains ateliers utilisent du tissu de mauvaise qualite malgre le prix. Toucher le tissu, verifier les coutures a l'essayage, ne payer le solde qu'a la recuperation finale si satisfait</div></div>
@@ -1315,10 +1354,10 @@
           </div>
 
           <div style="margin-top:15px; border-radius:10px; border:1px solid #f8bbd0; overflow:hidden;">
-            <div style="padding:12px; background:#fce4ec; cursor:pointer;" onclick="toggleSection(this)">
+            <div class="sub-collapsible-header collapsed" data-type="couple" style="padding:12px; background:#fce4ec; cursor:pointer;" onclick="toggleSection(this)">
               <p style="font-weight:600; color:#ad1457; margin:0;">💑 A faire en couple — Hoi An <span class="chevron"></span></p>
             </div>
-            <div class="collapsed" style="padding:0 12px; background:#fff5f8;">
+            <div class="sub-collapsible-body collapsed" style="padding:0 12px; background:#fff5f8;">
               <div class="activities" style="margin:8px 0;">
                 <div class="activity"><span class="activity-icon">🏮</span><div><strong>Vieille ville aux lanternes</strong> — Balade nocturne, pont japonais, ambiance magique</div></div>
                 <div class="activity"><span class="activity-icon">🕯️</span><div><strong>Lanternes flottantes</strong> — Lacher de lanternes sur la riviere Thu Bon au coucher du soleil</div></div>

@@ -498,8 +498,8 @@
   }
   .itinerary-tab {
     display: flex; flex-direction: column; align-items: center; gap: 4px;
-    padding: 4px 12px 8px; background: none; border: none; cursor: pointer;
-    position: relative; z-index: 1; min-width: 80px; flex-shrink: 0; transition: transform .2s;
+    padding: 4px 4px 8px; background: none; border: none; cursor: pointer;
+    position: relative; z-index: 1; flex: 1 1 0; min-width: 0; transition: transform .2s;
   }
   .itinerary-tab:hover { transform: translateY(-2px); }
   .tab-dot {
@@ -513,12 +513,12 @@
   .itinerary-tab.transit .tab-dot { width: 12px; height: 12px; background: #b0bec5; border-color: #78909c; }
   .itinerary-tab.transit.active .tab-dot { width: 18px; height: 18px; background: var(--gold); border-color: var(--dark); box-shadow: 0 0 0 4px rgba(224,164,88,.3); }
   .tab-label {
-    font-family: 'Outfit', sans-serif; font-size: .8rem; font-weight: 600;
-    color: var(--dark); white-space: nowrap;
+    font-family: 'Outfit', sans-serif; font-size: .85rem; font-weight: 600;
+    color: var(--dark); text-align: center; line-height: 1.2;
   }
   .itinerary-tab.active .tab-label { color: var(--gold); }
-  .itinerary-tab.transit .tab-label { font-size: .7rem; font-weight: 400; color: #78909c; }
-  .tab-dates { font-size: .65rem; color: #999; white-space: nowrap; }
+  .itinerary-tab.transit .tab-label { font-size: .75rem; font-weight: 400; color: #78909c; }
+  .tab-dates { font-size: .7rem; color: #999; text-align: center; }
   .tab-scroll-btn {
     background: linear-gradient(135deg, #5a7d5a, #3d5a3e); color: white; border: none;
     width: 32px; height: 32px; border-radius: 50%; cursor: pointer; flex-shrink: 0;
@@ -580,7 +580,7 @@
     .recap-stop { min-width: 60px; }
     .recap-arrow { min-width: 40px; padding: 0 3px; }
     .transport-info { flex-direction: column; gap: 6px; }
-    .itinerary-tab { min-width: 64px; padding: 4px 6px 8px; }
+    .itinerary-tab { flex: 0 0 auto; min-width: 60px; padding: 4px 4px 8px; }
     .tab-label { font-size: .7rem; }
     .itinerary-tab.transit .tab-label { font-size: .6rem; }
     .tab-dates { font-size: .55rem; }

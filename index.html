@@ -181,6 +181,7 @@
 
   /* Sub-section collapsible (inside itinerary panels) */
   .itinerary-panel .timeline-header {
+    display: flex; align-items: center; justify-content: space-between;
     cursor: pointer; user-select: none;
     transition: border-radius .35s cubic-bezier(.4,0,.2,1);
   }
@@ -191,7 +192,7 @@
   .itinerary-panel .timeline-header .chevron::before,
   .itinerary-panel .timeline-header .chevron::after {
     content: ''; position: absolute;
-    width: 8px; height: 2px; background: rgba(255,255,255,.6);
+    width: 8px; height: 2px; background: #e65100;
     top: 50%; border-radius: 2px;
     transition: transform .35s cubic-bezier(.4,0,.2,1);
   }
@@ -213,10 +214,6 @@
   }
 
   /* Sub-section: chevron color override for pink background */
-  .timeline-header[data-type="warning"] .chevron::before,
-  .timeline-header[data-type="warning"] .chevron::after { background: #e65100 !important; }
-  .timeline-header[data-type="couple"] .chevron::before,
-  .timeline-header[data-type="couple"] .chevron::after { background: #e65100 !important; }
 
   /* Sub-section collapsible body */
   .sub-collapsible-body { transition: max-height .4s cubic-bezier(.4,0,.2,1), opacity .3s; max-height: 2000px; opacity: 1; overflow: hidden; }

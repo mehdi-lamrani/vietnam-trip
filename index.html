@@ -218,21 +218,21 @@
     cursor: pointer; user-select: none;
   }
   .sub-collapsible-header .chevron {
-    width: 16px; height: 16px; position: relative;
-    flex-shrink: 0; margin-left: 10px;
+    width: 18px; height: 18px; position: relative;
+    flex-shrink: 0; margin-left: 12px;
   }
   .sub-collapsible-header .chevron::before,
   .sub-collapsible-header .chevron::after {
     content: ''; position: absolute;
-    width: 7px; height: 2px;
+    width: 8px; height: 2px;
     top: 50%; border-radius: 2px;
-    transition: transform .3s cubic-bezier(.4,0,.2,1);
+    transition: transform .35s cubic-bezier(.4,0,.2,1);
   }
   .sub-collapsible-header .chevron::before {
-    left: 1px; transform: rotate(45deg);
+    left: 2px; transform: rotate(45deg);
   }
   .sub-collapsible-header .chevron::after {
-    right: 1px; transform: rotate(-45deg);
+    right: 2px; transform: rotate(-45deg);
   }
   .sub-collapsible-header.collapsed .chevron::before {
     transform: rotate(-45deg);
